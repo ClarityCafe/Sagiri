@@ -1,5 +1,5 @@
 {
-  "name": "sagiri",
+  "name": "@sr229/sagiri",
   "version": "0.0.1",
   "description": "a Saucenao API wrapper",
   "main": "Sagiri.js",
@@ -16,7 +16,7 @@
     "saucenao"
   ],
   "author": "sr229",
-  "license": "MIT",
+  "license": "EPL",
   "bugs": {
     "url": "https://github.com/ClaraIO/Sagiri/issues"
   },
