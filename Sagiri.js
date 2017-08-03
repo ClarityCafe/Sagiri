@@ -21,10 +21,10 @@ class Sagiri {
      * @see {link} https://saucenao.com/user.php?page=search-api
      */
     constructor({key, numRes, outputType}) {
-        if (!key) throw new TypeError('NO API Key provided!');
         this.key = key,
         this.outputType = outputType || 2,
-        this.numRes = numRes || 5;
+        this.numRes = numRes || 5
+        if (!key) throw new TypeError('NO API Key provided!');
     }
     /**
      * Gets the source and outputs it in your preferred output type
