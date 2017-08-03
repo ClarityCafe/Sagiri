@@ -1,6 +1,6 @@
 /**
- * @file sauceQueryHandler.js
- * @description Sagiri thin client for Clara
+ * @file Sagiri.js
+ * @description Sagiri client
  * @author Capuccino
  * @license MIT
  * 
