@@ -8,8 +8,9 @@ Simple Example :
 
 const Sagiri = require('sagiri');
 const handler = new Sagiri({
-    token: 'TOKEN',
-    numRes: 5
+    key: 'TOKEN',
+    numRes: 5, //max 5 responses
+    outputType : 2 //mode 2 is JSON output
 });
 
 handler.getSauce('URL').then(res => {
