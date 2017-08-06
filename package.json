@@ -23,9 +23,11 @@
   "homepage": "https://github.com/ClaraIO/Sagiri#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "got": "^7.1.0"
+    "got": "^7.1.0",
+    "mime-types": "^2.1.16",
+    "restler": "^3.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.3.0"
+    "eslint": "^4.4.0"
   }
 }
