@@ -1,34 +1,33 @@
 # Sagiri
-Sagiri is a Saucenao API Handler.
+A lightweight wrapper for the SauceNAO API.
 
-### Usage
+## Usage
 
-Simple Example : 
+Example:
 ```js
-
 const Sagiri = require('sagiri');
 const handler = new Sagiri({
     key: 'TOKEN',
-    numRes: 5, //max 5 responses
-    outputType : 2 //mode 2 is JSON output
+    numRes: 5, // Number of responses. Default: 5
 });
 
-handler.getSauce('URL').then(res => {
+handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(res => {
     console.log(res);
 });
 ```
 
-**getSauce(``link``)**
+**getSauce(`file`)**
 
-Gets the image's source using the Suacenao API.
+Get potential sources for an image from SauceNAO.  
+`file` can either be a filepath, or an image url.
 
-Returns : JSON Response (by default)
+Returns: `Promise<Object>` - A Promise that resolves with the closest match.
 
-### Contributing
+## Contributing
 
 All contributions are accepted! If you think you can bring uploading support, or make the lib perform better, make a PR and start coding!
 
-### Copyright
+## Copyright
 
 Copyright 2017 (c) ClaraI/O. This Library is from the [Clara base project](https://github.com/ClaraIO/Clara).
 

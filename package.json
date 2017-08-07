@@ -1,11 +1,8 @@
 {
-  "name": "@sr229/sagiri",
+  "name": "sagiri",
   "version": "0.0.1",
-  "description": "a Saucenao API wrapper",
-  "main": "Sagiri.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "A wrapper for the SauceNAO API.",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ClaraIO/Sagiri.git"
@@ -22,10 +19,7 @@
   },
   "homepage": "https://github.com/ClaraIO/Sagiri#readme",
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "got": "^7.1.0",
-    "mime-types": "^2.1.16",
-    "restler": "^3.4.0"
+    "multi-part": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^4.4.0"

@@ -23,7 +23,7 @@
         
         "quotes": ["warn", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
         "semi": "warn",
-        "indent": "error",
+        "indent": ["error", 4, {"SwitchCase": 1}],
         "no-unsafe-negation": "error",
         "eqeqeq": ["warn", "always", {"null": "ignore"}],
         "no-alert": "error",
