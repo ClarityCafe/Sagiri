@@ -12,10 +12,6 @@
             "jsx": false
         }
     },
-    
-    "ignore": [
-        "*.min.js"
-    ],
 
     "rules": {
         "no-console": 0,
