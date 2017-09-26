@@ -6,10 +6,7 @@ A lightweight wrapper for the SauceNAO API.
 Example:
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri({
-    key: 'TOKEN',
-    numRes: 5, // Number of responses. Default: 5
-});
+const handler = new Sagiri('TOKEN'); // or new Sagiri('TOKEN', number of results)
 
 handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(res => {
     console.log(res);
