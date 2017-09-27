@@ -1,9 +1,10 @@
 # Sagiri
-A lightweight wrapper for the SauceNAO API.
+A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
+## Installation
 
 ```js
-npm install --save @sr229/sagiri
+npm install @sr229/sagiri
 ```
 
 ## Usage
@@ -18,12 +19,9 @@ handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(res => {
 });
 ```
 
-**getSauce(`file`)**
+## API 
 
-Get potential sources for an image from SauceNAO.  
-`file` can either be a filepath, or an image url.
-
-Returns: `Promise<Object>` - A Promise that resolves with the closest match.
+Documentation for the module is available [here](./API.md).
 
 ## Contributing
 
@@ -31,7 +29,7 @@ All contributions are accepted! If you think you can bring uploading support, or
 
 ## Copyright
 
-Copyright 2017 (c) ClaraI/O. This Library is from the [Clara base project](https://github.com/ClaraIO/Clara).
+Copyright 2017 (c) ClarityMoe. This Library is from the [Clara base project](https://github.com/ClaraIO/Clara).
 
 Sagiri is a character from Eromanga-sensei. All rights reserved to her authors.
 
