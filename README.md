@@ -1,6 +1,11 @@
 # Sagiri
 A lightweight wrapper for the SauceNAO API.
 
+
+```js
+npm install --save @sr229/sagiri
+```
+
 ## Usage
 
 Example:
