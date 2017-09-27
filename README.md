@@ -34,3 +34,7 @@ All contributions are accepted! If you think you can bring uploading support, or
 Copyright 2017 (c) ClaraI/O. This Library is from the [Clara base project](https://github.com/ClaraIO/Clara).
 
 Sagiri is a character from Eromanga-sensei. All rights reserved to her authors.
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/AWTfak41YehZveZx8xMtTKdF/ClarityMoe/Sagiri'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/AWTfak41YehZveZx8xMtTKdF/ClarityMoe/Sagiri.svg' />
+</a>
