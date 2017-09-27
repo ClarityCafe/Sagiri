@@ -7,7 +7,7 @@
     "extends": "eslint:recommended",
     "parserOptions": {
         "sourceType": "module",
-        "ecmaVersion": 6,
+        "ecmaVersion": 7,
         "ecmaFeatures": {
             "jsx": false
         }
@@ -66,7 +66,7 @@
                     "string": "String",
                     "number": "Number",
                     "boolean": "Boolean",
-                    "rromise": "Promise",
+                    "promise": "Promise",
                     "array": "Array",
                     "undefined":" Undefined",
                     "null": "Null",
