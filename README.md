@@ -3,8 +3,8 @@ A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
 ## Installation
 
-```js
-npm install @sr229/sagiri
+```
+npm install sagiri
 ```
 
 ## Usage
