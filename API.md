@@ -12,12 +12,16 @@ Query handler for SauceNAO.
 | --- | --- | --- |
 | key | <code>String</code> | API key |
 | numRes | <code>Number</code> | Amount of responses returned from the API. |
+| shortLimit | <code>Number</code> | Ratelimit for the "short" period, currently the last 30 seconds. Will be null before the first request. |
+| longLimit | <code>Number</code> | Ratelimit for the "long" period, currently 24 hours. Will be null before the first request. |
+| shortRemaining | <code>Number</code> | Amount of requests left during the "short" period before you get ratelimited. Will be null before the first request. |
+| longRemaining | <code>Number</code> | Amount of requests left during the "long" period before you get ratelimited. Will be null before the first request. |
 
 
 * [Sagiri](#Sagiri)
     * [new Sagiri(key, numRes)](#new_Sagiri_new)
     * [.getSauce(file)](#Sagiri+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
-    * [.getSource(file)](#Sagiri+getSource) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getSource(file)](#Sagiri+getSource) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 
 <a name="new_Sagiri_new"></a>
 
@@ -28,10 +32,9 @@ Query handler for SauceNAO.
 | key | <code>String</code> |  | API Key for SauceNAO |
 | numRes | <code>Number</code> | <code>5</code> | amount of responses you want returned from the API. Default is 5 Responses. |
 
-<br>
 <a name="Sagiri+getSauce"></a>
 
-### Sagiri#getSauce(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+### sagiri.getSauce(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Searches for potential sources of an image.
 
 **Kind**: instance method of [<code>Sagiri</code>](#Sagiri)  
@@ -45,12 +48,10 @@ Searches for potential sources of an image.
 ```js
 client.getSauce('http://cfile29.uf.tistory.com/image/277D9B3453F9D9283659F4').then(console.log);
 ```
-
-<br>
 <a name="Sagiri+getSource"></a>
 
-### Sagiri#getSource(file) ⇒ <code>Promise.&lt;Object&gt;</code>
-An alias of [<code>Sagiri#getSauce</code>](#Sagiri+getSauce)
+### sagiri.getSource(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+An alias of Sagiri#getSauce
 
 **Kind**: instance method of [<code>Sagiri</code>](#Sagiri)  
 **Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
