@@ -23,6 +23,16 @@ handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(res => {
 
 Documentation for the module is available [here](./API.md).
 
+## Ratings
+If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.  
+The meaning of these values are:
+ - `0 (UNKNOWN)` The rating of the source could not be determined.
+ - `1 (SAFE)` The source is safe and doesn't contain nudity, sex, etc.
+ - `2 (QUESTIONABLE)` The source isn't 100% safe and may contain nudity.
+ - `3 (NSFW)` The source is not safe, and contains nudity, sex, etc.
+
+If `options.getRatings` is not true, then this value will always be `0`.
+
 ## Contributing
 
 All contributions are accepted! If you think you can bring uploading support, or make the lib perform better, make a PR and start coding!
