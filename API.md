@@ -19,18 +19,20 @@ Query handler for SauceNAO.
 
 
 * [Sagiri](#Sagiri)
-    * [new Sagiri(key, numRes)](#new_Sagiri_new)
+    * [new Sagiri(key, [options])](#new_Sagiri_new)
     * [.getSauce(file)](#Sagiri+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
     * [.getSource(file)](#Sagiri+getSource) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 
 <a name="new_Sagiri_new"></a>
 
-### new Sagiri(key, numRes)
+### new Sagiri(key, [options])
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | key | <code>String</code> |  | API Key for SauceNAO |
-| numRes | <code>Number</code> | <code>5</code> | amount of responses you want returned from the API. Default is 5 Responses. |
+| [options] | <code>Object</code> |  | Optional options |
+| [options.numRes] | <code>Number</code> | <code>5</code> | Number of results to get from SauceNAO. |
+| [options.getRating] | <code>Boolean</code> | <code>false</code> | Whether to retrieve the rating of a source or not. |
 
 <a name="Sagiri+getSauce"></a>
 
