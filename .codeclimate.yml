@@ -12,6 +12,3 @@ engines:
 ratings:
   paths:
   - "lib/**.js"
-exclude_paths:
-- data/*
-- assets/*
