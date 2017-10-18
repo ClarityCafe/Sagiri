@@ -1,8 +1,8 @@
 # API Documentation
 
-<a name="Sagiri"></a>
+<a name="Handler"></a>
 
-## Sagiri
+## Handler
 Query handler for SauceNAO.
 
 **Kind**: global class  
@@ -12,20 +12,18 @@ Query handler for SauceNAO.
 | --- | --- | --- |
 | key | <code>String</code> | API key |
 | numRes | <code>Number</code> | Amount of responses returned from the API. |
-| shortLimit | <code>Number</code> | Ratelimit for the "short" period, currently the last 30 seconds. Will be null before the first request. |
-| longLimit | <code>Number</code> | Ratelimit for the "long" period, currently 24 hours. Will be null before the first request. |
-| shortRemaining | <code>Number</code> | Amount of requests left during the "short" period before you get ratelimited. Will be null before the first request. |
-| longRemaining | <code>Number</code> | Amount of requests left during the "long" period before you get ratelimited. Will be null before the first request. |
+| shortLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the short period, usually 30 seconds. |
+| longLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the long period, usually 24 hours. |
 
 
-* [Sagiri](#Sagiri)
-    * [new Sagiri(key, [options])](#new_Sagiri_new)
-    * [.getSauce(file)](#Sagiri+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
-    * [.getSource(file)](#Sagiri+getSource) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+* [Handler](#Handler)
+    * [new Handler(key, [options])](#new_Handler_new)
+    * [.getSauce(file)](#Handler+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getSource(file)](#Handler+getSource) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 
-<a name="new_Sagiri_new"></a>
+<a name="new_Handler_new"></a>
 
-### new Sagiri(key, [options])
+### new Handler(key, [options])
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,12 +32,12 @@ Query handler for SauceNAO.
 | [options.numRes] | <code>Number</code> | <code>5</code> | Number of results to get from SauceNAO. |
 | [options.getRating] | <code>Boolean</code> | <code>false</code> | Whether to retrieve the rating of a source or not. |
 
-<a name="Sagiri+getSauce"></a>
+<a name="Handler+getSauce"></a>
 
-### sagiri.getSauce(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+### handler.getSauce(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Searches for potential sources of an image.
 
-**Kind**: instance method of [<code>Sagiri</code>](#Sagiri)  
+**Kind**: instance method of [<code>Handler</code>](#Handler)  
 **Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
 
 | Param | Type | Description |
@@ -50,12 +48,12 @@ Searches for potential sources of an image.
 ```js
 client.getSauce('http://cfile29.uf.tistory.com/image/277D9B3453F9D9283659F4').then(console.log);
 ```
-<a name="Sagiri+getSource"></a>
+<a name="Handler+getSource"></a>
 
-### sagiri.getSource(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+### handler.getSource(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 An alias of Sagiri#getSauce
 
-**Kind**: instance method of [<code>Sagiri</code>](#Sagiri)  
+**Kind**: instance method of [<code>Handler</code>](#Handler)  
 **Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
 **See**: Sagiri#getSauce  
 
