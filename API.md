@@ -14,6 +14,11 @@ Query handler for SauceNAO.
 | numRes | <code>Number</code> | Amount of responses returned from the API. |
 | shortLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the short period, usually 30 seconds. |
 | longLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the long period, usually 24 hours. |
+| dbMask | ``Number`` | dbMask Mask for selecting specific indexes to ENABLE. dbmask=8191 will search all of the first 14 indexes. If intending to search all databases, the db=999 option is more appropriate.| 
+| dbMaskI | ``Number`` | dbMaskI Mask for selecting specific indexes to DISABLE. dbmaski=8191 would search only indexes higher than the first 14. This is ideal when attempting to disable only certain indexes, while allowing future indexes to be included by default.|
+| testMode | ``Number`` | Causes each index which has a match to output at most 1 for testing. Works best with a numres greater than the number of indexes searched. |
+| outputType | ``Number``| type of output that the API prints out. 1 for XML (not implemented) 2 for JSON result. |
+
 
 
 * [Handler](#Handler)
