@@ -1,17 +1,17 @@
 /**
- * @file testing the Masking parameters in SauceNao
+ * @file Test file for Sagiri for DB mask support.
  * @author Capuccino
- * @license MIT
- **/
+ * @author Ovyerus
+ */
  
- const Handler = require('../');
- const token = require('./token.json').token;
- const s = new Handler(token, {
-     // disable site index for this test
-     dbMaskI: 0,
-     dbMask: 10,
-     testMode: 1
- });
- 
- //one-liners ecksde
- s.getSauce('https://cdn.awwni.me/zqqd.jpg').then(res => console.log(res)).catch(err => console.error(err));
+const Sagiri = require('../');
+const token = require('./token.json').token;
+
+const sourcer = new Sagiri(token, {
+    dbMaskI: 0,
+    dbMask: 10,
+    testMode: 1
+});
+
+
+sourcer.getSauce('https://cdn.awwni.me/zqqd.jpg').then(res => console.log(res)).catch(err => console.error(err));
