@@ -10,7 +10,7 @@
      // disable site index for this test
      dbMaskI: 0,
      dbMask: 10,
-     testMode: 1,
+     testMode: 1
  });
  
  //one-liners ecksde
