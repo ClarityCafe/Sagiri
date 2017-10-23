@@ -1,0 +1,9 @@
+# files to ignore during publishing
+
+node_modules
+.c9
+.eslintrc.json
+.tern-project
+.codeclimate.yml
+tests
+.git
