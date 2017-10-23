@@ -11,7 +11,6 @@
      dbMaskI: 0,
      dbMask: 10,
      testMode: 1,
-     outputType: 2
  });
  
  //one-liners ecksde
