@@ -1,10 +1,7 @@
 const Handler = require('./lib/Handler');
 const Constants = require('./lib/Constants');
 const Ratelimiter = require('./lib/Ratelimiter');
-
-function Sagiri(key, options) {
-    return new Handler(key, options);
-}
+const Sagiri = Handler;
 
 Sagiri.Handler = Handler;
 Sagiri.Constants = Constants;
