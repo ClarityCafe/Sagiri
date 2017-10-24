@@ -12,18 +12,18 @@ Query handler for SauceNAO.
 | --- | --- | --- |
 | key | <code>String</code> | API key |
 | numRes | <code>Number</code> | Amount of responses returned from the API. |
+| dbMask | <code>Number</code> | Bit mask for selecting specific indexes to ENABLE. |
+| dbMaskI | <code>Number</code> | Bit mask for selecting specific indexes to DISABLE. |
 | shortLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the short period, usually 30 seconds. |
 | longLimiter | <code>Ratelimiter</code> | Ratelimiter object that takes care of the long period, usually 24 hours. |
-| dbMask | ``Number`` | dbMask Mask for selecting specific indexes to ENABLE. dbmask=8191 will search all of the first 14 indexes. If intending to search all databases, the db=999 option is more appropriate.| 
-| dbMaskI | ``Number`` | dbMaskI Mask for selecting specific indexes to DISABLE. dbmaski=8191 would search only indexes higher than the first 14. This is ideal when attempting to disable only certain indexes, while allowing future indexes to be included by default.|
-| testMode | ``Number`` | Causes each index which has a match to output at most 1 for testing. Works best with a numres greater than the number of indexes searched. |
-
 
 
 * [Handler](#Handler)
     * [new Handler(key, [options])](#new_Handler_new)
-    * [.getSauce(file)](#Handler+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
-    * [.getSource(file)](#Handler+getSource) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * _instance_
+        * [.getSauce(file)](#Handler+getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * _static_
+        * [.getSauce(file)](#Handler.getSauce) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 
 <a name="new_Handler_new"></a>
 
@@ -35,6 +35,9 @@ Query handler for SauceNAO.
 | [options] | <code>Object</code> |  | Optional options |
 | [options.numRes] | <code>Number</code> | <code>5</code> | Number of results to get from SauceNAO. |
 | [options.getRating] | <code>Boolean</code> | <code>false</code> | Whether to retrieve the rating of a source or not. |
+| [options.testMode] | <code>Boolean</code> | <code>false</code> | Whether to enable "test mode", which causes each index that has a match to output 1 result at most. |
+| [options.dbMask] | <code>Array.&lt;Number&gt;</code> |  | Array of all the indexes to ENABLE results for. |
+| [options.dbMaskI] | <code>Array.&lt;Number&gt;</code> |  | Array of all the indexes to DISABLE results for. |
 
 <a name="Handler+getSauce"></a>
 
@@ -52,14 +55,13 @@ Searches for potential sources of an image.
 ```js
 client.getSauce('http://cfile29.uf.tistory.com/image/277D9B3453F9D9283659F4').then(console.log);
 ```
-<a name="Handler+getSource"></a>
+<a name="Handler.getSauce"></a>
 
-### handler.getSource(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
-An alias of Sagiri#getSauce
+### Handler.getSauce(file) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+An alias of Handler#getSauce, for those who are more mentally sane.
 
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
+**Kind**: static method of [<code>Handler</code>](#Handler)  
 **Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
-**See**: Sagiri#getSauce  
 
 | Param | Type | Description |
 | --- | --- | --- |
