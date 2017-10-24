@@ -1,22 +1,34 @@
 # Sagiri
 A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
+[![NPM Info](https://nodei.co/npm/sagiri.png)](https://npmjs.org/package/sagiri)  
+![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
+
 ## Installation
 
 ```
 npm install sagiri
 ```
 
-## Usage
+## Examples
 
-Example:
+#### Regular
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri('TOKEN'); // or new Sagiri('TOKEN', number of results)
+const handler = new Sagiri('TOKEN');
 
-handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(res => {
-    console.log(res);
+handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+```
+
+#### Using DB masks
+```js
+const Sagiri = require('sagiri');
+const handler = new Sagiri('TOKEN', {
+  dbMask: [5, 35],
+  dbMaskI: [29]
 });
+
+handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 ```
 
 ## API 
