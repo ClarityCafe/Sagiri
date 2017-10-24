@@ -1,8 +1,8 @@
 declare module 'sagiri' {
     import * as FormData from 'form-data';
-    import 'fs';
-    import 'http';
-    import 'https';
+    import * as fs from 'fs';
+    import * as http from 'http';
+    import * as https from 'https';
 
     enum RATINGS {
         UNKNOWN,
@@ -12,9 +12,9 @@ declare module 'sagiri' {
     }
 
     interface Site {
+        URLRegex: RegExp,
         name: string,
         backupURL(data: string): string,
-        URLRegex: RegExp,
         getRating?(body: string): number,
     }
 
@@ -65,13 +65,13 @@ declare module 'sagiri' {
         public numRes: number;
         public testMode: boolean;
         public getRating: boolean;
-        public dbMask?: number;
-        public dbMaskI?: number;
+        public dbMask: number | null;
+        public dbMaskI: number | null;
         public shortLimiter: Ratelimiter;
         public longLimiter: Ratelimiter;
 
-        constructor(key: string, options: HandlerOptions);
-        getSauce(file: string): Promise<Source[]>;
-        getSource(file: string): Promise<Source[]>;
+        public constructor(key: string, options: HandlerOptions);
+        public getSauce(file: string): Promise<Source[]>;
+        public getSource(file: string): Promise<Source[]>;
     }
 }

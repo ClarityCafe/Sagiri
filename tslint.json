@@ -1,0 +1,26 @@
+{
+    "extends": ["tslint:recommended"],
+    "rules": {
+        "max-classes-per-file": false,
+        "interface-name": false,
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+        "trailing-comma": [
+            true,
+            "never"
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore"
+        ],
+        "semicolon": [
+            "always",
+            "ignore-interfaces"
+        ]
+    }
+}
