@@ -1,6 +1,6 @@
 {
   "name": "sagiri",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "main": "index.js",
   "repository": {
