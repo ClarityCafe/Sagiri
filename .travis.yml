@@ -9,4 +9,7 @@ node_js:
 install:
    - npm i -SD
 script:
-   - cd tests && node *
+   - cd tests
+   - node file
+   - node mask
+   - node url
