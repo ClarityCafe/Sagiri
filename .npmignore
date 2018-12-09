@@ -12,3 +12,4 @@ tsconfig.json
 renovate.json
 README.md 
 .tern-project
+package-lock.json
