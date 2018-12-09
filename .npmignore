@@ -13,3 +13,4 @@ renovate.json
 README.md 
 .tern-project
 package-lock.json
+.travis.yml
