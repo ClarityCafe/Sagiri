@@ -4,7 +4,7 @@
  */
 
 const Sagiri = require('../');
-const token = require('./token.json').token;
+const token = require('./token.json').token || process.env.SAUCENAO_TOKEN;
 
 const sourcer = new Sagiri(token);
 
