@@ -3,6 +3,7 @@ A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
 [![NPM Info](https://nodei.co/npm/sagiri.png)](https://npmjs.org/package/sagiri)  
 ![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
+[![Build Status](https://travis-ci.com/ClarityMoe/Sagiri.svg?branch=master)](https://travis-ci.com/ClarityMoe/Sagiri)
 
 ## Installation
 
