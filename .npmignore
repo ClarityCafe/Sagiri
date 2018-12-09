@@ -7,3 +7,8 @@ node_modules
 .codeclimate.yml
 tests
 .git
+tslint.json
+tsconfig.json
+renovate.json
+README.md 
+.tern-project
