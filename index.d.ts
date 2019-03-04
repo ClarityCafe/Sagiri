@@ -1,10 +1,10 @@
 import { Buffer } from 'buffer';
+import * as FormData from 'form-data';
+import * as fs from 'fs';
+import * as http from 'http';
+import * as https from 'https';
 
 declare module 'sagiri' {
-    import * as FormData from 'form-data';
-    import * as fs from 'fs';
-    import * as http from 'http';
-    import * as https from 'https';
 
     enum RATINGS {
         UNKNOWN,
