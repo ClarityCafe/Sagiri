@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 declare module 'sagiri' {
     import * as FormData from 'form-data';
     import * as fs from 'fs';
@@ -71,7 +73,7 @@ declare module 'sagiri' {
         public longLimiter: Ratelimiter;
 
         public constructor(key: string, options: HandlerOptions);
-        public getSauce(file: string): Promise<Source[]>;
-        public getSource(file: string): Promise<Source[]>;
+        public getSauce(file: string | Buffer): Promise<Source[]>;
+        public getSource(file: string | Buffer): Promise<Source[]>;
     }
 }
