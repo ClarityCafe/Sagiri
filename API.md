@@ -49,7 +49,7 @@ Searches for potential sources of an image.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| file | <code>String | Buffer</code> | Either a file or URL that you want to find the source of. |
+| file | <code>String</code> | <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of. |
 
 **Example**  
 ```js
@@ -65,5 +65,5 @@ An alias of Handler#getSauce, for those who are more mentally sane.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| file | <code>String | Buffer</code> | Either a file or URL that you want to find the source of. |
+| file | <code>String</code> | <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of. |
 
