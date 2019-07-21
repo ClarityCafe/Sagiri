@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "@types/form-data": "2.2.1",
-    "eslint": "6.0.1"
+    "eslint": "6.1.0"
   }
 }
