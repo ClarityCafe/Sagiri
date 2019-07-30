@@ -30,5 +30,8 @@
   "devDependencies": {
     "@types/form-data": "2.2.1",
     "eslint": "6.1.0"
+  },
+  "peerDependencies": {
+    "@types/form-data": "^2",
   }
 }
