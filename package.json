@@ -32,6 +32,6 @@
     "eslint": "6.1.0"
   },
   "peerDependencies": {
-    "@types/form-data": "^2",
+    "@types/form-data": "^2"
   }
 }
