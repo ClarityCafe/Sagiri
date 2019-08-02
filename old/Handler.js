@@ -9,7 +9,7 @@ const fs = require('fs');
 const http = require('http');
 const https = require('https');
 const Constants = require('./Constants');
-const Ratelimiter = require('./Ratelimiter');
+const Ratelimiter = require('../lib/Ratelimiter');
 
 /**
  * Query handler for SauceNAO.
@@ -41,7 +41,7 @@ class Handler {
             if (!Array.isArray(options.dbMask)) throw new TypeError('options.dbMask is not an array.');
             if (options.dbMask.filter(a => typeof a === 'number').length !== options.dbMask.length) throw new TypeError('Not all of the values in `options.dbMask` are a number.');
         }
-        
+
         if (options.dbMaskI) {
             if (!Array.isArray(options.dbMaskI)) throw new TypeError('options.dbMaskI is not an array.');
             if (options.dbMaskI.filter(a => typeof a === 'number').length !== options.dbMaskI.length) throw new TypeError('Not all of the values in `options.dbMaskI` are a number.');
@@ -137,7 +137,7 @@ class Handler {
     /**
      * An alias of Handler#getSauce, for those who are more mentally sane.
      * @alias Handler.getSauce
-     * 
+     *
      * @param {String | Buffer} file Either a file or URL or a file buffer that you want to find the source of.
      * @returns {Promise<Object[]>} An array of all the results from the API, with parsed data.
      */

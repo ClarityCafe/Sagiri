@@ -1,6 +1,6 @@
-const Handler = require('./lib/Handler');
-const Constants = require('./lib/Constants');
-const Ratelimiter = require('./lib/Ratelimiter');
+const Handler = require('./Handler');
+const Constants = require('./Constants');
+const Ratelimiter = require('../lib/Ratelimiter');
 const Sagiri = Handler;
 
 Sagiri.Handler = Handler;

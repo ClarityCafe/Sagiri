@@ -7,8 +7,9 @@ engines:
     config:
       languages:
       - javascript
+      - typescript
   fixme:
       enabled: true
 ratings:
   paths:
-  - "lib/**.js"
+  - "lib/**.ts"

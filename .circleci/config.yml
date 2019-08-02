@@ -1,0 +1,51 @@
+version: 2.1
+
+commands:
+  nodejs:
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - node_modules
+      - run:
+          name: Linting
+          command: yarn lint
+      - run:
+          name: Testing
+          command: yarn test
+
+# List of jobs
+jobs:
+  node-v8:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - nodejs
+  node-v10:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - nodejs
+  node-v11:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - nodejs
+
+workflows:
+  version: 2
+  node-multi-build:
+    jobs:
+      - node-v8
+      - node-v10
+      - node-v11

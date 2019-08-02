@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+out
+coverage
+.idea
+.vscode
+.github
+.circleci
