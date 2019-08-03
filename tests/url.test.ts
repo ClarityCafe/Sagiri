@@ -8,7 +8,7 @@ describe('Sagiri URL test', () => {
     sagiri = new Sagiri(token, {testMode: true});
   });
 
-  test('should get source', async() => {
+  test('should get source', async () => {
     const results = await sagiri.getSauce('https://i.imgur.com/YmaYT5L.jpg');
 
     expect(results).toBeDefined();

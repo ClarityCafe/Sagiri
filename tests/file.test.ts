@@ -9,7 +9,7 @@ describe('Sagiri File test', () => {
     sagiri = new Sagiri(token, {testMode: true});
   });
 
-  test('should get source', async() => {
+  test('should get source', async () => {
     const imagePath = path.join(__dirname, 'fixtures', 'image.png');
     const results = await sagiri.getSauce(imagePath);
 

@@ -6,14 +6,21 @@ plugins:
   eslint:
     enabled: true
     channel: "eslint-5"
-    config: .eslintrc.json
+    ignore_warnings: true
     extensions:
     - .ts
   nodesecurity:
-    enabled: true
-  markdownlint:
     enabled: true
 exclude_patterns:
 - "tests/"
 - "docs/"
 - "**/node_modules/"
+- "jest.config.js"
+- "yarn.lock"
+- "LICENSE.md"
+- "README.md"
+- "renovate.json"
+- "tsconfig.docs.json"
+- "tsconfig.json"
+- "CHANGELOG.md"
+- ".travis.yml"

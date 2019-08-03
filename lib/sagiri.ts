@@ -145,7 +145,7 @@ export class Sagiri {
       }
 
       return returnData;
-    } catch(err) {
+    } catch (err) {
       throw new Error(err);
     }
   }
@@ -183,8 +183,8 @@ export class Sagiri {
       });
 
       return res.json() as Promise<FormRes>;
-    } catch(err) {
-      throw new Error(`Got HTML response while expecting JSON`);
+    } catch (err) {
+      throw new Error('Got HTML response while expecting JSON');
     }
   }
 
@@ -220,7 +220,7 @@ export class Sagiri {
       if (!getter) throw new Error('Could not find site matching URL given.');
 
       return getter.getRating(data);
-    } catch(err) {
+    } catch (err) {
       return RATINGS[0];
     }
   }
