@@ -1,14 +1,26 @@
-engines:
+plugins:
+  editorconfig:
+    enabled: true
+  fixme:
+    enabled: true
   eslint:
     enabled: true
-    config: .eslintrc
-  duplication:
-    enabled: false
-    config:
-      languages:
-      - javascript
-  fixme:
-      enabled: true
-ratings:
-  paths:
-  - "lib/**.js"
+    channel: "eslint-5"
+    ignore_warnings: true
+    extensions:
+    - .ts
+  nodesecurity:
+    enabled: true
+exclude_patterns:
+- "tests/"
+- "docs/"
+- "**/node_modules/"
+- "jest.config.js"
+- "yarn.lock"
+- "LICENSE.md"
+- "README.md"
+- "renovate.json"
+- "tsconfig.docs.json"
+- "tsconfig.json"
+- "CHANGELOG.md"
+- ".travis.yml"

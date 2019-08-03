@@ -1,0 +1,31 @@
+{
+    "extends": ["@favware/eslint-config"],
+    "rules": {
+        "@typescript-eslint/indent": ["error", 2, {"SwitchCase": 1}],
+        "valid-jsdoc": [
+            "warn",
+            {
+                "prefer": {
+                    "return": "returns",
+                    "arg": "param",
+                    "argument": "param",
+                    "augments": "extends",
+                    "property": "prop"
+                },
+
+                "preferType": {
+                    "object": "object",
+                    "string": "string",
+                    "number": "number",
+                    "boolean": "boolean",
+                    "promise": "Promise",
+                    "array": "Array",
+                    "null": "null",
+                    "function": "function"
+                },
+
+                "requireReturn": false
+            }
+        ]
+    }
+}

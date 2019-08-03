@@ -1,3 +1,34 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 token.json
+
+# File Archives
+*.zip
+*.tar.xz
+*.7z
+*.rar
+
+# Logs
+logs
+*.log*
+coverage/
+
+# IDE Settings
+.idea/
+.vscode/
+.vs/
+*.iml
+
+# Transpiled files
+dist/
+
+# Lock files
 package-lock.json

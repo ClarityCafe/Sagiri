@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+out
+coverage
+.idea
+.vscode
+.github
+.circleci
+old/
+docsbuild/
+docs/example.js
