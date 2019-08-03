@@ -8,7 +8,7 @@
  * it also tracks it's own rate usages.
  * @private
  */
-export default class Ratelimiter {
+export class Ratelimiter {
   private static totalUses: number;
   private uses: number;
 
@@ -59,3 +59,5 @@ export default class Ratelimiter {
     Ratelimiter.totalUses = value;
   }
 }
+
+export default Ratelimiter;

@@ -7,12 +7,15 @@ A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
 ## Installation
 
-Install with [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/):
+Install with [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/).
+This library also has 2 mandatory peer dependencies, [node-fetch](https://www.npmjs.com/package/node-fetch) and [form-data](https://www.npmjs.com/package/form-data).
+You should also install these libraries.
+Lastly if you're writing in TypeScript it would be a good idea to also add `@types/node-fetch` to your devDependencies.
 
 ```sh
-npm install sagiri
+npm install sagiri node-fetch form-data
 
-yarn add sagiri
+yarn add sagiri node-fetch form-data
 ```
 
 ## Examples
