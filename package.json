@@ -18,7 +18,7 @@
     "url": "https://github.com/ClarityCafe/issues"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prebuild": "yarn lint && yarn test",
     "build": "rollup -c rollup.config.ts",
