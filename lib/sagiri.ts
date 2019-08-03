@@ -23,7 +23,7 @@ import fetch from 'node-fetch';
  * @param {number[] | null} [options.dbMask=null] Array of all the indexes to **ENABLE** results for.
  * @param {number[] | null} [options.dbMaskI=null] Array of all the indexes to **DISABLE** results for.
  * @description The main class for the library to get sources of images.
- * An instance of this class can be created with a SauceNAO token upon which you can query the API get the {@link getSauce} method
+ * An instance of this class can be created with a SauceNAO token upon which you can query the API get the `getSauce` method
  */
 export class Sagiri {
   private key: string;
@@ -152,7 +152,7 @@ export class Sagiri {
 
   /**
    * @method sagiri#getSource
-   * @description An alias of {@link Sagiri}#{@link getSuace}, for those who are more mentally sane.
+   * @description An alias of `Sagiri#getSauce`, for those who are more mentally sane.
    * @param {string | Buffer} file Either a file or URL or a file buffer that you want to find the source of
    * @returns {Promise<Array<Source>>} An array of all the results from the API, with parsed data.
    */

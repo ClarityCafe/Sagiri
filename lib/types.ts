@@ -44,7 +44,7 @@ export enum PERIODS {
 
 /**
  * @typedef BackupUrlData
- * @description Data used in the backup url in {@link SiteData}
+ * @description Data used in the backup url in `SiteData`
  */
 export type BackupUrlData = {
   data: {
