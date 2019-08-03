@@ -43,7 +43,10 @@
     "node": ">=8",
     "npm": ">=5"
   },
-  "dependencies": {},
+  "dependencies": {
+    "form-data": "^2.5.0",
+    "node-fetch": "^2.6.0"
+  },
   "devDependencies": {
     "@favware/eslint-config": "^1.0.0",
     "@types/dotenv": "^6.1.1",
@@ -53,14 +56,13 @@
     "common-tags": "^1.8.0",
     "dotenv": "^8.0.0",
     "eslint": "^6.1.0",
-    "form-data": "^2.5.0",
     "jest": "^24.8.0",
     "jsdoc-to-markdown": "^5.0.0",
-    "node-fetch": "^2.6.0",
     "replace": "^1.1.0",
     "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-copy": "^3.1.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-progress": "^1.1.1",
@@ -70,10 +72,6 @@
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
-  },
-  "peerDependencies": {
-    "form-data": "^2",
-    "node-fetch": "^2"
   },
   "files": [
     "dist"

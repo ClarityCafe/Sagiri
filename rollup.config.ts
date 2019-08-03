@@ -6,6 +6,7 @@ import {terser} from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
+import json from 'rollup-plugin-json';
 
 export default {
   input: 'lib/index.ts',
@@ -32,6 +33,11 @@ export default {
     progress(),
     external(),
     resolve({preferBuiltins: true}),
+    json({
+      preferConst: true,
+      compact: true,
+      namedExports: false,
+    }),
     typescript({
       rollupCommonJSResolveHack: true,
       clean: true,
