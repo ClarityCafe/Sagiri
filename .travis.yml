@@ -1,0 +1,15 @@
+
+sudo: false
+dist: bionic
+language: node_js
+cache: yarn
+
+node_js:
+   - "8"
+   - "10"
+   - "12"
+
+install:
+   - yarn
+script:
+   - yarn lint && yarn test
