@@ -1,0 +1,19 @@
+plugins:
+  editorconfig:
+    enabled: true
+  fixme:
+    enabled: true
+  eslint:
+    enabled: true
+    channel: "eslint-5"
+    config: .eslintrc.json
+    extensions:
+    - .ts
+  nodesecurity:
+    enabled: true
+  markdownlint:
+    enabled: true
+exclude_patterns:
+- "tests/"
+- "docs/"
+- "**/node_modules/"
