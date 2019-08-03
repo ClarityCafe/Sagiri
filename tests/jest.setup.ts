@@ -1,8 +1,3 @@
-/**
- * @file Jest Setup file, runs before any other tests
- * @author Favna
- */
-
 import {config} from 'dotenv';
 import path from 'path';
 
