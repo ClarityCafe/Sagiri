@@ -109,6 +109,7 @@ If `options.getRatings` is not true, then this value will always be `0`.
 ## Contributing
 
 All contributions are accepted! If you think you can bring uploading support, or make the lib perform better, make a PR and start coding!
+For more detailed contribution guidelines please read over [this repositories Contributing Guidelines](https://github.com/ClarityCafe/Sagiri/blob/master/.github/CONTRIBUTING.md)
 
 ## Copyright
 
