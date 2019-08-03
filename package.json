@@ -60,7 +60,7 @@
     "jsdoc-to-markdown": "5.0.0",
     "replace": "1.1.0",
     "rollup-plugin-cleaner": "1.0.0",
-    "rollup-plugin-commonjs": "10.0.1",
+    "rollup-plugin-commonjs": "10.0.2",
     "rollup-plugin-copy": "3.1.0",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
