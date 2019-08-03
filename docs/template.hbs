@@ -5,7 +5,7 @@ A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 ![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
 [![Build Status](https://travis-ci.com/ClarityCafe/Sagiri.svg?branch=master)](https://travis-ci.com/ClarityCafe/Sagiri)
 
-## Install
+## Installation
 
 Install with [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/):
 
@@ -20,25 +20,40 @@ yarn add sagiri
 #### Regular
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri('TOKEN');
+const sagiri = new Sagiri('TOKEN');
 
-handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 ```
 
 #### Using DB masks
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri('TOKEN', {
+const sagiri = new Sagiri('TOKEN', {
   dbMask: [5, 35],
   dbMaskI: [29]
 });
 
-handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+```
+
+#### In TypeScript / with ES6 modules
+```ts
+import Sagiri from 'sagiri';
+const sagiri = new Sagiri('TOKEN');
+
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 ```
 
 ## API Documentation
 
-{{>main}}
+{{#modules}}
+### {{name}}
+{{>body~}}
+{{#functions}}
+#### {{name}}(params)
+{{>body~}}
+{{/functions}}
+{{/modules}}
 
 ## Ratings
 If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.

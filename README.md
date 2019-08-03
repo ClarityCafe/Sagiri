@@ -1,14 +1,18 @@
 # Sagiri
 A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
-[![NPM Info](https://nodei.co/npm/sagiri.png)](https://npmjs.org/package/sagiri)  
+[![NPM Info](https://nodei.co/npm/sagiri.png)](https://npmjs.org/package/sagiri)
 ![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
 [![Build Status](https://travis-ci.com/ClarityCafe/Sagiri.svg?branch=master)](https://travis-ci.com/ClarityCafe/Sagiri)
 
 ## Installation
 
-```
+Install with [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/):
+
+```sh
 npm install sagiri
+
+yarn add sagiri
 ```
 
 ## Examples
@@ -16,28 +20,79 @@ npm install sagiri
 #### Regular
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri('TOKEN');
+const sagiri = new Sagiri('TOKEN');
 
-handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 ```
 
 #### Using DB masks
 ```js
 const Sagiri = require('sagiri');
-const handler = new Sagiri('TOKEN', {
+const sagiri = new Sagiri('TOKEN', {
   dbMask: [5, 35],
   dbMaskI: [29]
 });
 
-handler.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 ```
 
-## API 
+#### In TypeScript / with ES6 modules
+```ts
+import Sagiri from 'sagiri';
+const sagiri = new Sagiri('TOKEN');
 
-Documentation for the module is available [here](./API.md).
+sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+```
+
+## API Documentation
+
+### Sagiri
+The main class for the library to get sources of images.
+An instance of this class can be created with a SauceNAO token upon which you can query the API get the [getSauce](getSauce) method
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| key | <code>string</code> |  | API Key for SauceNAO |
+| [options] | <code>SagiriOptions</code> |  | Optional options |
+| [options.numRes] | <code>number</code> | <code>5</code> | Number of results to get from SauceNAO. |
+| [options.getRating] | <code>boolean</code> | <code>false</code> | Whether to retrieve the rating of a source or not. |
+| [options.testMode] | <code>boolean</code> | <code>false</code> | Whether to enable "test mode", which causes each index that has a match to output 1 result at most. |
+| [options.dbMask] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **ENABLE** results for. |
+| [options.dbMaskI] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **DISABLE** results for. |
+
+#### getSauce(params)
+Searches for potential sources of an image.
+
+**Kind**: instance method of <code>Sagiri</code>  
+**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
+
+**Example**  
+```ts
+ const Sagiri = require('sagiri');
+ const sagiri = new Sagiri('YOUR_TOKEN');
+ (async function() {
+   const data = await sagiri.getSauce('https://i.imgur.com/YmaYT5L.jpg');
+   console.log(data);
+ })();
+```
+#### getSource(params)
+An alias of [Sagiri](Sagiri)#[getSuace](getSuace), for those who are more mentally sane.
+
+**Kind**: instance method of <code>sagiri</code>  
+**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
+
 
 ## Ratings
-If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.  
+If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.
 The meaning of these values are:
  - `0 (UNKNOWN)` The rating of the source could not be determined.
  - `1 (SAFE)` The source is safe and doesn't contain nudity, sex, etc.
@@ -46,12 +101,14 @@ The meaning of these values are:
 
 If `options.getRatings` is not true, then this value will always be `0`.
 
+* * *
+
 ## Contributing
 
 All contributions are accepted! If you think you can bring uploading support, or make the lib perform better, make a PR and start coding!
 
 ## Copyright
 
-Copyright 2017 (c) ClarityMoe. This Library is from the [Clara base project](https://github.com/ClaraIO/Clara).
+Copyright 2017 (c) ClarityMoe. This Library is from the [Clara base project](https://github.com/ClarityCafe/Clara).
 
 Sagiri is a character from Eromanga-sensei. All rights reserved to her authors.

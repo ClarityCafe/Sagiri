@@ -8,3 +8,5 @@ coverage
 .github
 .circleci
 old/
+docsbuild/
+docs/example.js
