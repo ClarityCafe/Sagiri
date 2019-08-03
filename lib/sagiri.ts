@@ -108,6 +108,7 @@ export class Sagiri {
       this.shortLimiter.use();
       this.longLimiter.use();
 
+      if (res.header.status === -2) throw new Error(`SauceNao Search Rate Too High.\n${res.header.message.match(/(Your IP \((?:[0-9]{1,3}\.){3}[0-9]{1,3}\)[a-z \\'0-9]+)/)![0]}`);
       if (res.header.status > 0) throw new Error(`Server-side error occurred. Error Code: ${res.header.status}`);
       if (res.header.status < 0) throw new Error(`Client-side error occurred. Error code: ${res.header.status}`);
 

@@ -1,8 +1,3 @@
-/**
- * @file Test file for Sagiri for URL support.
- * @author Ovyerus, Favna
- */
-
 import Sagiri from '../lib';
 
 describe('Sagiri URL test', () => {

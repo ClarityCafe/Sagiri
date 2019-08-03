@@ -117,6 +117,7 @@ type FormResHeader = {
   short_remaining: number;
   long_remaining: number;
   status: number;
+  message: string;
   results_requested: number;
   index: { [key: string]: FormResHeaderIndexData };
   search_depth: string;

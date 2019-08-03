@@ -1,11 +1,6 @@
-/**
- * @file Test file for Sagiri for URL support.
- * @author Ovyerus, Favna
- */
-
 import Sagiri from '../lib';
 
-describe('Sagiri Mask test', () => {
+describe('Sagiri With Options test', () => {
   let sagiri: Sagiri;
   beforeAll(() => {
     const token = process.env.SAUCENAO_TOKEN as string;
@@ -14,6 +9,7 @@ describe('Sagiri Mask test', () => {
       dbMaskI: [ 9 ],
       dbMask: [ 5, 10 ],
       testMode: true,
+      getRating: true,
     });
   });
 

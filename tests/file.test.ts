@@ -1,8 +1,3 @@
-/**
- * @file Test file for Sagiri for File support.
- * @author Ovyerus, Favna
- */
-
 import Sagiri from '../lib';
 import path from 'path';
 
