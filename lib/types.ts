@@ -20,7 +20,7 @@ export type Source = {
   url: string;
   site: string;
   index: string;
-  similary: number;
+  similarity: number;
   thumbnail: string;
   rating: string;
   authorName: string;

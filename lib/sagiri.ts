@@ -128,7 +128,7 @@ export class Sagiri {
           url: data.url,
           site: data.name,
           index: data.id.toString(),
-          similary: parseFloat(result.header.similarity),
+          similarity: parseFloat(result.header.similarity),
           thumbnail: result.header.thumbnail,
           authorName: result.data.author_name,
           authorUrl: result.data.author_url,
