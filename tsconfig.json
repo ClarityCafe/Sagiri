@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
-        "outDir": "build",
+        "outDir": "dist",
         "rootDir": "lib",
         "module": "esnext",
         "lib": ["esnext"],
-        "target": "es5",
+        "target": "es6",
         "moduleResolution": "node",
         "newLine": "LF",
         "strict": true,
