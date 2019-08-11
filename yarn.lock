@@ -139,10 +139,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@favware/eslint-config@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@favware/eslint-config/-/eslint-config-1.0.0.tgz#9f9217a57ac62a1722f4c99b392dbcae07545df8"
-  integrity sha512-nXl75IS+JDKl7UghhfvoKEKxf+pYi1088Ykowe0OU20bxIdcN65Qk7GxpuqXQJzFGoGiOh4Vmvx/+e2pJvrUyw==
+"@favware/eslint-config@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@favware/eslint-config/-/eslint-config-1.0.1.tgz#c324319aeb836fd62ff25d88be9822233d60a479"
+  integrity sha512-vZneYIrgEKOzuxAKBwW2gwmdrkJl2IOWHbZTq2PmG349QSm+ucAc3khyb+ggImo5FKawXNlToX9YJia0OWSePA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1"
     "@typescript-eslint/parser" "^1"
