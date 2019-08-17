@@ -7,7 +7,7 @@
  * @private
  */
 export class Ratelimiter {
-  uses: number = 0;
+  uses = 0;
 
   constructor(public totalUses: number, interval: number) {
     setInterval(() => {
