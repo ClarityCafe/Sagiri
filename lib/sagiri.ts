@@ -1,15 +1,22 @@
-/**
- * @file API wrapper for SauceNAO, capable of submitting files and urls.
- * @author Capuccino
- * @author Ovyerus
- */
-
 import FormData from 'form-data';
-import fs from 'fs';
-import * as Constants from './constants';
-import Ratelimiter from './ratelimiter';
-import {SagiriOptions, PERIODS, RATINGS, Source, SauceData, FormRes, FormResResult} from './types';
 import fetch from 'node-fetch';
+
+import fs from 'fs';
+
+import { MASKS, SITE_LIST } from './constants';
+import Ratelimiter from './ratelimiter';
+import {
+  SagiriOptions,
+  PERIODS,
+  RATINGS,
+  Source,
+  SauceData,
+  FormRes,
+  FormResResult
+} from './types';
+
+const exists = (path: fs.PathLike) =>
+  new Promise(res => fs.exists(path, ex => res(ex)));
 
 /**
  * @class Sagiri
@@ -32,32 +39,55 @@ export class Sagiri {
   private dbMask: number | null;
   private dbMaskI: number | null;
   private getRating: SagiriOptions['getRating'];
-
   private shortLimiter: Ratelimiter;
   private longLimiter: Ratelimiter;
 
-  public constructor(key: string, options: SagiriOptions = {numRes: 5, getRating: false, testMode: false}) {
+  constructor(
+    key: string,
+    options: SagiriOptions = { numRes: 5, getRating: false, testMode: false }
+  ) {
     if (typeof key !== 'string') throw new TypeError('key is not a string.');
-    if (options.numRes && typeof options.numRes !== 'number') throw new TypeError('options.numRes is not a number.');
-    if (options.testMode && typeof options.testMode !== 'boolean') throw new TypeError('options.testMode is not a boolean.');
-    if (options.getRating && typeof options.getRating !== 'boolean') throw new TypeError('options.getRating is not a boolean.');
+    if (options.numRes && typeof options.numRes !== 'number')
+      throw new TypeError('options.numRes is not a number.');
+    if (options.testMode && typeof options.testMode !== 'boolean')
+      throw new TypeError('options.testMode is not a boolean.');
+    if (options.getRating && typeof options.getRating !== 'boolean')
+      throw new TypeError('options.getRating is not a boolean.');
 
     if (options.dbMask && options.dbMask.length) {
-      if (!Array.isArray(options.dbMask)) throw new TypeError('options.dbMask is not an array.');
-      if (options.dbMask.filter(a => typeof a === 'number').length !== options.dbMask.length) throw new TypeError('Not all of the values in `options.dbMask` are a number.');
+      if (!Array.isArray(options.dbMask))
+        throw new TypeError('options.dbMask is not an array.');
+      if (
+        options.dbMask.filter(a => typeof a === 'number').length !==
+        options.dbMask.length
+      )
+        throw new TypeError(
+          'Not all of the values in `options.dbMask` are a number.'
+        );
     }
 
     if (options.dbMaskI && options.dbMaskI.length) {
-      if (!Array.isArray(options.dbMaskI)) throw new TypeError('options.dbMaskI is not an array.');
-      if (options.dbMaskI.filter(a => typeof a === 'number').length !== options.dbMaskI.length) throw new TypeError('Not all of the values in `options.dbMaskI` are a number.');
+      if (!Array.isArray(options.dbMaskI))
+        throw new TypeError('options.dbMaskI is not an array.');
+      if (
+        options.dbMaskI.filter(a => typeof a === 'number').length !==
+        options.dbMaskI.length
+      )
+        throw new TypeError(
+          'Not all of the values in `options.dbMaskI` are a number.'
+        );
     }
 
     this.key = key;
     this.numRes = this.hasProp(options, 'numRes') ? options.numRes : 5;
-    this.testMode = this.hasProp(options, 'testMode') ? options.testMode : false;
+    this.testMode = this.hasProp(options, 'testMode')
+      ? options.testMode
+      : false;
     this.dbMask = options.dbMask ? this.genBitMask(options.dbMask) : null;
     this.dbMaskI = options.dbMaskI ? this.genBitMask(options.dbMaskI) : null;
-    this.getRating = this.hasProp(options, 'getRating') ? options.getRating : false;
+    this.getRating = this.hasProp(options, 'getRating')
+      ? options.getRating
+      : false;
 
     this.shortLimiter = new Ratelimiter(20, PERIODS.SHORT); // 20 uses every 30 seconds
     this.longLimiter = new Ratelimiter(300, PERIODS.LONG); // 300 uses every 24 hours
@@ -78,76 +108,93 @@ export class Sagiri {
    *  })();
    * ```
    */
-  public async getSauce(file: string | Buffer): Promise<Source[]> {
-    try {
-      if (!Buffer.isBuffer(file) && typeof file !== 'string') throw new Error('file is not a string nor buffer.');
-      if (this.shortLimiter.ratelimited) throw new Error('Short duration ratelimit excedeeded');
-      if (this.longLimiter.ratelimited) throw new Error('Long duration ratelimit exceeded');
+  async getSauce(file: string | Buffer): Promise<Source[]> {
+    if (this.shortLimiter.ratelimited)
+      throw new Error('Short duration ratelimit excedeeded');
+    if (this.longLimiter.ratelimited)
+      throw new Error('Long duration ratelimit exceeded');
 
-      const form = new FormData();
+    const form = new FormData();
 
-      form.append('api_key', this.key);
-      form.append('output_type', 2);
-      form.append('numres', this.numRes);
-      form.append('testmode', Number(this.testMode));
+    form.append('api_key', this.key);
+    form.append('output_type', 2);
+    form.append('numres', this.numRes);
+    form.append('testmode', Number(this.testMode));
 
-      if (this.dbMask) form.append('dbmask', this.dbMask);
-      if (this.dbMaskI) form.append('dbmaski', this.dbMaskI);
+    if (this.dbMask) form.append('dbmask', this.dbMask);
+    if (this.dbMaskI) form.append('dbmaski', this.dbMaskI);
 
-      if (typeof file === 'string') {
-        if (fs.existsSync(file)) form.append('file', fs.createReadStream(file));
-        else form.append('url', file);
-      } else if (Buffer.isBuffer(file)) {
-        form.append('file', file);
-      }
+    if (typeof file === 'string')
+      if (await exists(file)) form.append('file', fs.createReadStream(file));
+      else form.append('url', file);
+    else if (Buffer.isBuffer(file)) form.append('file', file);
 
-      const res = await this.sendForm(form);
-      if (parseInt(res.header.short_limit) !== this.shortLimiter.totalUses) this.shortLimiter.totalUses = parseInt(res.header.short_limit);
-      if (parseInt(res.header.long_limit) !== this.longLimiter.totalUses) this.longLimiter.totalUses = parseInt(res.header.long_limit);
+    const res = await this.sendForm(form);
 
-      this.shortLimiter.use();
-      this.longLimiter.use();
+    if (parseInt(res.header.short_limit) !== this.shortLimiter.totalUses)
+      this.shortLimiter.totalUses = parseInt(res.header.short_limit);
+    if (parseInt(res.header.long_limit) !== this.longLimiter.totalUses)
+      this.longLimiter.totalUses = parseInt(res.header.long_limit);
 
-      if (res.header.status === -2) throw new Error(`SauceNao Search Rate Too High.\n${res.header.message.match(/(Your IP \((?:[0-9]{1,3}\.){3}[0-9]{1,3}\)[a-z \\'0-9]+)/)![0]}`);
-      if (res.header.status > 0) throw new Error(`Server-side error occurred. Error Code: ${res.header.status}`);
-      if (res.header.status < 0) throw new Error(`Client-side error occurred. Error code: ${res.header.status}`);
+    this.shortLimiter.use();
+    this.longLimiter.use();
 
-      if (res.results.length === 0) throw new Error('No results.');
+    // TODO: better errors
+    if (res.header.status === -2)
+      throw new Error(
+        `SauceNao Search Rate Too High.\n${
+          res.header.message.match(
+            /(Your IP \((?:[0-9]{1,3}\.){3}[0-9]{1,3}\)[a-z \\'0-9]+)/
+          )![0]
+        }`
+      );
+    if (res.header.status > 0)
+      throw new Error(
+        `Server-side error occurred. Error Code: ${res.header.status}`
+      );
+    if (res.header.status < 0)
+      throw new Error(
+        `Client-side error occurred. Error code: ${res.header.status}`
+      );
 
-      // Filter out any results that do not have a resolver, and sort according to their similarity.
-      let results = res.results.filter(r => Constants.SITE_LIST[parseInt(r.header.index_name.match(/^Index #(\d+):? /)![1])]);
+    if (res.results.length === 0) throw new Error('No results.');
 
-      if (results.length === 0) throw new Error('No results');
+    // Filter out any results that do not have a resolver, and sort according to their similarity.
+    let results = res.results.filter(
+      r =>
+        SITE_LIST[parseInt(r.header.index_name.match(/^Index #(\d+):? /)![1])]
+    );
 
-      results = results.sort((a, b) => parseFloat(b.header.similarity) - parseFloat(a.header.similarity));
-      const returnData: Source[] = [];
+    if (results.length === 0) throw new Error('No results');
 
-      results.forEach(result => {
-        const data = this.resolveSauceData(result);
-        returnData.push({
-          url: data.url,
-          site: data.name,
-          index: data.id.toString(),
-          similarity: parseFloat(result.header.similarity),
-          thumbnail: result.header.thumbnail,
-          authorName: result.data.author_name,
-          authorUrl: result.data.author_url,
-          rating: RATINGS[0],
-          original: result,
-        });
+    results = results.sort(
+      (a, b) =>
+        parseFloat(b.header.similarity) - parseFloat(a.header.similarity)
+    );
+    const returnData: Source[] = [];
+
+    results.forEach(result => {
+      const data = this.resolveSauceData(result);
+      returnData.push({
+        url: data.url,
+        site: data.name,
+        index: data.id.toString(),
+        similarity: parseFloat(result.header.similarity),
+        thumbnail: result.header.thumbnail,
+        authorName: result.data.author_name,
+        authorUrl: result.data.author_url,
+        rating: RATINGS[0],
+        original: result
       });
+    });
 
-      if (this.getRating) {
-        returnData.map(async dataSet => ({
-          ...dataSet,
-          rating: await this.resolveRating(dataSet.url),
-        }));
-      }
+    if (this.getRating)
+      returnData.map(async dataSet => ({
+        ...dataSet,
+        rating: await this.resolveRating(dataSet.url)
+      }));
 
-      return returnData;
-    } catch (err) {
-      throw new Error(err);
-    }
+    return returnData;
   }
 
   /**
@@ -156,21 +203,20 @@ export class Sagiri {
    * @param {string | Buffer} file Either a file or URL or a file buffer that you want to find the source of
    * @returns {Promise<Array<Source>>} An array of all the results from the API, with parsed data.
    */
-  public async getSource(file: string | Buffer): Promise<Source[]> {
-    return this.getSauce(file);
-  }
+  // eslint-disable-next-line no-invalid-this
+  getSource = (file: string | Buffer): Promise<Source[]> => this.getSauce(file);
 
   private genBitMask(arr: number[]): number {
     if (!Array.isArray(arr)) throw new TypeError('arr is not an array.');
 
     let res = 0;
 
-    for (let i = 0; i < arr.length; i++) {
-      if (typeof arr[i] !== 'number') throw new TypeError(`Value at index \`${i}\` is not a number.`);
-      else if (Constants.MASKS[arr[i]] === null) throw new Error(`DB index \`${arr[i]}\` is unsupported.`);
-
-      else res ^= Number(Constants.MASKS[arr[i]]);
-    }
+    for (const mask of arr)
+      if (typeof mask !== 'number')
+        throw new TypeError(`Unexpected '${mask}' in mask.`);
+      else if (MASKS[mask] === null)
+        throw new Error(`DB index '${mask}' is unsupported.`);
+      else res ^= Number(MASKS[mask]);
 
     return res;
   }
@@ -179,7 +225,7 @@ export class Sagiri {
     try {
       const res = await fetch('https://saucenao.com/search.php', {
         method: 'POST',
-        body: form,
+        body: form
       });
 
       return res.json() as Promise<FormRes>;
@@ -190,32 +236,35 @@ export class Sagiri {
 
   private resolveSauceData(data: FormResResult): SauceData {
     const body = data.data;
-    const id: number = parseInt(data.header.index_name.match(/^Index #(\d+):? /)![1]);
+    const id: number = parseInt(
+      data.header.index_name.match(/^Index #(\d+):? /)![1]
+    );
 
-    if (!Constants.SITE_LIST[id]) throw new Error(`Unsupported site index: ${id}`);
+    if (!SITE_LIST[id]) throw new Error(`Unsupported site index: ${id}`);
 
-    const name = Constants.SITE_LIST[id].name;
+    const { name } = SITE_LIST[id];
     let url = '';
 
-    if (body.ext_urls && body.ext_urls.length > 1) {
-      url = body.ext_urls.filter((urlFilter: string) => Constants.SITE_LIST[id].URLRegex.test(urlFilter))[0];
-    } else if (body.ext_urls && body.ext_urls.length === 1) {
-      url = body.ext_urls[0];
-    }
+    if (body.ext_urls && body.ext_urls.length > 1)
+      [url] = body.ext_urls.filter((urlFilter: string) =>
+        SITE_LIST[id].URLRegex.test(urlFilter)
+      );
+    else if (body.ext_urls && body.ext_urls.length === 1) [url] = body.ext_urls;
 
     // Use fallback generation method.
-    if (!url) url = Constants.SITE_LIST[id].backupURL(data);
+    if (!url) url = SITE_LIST[id].backupURL(data);
 
-    return {id, url, name};
+    return { id, url, name };
   }
 
   private async resolveRating(url: string) {
-    if (!/^https?/.test(url)) throw new Error('url does not start with `https` or `http`');
+    if (!/^https?/.test(url))
+      throw new Error('url does not start with `https` or `http`');
 
     try {
       const res = await fetch(url);
       const data = await res.text();
-      const getter = Object.values(Constants.SITE_LIST).find(v => v.URLRegex.test(url));
+      const getter = Object.values(SITE_LIST).find(v => v.URLRegex.test(url));
 
       if (!getter) throw new Error('Could not find site matching URL given.');
 
@@ -225,7 +274,7 @@ export class Sagiri {
     }
   }
 
-  private hasProp <O extends {}>(obj: O, prop: keyof O) {
+  private hasProp<O extends {}>(obj: O, prop: keyof O) {
     return obj && prop in obj;
   }
 }

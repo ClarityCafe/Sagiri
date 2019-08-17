@@ -28,6 +28,7 @@ coverage/
 
 # Transpiled files
 dist/
+docsbuild/
 
 # Lock files
 package-lock.json
