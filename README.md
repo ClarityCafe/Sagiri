@@ -51,7 +51,7 @@ sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
 
 ### Sagiri
 The main class for the library to get sources of images.
-An instance of this class can be created with a SauceNAO token upon which you can query the API get the [getSauce](getSauce) method
+An instance of this class can be created with a SauceNAO token upon which you can query the API get the `getSauce` method
 
 
 | Param | Type | Default | Description |
@@ -63,6 +63,16 @@ An instance of this class can be created with a SauceNAO token upon which you ca
 | [options.testMode] | <code>boolean</code> | <code>false</code> | Whether to enable "test mode", which causes each index that has a match to output 1 result at most. |
 | [options.dbMask] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **ENABLE** results for. |
 | [options.dbMaskI] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **DISABLE** results for. |
+
+#### getSource(params)
+An alias of `Sagiri#getSauce`, for those who are more mentally sane.
+
+**Kind**: instance method of <code>sagiri</code>  
+**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
 
 #### getSauce(params)
 Searches for potential sources of an image.
@@ -83,16 +93,6 @@ Searches for potential sources of an image.
    console.log(data);
  })();
 ```
-#### getSource(params)
-An alias of [Sagiri](Sagiri)#[getSuace](getSuace), for those who are more mentally sane.
-
-**Kind**: instance method of <code>sagiri</code>  
-**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
-
 
 ## Ratings
 If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.

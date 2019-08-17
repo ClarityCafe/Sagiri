@@ -23,12 +23,12 @@ coverage/
 
 # IDE Settings
 .idea/
-.vscode/
 .vs/
 *.iml
 
 # Transpiled files
 dist/
+docsbuild/
 
 # Lock files
 package-lock.json

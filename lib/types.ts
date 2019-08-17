@@ -1,115 +1,15 @@
-import {SITE_LIST} from './constants';
+import { SITE_LIST } from './constants';
 
-/**
- * @typdef SagiriOptions
- * Options for the Sagiri Class constructor
- */
-export type SagiriOptions = {
-  numRes?: number;
-  testMode?: boolean;
-  getRating?: boolean;
-  dbMask?: (keyof typeof SITE_LIST)[];
-  dbMaskI?: (keyof typeof SITE_LIST)[];
-};
-
-/**
- * @typedef Source
- * Source result from the search
- */
-export type Source = {
-  url: string;
-  site: string;
-  index: string;
-  similarity: number;
-  thumbnail: string;
-  rating: string;
-  authorName: string;
-  authorUrl: string;
-  original: FormResResult;
-};
-
-/** NSFW Classfication ratings */
-export enum RATINGS {
-  UNKNOWN = 0,
-  SAFE = 1,
-  QUESTIONABLE = 2,
-  NSFW = 3
-}
-
-/** Enum used to define periods of time */
-export enum PERIODS {
-  SHORT = 1000 * 30, // 30 seconds
-  LONG = 1000 * 60 * 60 * 24 // 24 hours
-}
-
-/**
- * @typedef BackupUrlData
- * @description Data used in the backup url in `SiteData`
- */
-export type BackupUrlData = {
-  data: {
-    [key: string]: string;
-  };
-  header: {
-    [key: string]: string;
-  };
-};
-
-/**
- * @typdef SiteData
- * @description Data for each supported site
- */
-export type SiteData = {
-  name: string;
-  URLRegex: RegExp;
-  backupURL(data: FormResResult): string;
-  getRating(body?: string): string;
-};
-
-/**
- * @typedef SiteList
- * @description Type for the list of supported sites
- */
-export type SiteList = {
-  [key: number]: SiteData;
-};
-
-/**
- * @typdef Masks
- * @description Type for the Masks constant
- */
-export type Masks = {
-  [key: string]: string | number;
-};
-
-/**
- * @typdef Saucedata
- * @description Returned by the internal resolveSauceData function
- */
-export type SauceData = {
-  id: number;
-  url: string;
-  name: string;
-};
-
-/**
- * @typedef FormResHeaderIndexData
- * @description Data for the FormResHeader index property
- * @private
- */
-type FormResHeaderIndexData = {
+/** Data for the FormResHeader index property */
+interface FormResHeaderIndexData {
   status: number;
   parent_id: number;
   id: number;
   results: number;
-};
+}
 
-/**
- * @typedef FormResHeader
- * @description Headers from the SauceNao result
- * @private
- */
-type FormResHeader = {
+/** Headers from the SauceNao result */
+interface FormResHeader {
   user_id: string;
   account_type: string;
   short_limit: string;
@@ -125,13 +25,81 @@ type FormResHeader = {
   query_iamge_display: string;
   query_image: string;
   results_returned: number;
-};
+}
 
-/**
- * @typedef FormResResult
- * @description Single result from SuaceNao
- */
-export type FormResResult = {
+/** Options for the Sagiri constructor */
+export interface SagiriOptions {
+  numRes?: number;
+  testMode?: boolean;
+  getRating?: boolean;
+  dbMask?: Array<keyof typeof SITE_LIST>;
+  dbMaskI?: Array<keyof typeof SITE_LIST>;
+}
+
+/** Source result from the search */
+export interface Source {
+  url: string;
+  site: string;
+  index: string;
+  similarity: number;
+  thumbnail: string;
+  rating: string;
+  authorName: string;
+  authorUrl: string;
+  original: FormResResult;
+}
+
+/** NSFW Classfication ratings */
+export enum RATINGS {
+  UNKNOWN = 0,
+  SAFE = 1,
+  QUESTIONABLE = 2,
+  NSFW = 3
+}
+
+/** Enum used to define periods of time */
+export enum PERIODS {
+  SHORT = 1000 * 30, // 30 seconds
+  LONG = 1000 * 60 * 60 * 24 // 24 hours
+}
+
+/** Data used in the backup url in `SiteData` */
+export interface BackupUrlData {
+  data: {
+    [key: string]: string;
+  };
+  header: {
+    [key: string]: string;
+  };
+}
+
+/** @description Data for each supported site */
+export interface SiteData {
+  name: string;
+  URLRegex: RegExp;
+  backupURL(data: FormResResult): string;
+  getRating(body?: string): string;
+}
+
+/** Type for the list of supported sites */
+export interface SiteList {
+  [key: number]: SiteData;
+}
+
+/** Type for the Masks constant */
+export interface Masks {
+  [key: string]: string | number;
+}
+
+/** Returned by the internal resolveSauceData function */
+export interface SauceData {
+  id: number;
+  url: string;
+  name: string;
+}
+
+/** Single result from SauceNao */
+export interface FormResResult {
   header: {
     similarity: string;
     thumbnail: string;
@@ -170,13 +138,10 @@ export type FormResResult = {
     yandere_id?: string;
     'anime-pictures_id'?: string;
   };
-};
+}
 
-/**
- * @typedef FormRes
- * @description Returned by the internal sendForm function
- */
-export type FormRes = {
+/** Returned by the internal sendForm function */
+export interface FormRes {
   header: FormResHeader;
   results: FormResResult[];
-};
+}

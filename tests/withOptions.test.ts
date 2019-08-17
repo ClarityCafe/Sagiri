@@ -6,10 +6,10 @@ describe('Sagiri With Options test', () => {
     const token = process.env.SAUCENAO_TOKEN as string;
 
     sagiri = new Sagiri(token, {
-      dbMaskI: [ 9 ],
-      dbMask: [ 5, 10 ],
+      dbMaskI: [9],
+      dbMask: [5, 10],
       testMode: true,
-      getRating: true,
+      getRating: true
     });
   });
 
