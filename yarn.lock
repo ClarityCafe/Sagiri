@@ -1331,10 +1331,10 @@ escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-clarity@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-clarity/-/eslint-config-clarity-0.2.3.tgz#6a253894d344f4ef341dcab43bc1f81858e13016"
-  integrity sha512-J0x7zBsGZcbBRihnybS9bBgs7Bkkt7+r4/ALRu+QDZeL0EqcADWRnRpcNTBKUz3a+QUdhF1VrvXIjrgqjCDPgg==
+eslint-config-clarity@0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-clarity/-/eslint-config-clarity-0.2.4.tgz#51a7d091b8b8f9e35650229c0fa7d89ce34b0ac3"
+  integrity sha512-J0gmMwyW7mMV1qEer98Cwth53u6iUEfcaGAnijBwZ6vgctd2HSn1I5q3c5zxFVBiO0PeMgrur87NiXvEOqfZSQ==
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
