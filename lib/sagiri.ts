@@ -32,7 +32,7 @@ const exists = (path: fs.PathLike) =>
  * @description The main class for the library to get sources of images.
  * An instance of this class can be created with a SauceNAO token upon which you can query the API get the `getSauce` method
  */
-export class Sagiri {
+export default class Sagiri {
   private key: string;
   private numRes: SagiriOptions['numRes'];
   private testMode: SagiriOptions['testMode'];
@@ -278,5 +278,3 @@ export class Sagiri {
     return obj && prop in obj;
   }
 }
-
-export default Sagiri;
