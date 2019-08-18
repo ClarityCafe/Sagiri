@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
  - Rollup bundling
+ 
+## [2.0.1]
+### Changed
+ - Fixed typo in `similarity` key.
 
 ## [2.0.0] - 2019-08-04
 ### Changed
