@@ -1241,10 +1241,10 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.1.tgz#0c667cb467ebbb5cea7f14f135cc2dba7780a8ff"
   integrity sha512-s2+XdvhPCOF01LRQBC8hf4vhbVmI2CGS5aZnxLJlT5FtdhPCDFq80q++zK2KlrVorVDdL5BOGZ/VfLrVtYNF+Q==
 
-dmd@^4.0.2:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/dmd/-/dmd-4.0.3.tgz#e968b4d6b3735c3349f7a302bacb17da2a5fd9eb"
-  integrity sha512-qU9jcZQCxfLlTbZU1e5jROXVkTsn9q3s1FmnOPFWo9tfDol3cSt0AZREiXCsgmSaS5L/AXXQqcZiR7YjFNAL1g==
+dmd@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/dmd/-/dmd-4.0.4.tgz#410cfbe9e140ad80b3bcee2ad39cf18304da3e6b"
+  integrity sha512-ZbHUPKUp5Tl8nVVMZw8rc/MQmFVKusvfR10X/lPAXjBUc/LRW7AaXnYrK2LnVIPfTGEw7T6OmsxkvNRX7GnjIQ==
   dependencies:
     array-back "^4.0.0"
     cache-point "^0.4.1"
@@ -2782,15 +2782,15 @@ jsdoc-parse@^4.0.1:
     sort-array "^2.0.0"
     test-value "^3.0.0"
 
-jsdoc-to-markdown@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/jsdoc-to-markdown/-/jsdoc-to-markdown-5.0.1.tgz#3fcc32385c69d2ebb7174cc91ff7e8e27fe01f92"
-  integrity sha512-l+2sPeNM0V4iYHMS5IGhwKDtCTAW0sF4PAXX1AX9f7r6xfszTB8bqlqNR8ymvU85L9U2kEQ/Qemd5NrtX5DR0w==
+jsdoc-to-markdown@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/jsdoc-to-markdown/-/jsdoc-to-markdown-5.0.2.tgz#a212ed3c3437ae177c290949989a07a36afab282"
+  integrity sha512-Rcs9/3+NO1odClVhLDk0lDNFe11RiYUHh/PnROT5QU2Fpad2zBESmJD+DcmeK7lg1jalFfGG1MKOGuJHs27jsA==
   dependencies:
     array-back "^4.0.0"
     command-line-tool "^0.8.0"
     config-master "^3.1.0"
-    dmd "^4.0.2"
+    dmd "^4.0.4"
     jsdoc-api "^5.0.3"
     jsdoc-parse "^4.0.1"
     walk-back "^3.0.1"
