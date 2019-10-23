@@ -37,13 +37,8 @@ const BASE_SITE_LIST: SiteList = {
     backupURL: data =>
       `https://www.pixiv.net/member_illust.php?mode=medium&illust_id=${data.data.pixiv_id}`,
     getRating(data: string) {
-      const match = data.match(
-        /<div class="introduction-modal"><p class="title">(.*?)<\/p>/i
-      );
-
-      if (!match) return RATINGS[1];
-
-      return match[1].toLowerCase().includes('r-18') ? RATINGS[3] : RATINGS[1];
+      const isR18 = /r18/gi.test(data);
+      return isR18 ? RATINGS[3] : RATINGS[1];
     }
   },
   '8': {
