@@ -189,10 +189,12 @@ export default class Sagiri {
     });
 
     if (this.getRating)
-      returnData.map(async dataSet => ({
-        ...dataSet,
-        rating: await this.resolveRating(dataSet.url)
-      }));
+      return Promise.all(
+        returnData.map(async dataSet => ({
+          ...dataSet,
+          rating: await this.resolveRating(dataSet.url)
+        }))
+      );
 
     return returnData;
   }
