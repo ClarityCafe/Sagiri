@@ -368,7 +368,7 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
   integrity sha512-Il2DtDVRGDcqjDtE+rF8iqg1CArehSK84HZJCT7AMITlyXRBpuPhqGLDQMowraqqu1coEaimg4ZOqggt6L6L+A==
 
-"@types/lodash.ismatch@^4.4.6":
+"@types/lodash.ismatch@4.4.6":
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.ismatch/-/lodash.ismatch-4.4.6.tgz#7ef39e51e56e562e579b1416c4edbb57295b239c"
   integrity sha512-Qy6R9c+LOc3M+kBTDgQGAWxzcrXFKznXuIyg8tbw2/Ct3D3lBmQd3yMTD+NjGzIATgUr0v4uWzW3+ALid+LXsQ==
@@ -3618,7 +3618,7 @@ parse-json@^4.0.0:
     error-ex "^1.3.1"
     json-parse-better-errors "^1.0.1"
 
-parse-multipart@^1.0.4:
+parse-multipart@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/parse-multipart/-/parse-multipart-1.0.4.tgz#767b8788b2487b87b83a19615cd6ba78a8d14492"
   integrity sha1-dnuHiLJIe4e4OhlhXNa6eKjRRJI=
