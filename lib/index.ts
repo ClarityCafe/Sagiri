@@ -4,6 +4,7 @@ import FormData from 'form-data';
 import { createReadStream } from 'fs';
 import { Readable } from 'stream';
 
+import { SagiriClientError, SagiriServerError } from './errors';
 import { generateMask, resolveResult } from './util';
 import { Response, Result } from './response';
 import sites from './sites';
@@ -62,10 +63,14 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     else form.append('file', file);
 
     const response = (await request('/search.php', form)) as Response;
+    const {
+      header: { status, message }
+    } = response;
 
-    // TODO: better errors
-    if (response.header.status !== 0)
-      throw new Error(response.header.status as any);
+    // Server side error
+    if (status > 0) throw new SagiriServerError(status, message!);
+    // Client side error
+    else if (status < 0) throw new SagiriClientError(status, message!);
 
     const results = response.results
       .filter(({ header: { index_id: id } }) => !!sites[id])

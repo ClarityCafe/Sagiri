@@ -8,6 +8,7 @@ export interface Header {
   index: { [id: string]: HeaderIndex | undefined }; // do i wanna generic this to be id value?
   long_limit: string;
   long_remaining: number;
+  message?: string;
   minimum_similarity: number;
   query_image: string;
   query_image_display: string;
