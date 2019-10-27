@@ -4,7 +4,7 @@ import nock from 'nock';
 
 import { promises as fs } from 'fs';
 
-import Sagiri from '../lib';
+import sagiri from '../lib';
 
 import { normalData, inverseMaskData, regularMaskData } from './fixtures/data';
 import {
@@ -12,11 +12,11 @@ import {
   inverseMaskExpectations,
   regularMaskExpectations
 } from './fixtures/expectations';
-import remoteData from './fixtures/remoteData';
+// import remoteData from './fixtures/remoteData';
 
-const client = new Sagiri('');
+const client = sagiri('');
 const testImage = `${__dirname}/fixtures/image.png`;
-const ratingMatcher = expect.arrayContaining([
+/*const ratingMatcher = expect.arrayContaining([
   expect.objectContaining({
     url: 'https://deviantart.com/view/507811345',
     rating: 'QUESTIONABLE'
@@ -39,7 +39,7 @@ const ratingMatcher = expect.arrayContaining([
       'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=60231445',
     rating: 'NSFW'
   })
-]);
+]);*/
 
 /** Dumb 'n stupid "parser" for multipart/form-data bodies using regex and a bunch of string functions.
     Serves to provide an object for matching correct options in Nock calls.*/
@@ -81,9 +81,7 @@ describe('Sagiri#getSauce', () => {
       });
     }).reply(200, normalData);
 
-    const results = await client.getSauce(
-      'https://owo.whats-th.is/6MtFNmm.png'
-    );
+    const results = await client('https://owo.whats-th.is/6MtFNmm.png');
 
     expect(results).toEqual(normalExpectations);
   });
@@ -99,7 +97,7 @@ describe('Sagiri#getSauce', () => {
         });
       }).reply(200, normalData);
 
-      const results = await client.getSauce(testImage);
+      const results = await client(testImage);
 
       expect(results).toEqual(normalExpectations);
     });
@@ -114,7 +112,7 @@ describe('Sagiri#getSauce', () => {
         });
       }).reply(200, normalData);
 
-      const results = await client.getSauce(await fs.readFile(testImage));
+      const results = await client(await fs.readFile(testImage));
 
       expect(results).toEqual(normalExpectations);
     });
@@ -122,8 +120,6 @@ describe('Sagiri#getSauce', () => {
 
   describe('index masks', () => {
     test('regular', async () => {
-      const maskClient = new Sagiri('', { dbMask: [5] });
-
       mockApi(b => {
         const body = parseMultipart(b);
         return isMatch(body, {
@@ -135,16 +131,15 @@ describe('Sagiri#getSauce', () => {
         });
       }).reply(200, regularMaskData);
 
-      const results = await maskClient.getSauce(
-        'http://saucenao.com/images/static/banner.gif'
+      const results = await client(
+        'http://saucenao.com/images/static/banner.gif',
+        { mask: [5] }
       );
 
       expect(results).toEqual(regularMaskExpectations);
     });
 
     test('inverse', async () => {
-      const maskClient = new Sagiri('', { dbMaskI: [5] });
-
       mockApi(b => {
         const body = parseMultipart(b);
         return isMatch(body, {
@@ -156,18 +151,18 @@ describe('Sagiri#getSauce', () => {
         });
       }).reply(200, inverseMaskData);
 
-      const results = await maskClient.getSauce(
-        'http://saucenao.com/images/static/banner.gif'
+      const results = await client(
+        'http://saucenao.com/images/static/banner.gif',
+        { excludeMask: [5] }
       );
 
       expect(results).toEqual(inverseMaskExpectations);
     });
   });
 
-  describe('fetching ratings', () => {
+  // Uncomment when fetching ratings is supported again
+  /*describe('fetching ratings', () => {
     test('gets the right ratings', async () => {
-      const ratingClient = new Sagiri('', { getRating: true });
-
       // Mock SauceNao
       mockApi(b => {
         const body = parseMultipart(b);
@@ -202,11 +197,11 @@ describe('Sagiri#getSauce', () => {
         .get('/view/653284939')
         .reply(200, remoteData['https://deviantart.com/view/653284939']);
 
-      const results = await ratingClient.getSauce(
-        'https://owo.whats-th.is/6MtFNmm.png'
-      );
+      const results = await client('https://owo.whats-th.is/6MtFNmm.png', {
+        getRatings: true
+      });
 
       expect(results).toEqual(ratingMatcher);
     });
-  });
+  });*/
 });

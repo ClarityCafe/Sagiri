@@ -2,6 +2,7 @@ import { Result } from './response';
 import sites from './sites';
 
 export const generateMask = (masks: number[]) =>
+  // eslint-disable-next-line prefer-template
   masks.reduce((prev, curr) => prev ^ parseInt('1' + '0'.repeat(curr), 2), 0);
 
 export function resolveResult(result: Result) {
