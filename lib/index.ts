@@ -13,7 +13,7 @@ export interface Options {
   results?: number;
   mask?: number[];
   excludeMask?: number[];
-  getRatings?: boolean;
+  // getRatings?: boolean;
   testMode?: boolean;
   db?: number;
 }
@@ -33,7 +33,7 @@ type File = string | Buffer | Readable;
 
 // Ratelimiter?
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
-  const request = bent('https://saucenao.com', 'json');
+  const request = bent('https://saucenao.com', 'json', 'POST');
 
   return async (
     file: File,
