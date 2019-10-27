@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:debug": "cross-env DEBUG=sagiri jest",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prebuild": "yarn lint && yarn test",
@@ -46,9 +47,11 @@
   },
   "dependencies": {
     "bent": "^7.0.2",
+    "debug": "^4.1.1",
     "form-data": "^2.5.0"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.5",
     "@types/dotenv": "6.1.1",
     "@types/jest": "24.0.19",
     "@types/lodash.ismatch": "4.4.6",
@@ -56,6 +59,7 @@
     "@types/node-fetch": "2.5.2",
     "@typescript-eslint/eslint-plugin": "2.5.0",
     "@typescript-eslint/parser": "2.5.0",
+    "cross-env": "^6.0.3",
     "eslint": "6.5.1",
     "eslint-config-clarity": "0.2.11",
     "eslint-plugin-import": "2.18.2",
