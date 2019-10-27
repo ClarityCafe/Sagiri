@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { Result } from './response';
 
 export interface SiteData {
@@ -6,10 +7,10 @@ export interface SiteData {
   urlMatcher: RegExp;
   backupUrl(result: Result): string;
   // getRating(body: string): boolean; we remove this?
-  //isNSFW: boolean
+  // isNSFW: boolean
 }
 
-//#region Site data objects
+// #region Site data objects
 const DoujinMangaLexicon: SiteData = {
   name: 'The Doujinshi & Manga Lexicon',
   index: 3,
@@ -213,7 +214,7 @@ const MangaUpdates: SiteData = {
   backupUrl: data =>
     `https://www.mangaupdates.com/series.html?id=${data.data.mu_id}`
 };
-//#endregion
+// #endregion
 
 const sites = {
   '3': DoujinMangaLexicon,

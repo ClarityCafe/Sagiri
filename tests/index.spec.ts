@@ -16,7 +16,7 @@ import {
 
 const client = sagiri('');
 const testImage = `${__dirname}/fixtures/image.png`;
-/*const ratingMatcher = expect.arrayContaining([
+/* const ratingMatcher = expect.arrayContaining([
   expect.objectContaining({
     url: 'https://deviantart.com/view/507811345',
     rating: 'QUESTIONABLE'
@@ -161,7 +161,7 @@ describe('Sagiri#getSauce', () => {
   });
 
   // Uncomment when fetching ratings is supported again
-  /*describe('fetching ratings', () => {
+  /* describe('fetching ratings', () => {
     test('gets the right ratings', async () => {
       // Mock SauceNao
       mockApi(b => {

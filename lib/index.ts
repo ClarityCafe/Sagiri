@@ -101,7 +101,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     const response = (await request('/search.php', form)) as Response;
     const {
-      header: { status, message, results_returned }
+      header: { status, message, results_returned: resultsReturned }
     } = response;
 
     log(`Received response, status ${status}`);
@@ -117,7 +117,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     log(
       `Expected ${numResults} results. ` +
-        `SauceNAO says it sent ${results_returned}, actually sent ${response.results.length}. ` +
+        `SauceNAO says it sent ${resultsReturned}, actually sent ${response.results.length}. ` +
         `Found ${results.length} acceptable results.`
     );
 
