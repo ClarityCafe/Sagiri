@@ -20,5 +20,5 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true
   },
-  "include": ["lib"]
+  "include": ["lib", "types.d.ts"]
 }

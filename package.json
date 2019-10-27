@@ -45,8 +45,8 @@
     "npm": ">=5"
   },
   "dependencies": {
-    "form-data": "^2.5.0",
-    "node-fetch": "^2.6.0"
+    "bent": "^7.0.2",
+    "form-data": "^2.5.0"
   },
   "devDependencies": {
     "@types/dotenv": "6.1.1",

@@ -759,6 +759,15 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bent@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/bent/-/bent-7.0.2.tgz#3e95c3db80387abfa68af6a5211e93d118709889"
+  integrity sha512-vjI+A83Tvg3gdIlYHIP4YrlANtS/LCpQP1mHq+nig1+7jJKNAzVYPAw9rp5IevVoeoM6y64jX1PqaSjmUZqQLg==
+  dependencies:
+    bytesish "^0.4.1"
+    caseless "~0.12.0"
+    is-stream "^2.0.0"
+
 bluebird@^3.5.4:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.1.tgz#df70e302b471d7473489acf26a93d63b53f874de"
@@ -818,6 +827,11 @@ buffer-from@1.x, buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
+
+bytesish@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/bytesish/-/bytesish-0.4.1.tgz#5fe19b076037ffdfb63e083a53495b1d1c063f6f"
+  integrity sha512-j3l5QmnAbpOfcN/Z2Jcv4poQYfefs8rDdcbc6iEKm+OolvUXAE2APodpWj+DOzqX6Bl5Ys1cQkcIV2/doGvQxg==
 
 cache-base@^1.0.1:
   version "1.0.1"
@@ -2241,6 +2255,11 @@ is-stream@^1.1.0:
   resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
 
+is-stream@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-2.0.0.tgz#bde9c32680d6fae04129d6ac9d921ce7815f78e3"
+  integrity sha512-XCoy+WlUr7d1+Z8GgSuXmpuUFC9fOhRXglJMx+dwLKTkL44Cjd4W1Z5P+BQZpr+cR93aGP4S/s7Ftw6Nd/kiEw==
+
 is-symbol@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-symbol/-/is-symbol-1.0.2.tgz#a055f6ae57192caee329e7a860118b497a950f38"
@@ -3266,11 +3285,6 @@ nock@11.6.0:
     lodash "^4.17.13"
     mkdirp "^0.5.0"
     propagate "^2.0.0"
-
-node-fetch@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 node-int64@^0.4.0:
   version "0.4.0"
