@@ -18,20 +18,14 @@
     "url": "https://github.com/ClarityCafe/issues"
   },
   "scripts": {
-    "test": "jest",
-    "test:debug": "cross-env DEBUG=sagiri jest",
+    "build": "yarn lint && yarn test && yarn compile",
+    "compile": "tsc",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "prebuild": "yarn lint && yarn test",
-    "build": "tsc",
+    "prepublishOnly": "yarn build",
     "start": "yarn build -w",
-    "prepublishOnly": "yarn build && yarn docs",
-    "predocs": "yarn docs:clean && yarn lint && yarn docs:build",
-    "docs": "jsdoc2md --template ./docs/template.hbs --files ./docsbuild/*.js --example-lang ts > ./README.md",
-    "postdocs": "yarn docs:replace && yarn docs:clean",
-    "docs:clean": "rimraf ./docsbuild",
-    "docs:build": "tsc -p ./tsconfig.docs.json",
-    "docs:replace": "replace --silent \".&lt;\" \"&lt;\" ./README.md"
+    "test": "jest",
+    "test:debug": "cross-env DEBUG=sagiri jest"
   },
   "keywords": [
     "hitorigoto",
@@ -39,11 +33,13 @@
     "saucenao",
     "simple",
     "easy",
-    "api"
+    "api",
+    "functional",
+    "image",
+    "source"
   ],
   "engines": {
-    "node": ">=8",
-    "npm": ">=5"
+    "node": ">=8"
   },
   "dependencies": {
     "bent": "^7.0.2",
@@ -68,12 +64,10 @@
     "eslint-plugin-react-hooks": "2.2.0",
     "eslint-plugin-sift": "0.3.0",
     "jest": "24.9.0",
-    "jsdoc-to-markdown": "5.0.2",
     "lodash.ismatch": "4.4.0",
     "nock": "11.6.0",
     "parse-multipart": "1.0.4",
     "prettier": "1.18.2",
-    "replace": "1.1.1",
     "ts-jest": "24.1.0",
     "ts-node": "8.4.1",
     "typescript": "3.6.4"
