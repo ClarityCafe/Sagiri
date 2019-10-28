@@ -1,118 +1,72 @@
 # Sagiri
-A simple, lightweight and actually good JS wrapper for the SauceNAO API.
 
-[![NPM Info](https://nodei.co/npm/sagiri.png)](https://npmjs.org/package/sagiri)
+A simple and lightweight NodeJS wrapper for [SauceNAO](https://saucenao.com/).
+
 ![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
 [![Build Status](https://travis-ci.com/ClarityCafe/Sagiri.svg?branch=master)](https://travis-ci.com/ClarityCafe/Sagiri)
 
 ## Installation
 
-Install with [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/).
-This library also has 2 mandatory peer dependencies, [node-fetch](https://www.npmjs.com/package/node-fetch) and [form-data](https://www.npmjs.com/package/form-data).
-You should also install these libraries.
-Lastly if you're writing in TypeScript it would be a good idea to also add `@types/node-fetch` to your devDependencies.
-
 ```sh
-npm install sagiri node-fetch form-data
-
-yarn add sagiri node-fetch form-data
+yarn add sagiri
+# or with npm
+npm install sagiri
 ```
 
-## Examples
+## Usage
 
-#### Regular
 ```js
-const Sagiri = require('sagiri');
-const sagiri = new Sagiri('TOKEN');
+const sagiri = require('sagiri');
 
-sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+const client = sagiri('token');
+const results = await client('http://i.imgur.com/5yFTeRV.png');
 ```
 
-#### Using DB masks
+`sagiri` is a function that returns an async function, so you can call it and store it in a variable to use multiple times, or you can call it and use it immediately.
+
+Sagiri also has the ability to provide [options]() both when calling the main function, and the given async function.
+
 ```js
-const Sagiri = require('sagiri');
-const sagiri = new Sagiri('TOKEN', {
-  dbMask: [5, 35],
-  dbMaskI: [29]
-});
-
-sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+const client = sagiri('client', { results: 10 });
+const results = await client('http://i.imgur.com/5yFTeRV.png', { mask: [5] });
 ```
 
-#### In TypeScript / with ES6 modules
+### API
+
+`sagiri(token: string, defaultOptions?: Options)`  
+_Creates a function to be used for finding potential sources for a given image._  
+By default has options set to give 5 results from SauceNAO.
+
+You can get a token for SauceNAO by [registering an account](https://saucenao.com/user.php) and going to the API page.
+
+Returns `async function (file: File, optionOverrides?: Options)` which is loaded with the given token and default options to use.
+
+### Options
+
+Options takes the form of a simple object passed to either the constructor function or the request function, which covers the options available in the SauceNAO API.
+
+A basic overview of this object looks like this:
+
 ```ts
-import Sagiri from 'sagiri';
-const sagiri = new Sagiri('TOKEN');
-
-sagiri.getSauce('http://i.imgur.com/5yFTeRV.png').then(console.log);
+{
+  results?: number;
+  mask?: number[];
+  excludeMask?: number[];
+  testMode?: boolean;
+  db?: number;
+}
 ```
 
-## API Documentation
-
-### Sagiri
-The main class for the library to get sources of images.
-An instance of this class can be created with a SauceNAO token upon which you can query the API get the `getSauce` method
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| key | <code>string</code> |  | API Key for SauceNAO |
-| [options] | <code>SagiriOptions</code> |  | Optional options |
-| [options.numRes] | <code>number</code> | <code>5</code> | Number of results to get from SauceNAO. |
-| [options.getRating] | <code>boolean</code> | <code>false</code> | Whether to retrieve the rating of a source or not. |
-| [options.testMode] | <code>boolean</code> | <code>false</code> | Whether to enable "test mode", which causes each index that has a match to output 1 result at most. |
-| [options.dbMask] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **ENABLE** results for. |
-| [options.dbMaskI] | <code>Array&lt;number&gt;</code> \| <code>null</code> | <code></code> | Array of all the indexes to **DISABLE** results for. |
-
-#### getSource(params)
-An alias of `Sagiri#getSauce`, for those who are more mentally sane.
-
-**Kind**: instance method of <code>sagiri</code>  
-**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
-
-#### getSauce(params)
-Searches for potential sources of an image.
-
-**Kind**: instance method of <code>Sagiri</code>  
-**Returns**: <code>Promise&lt;Array&lt;Source&gt;&gt;</code> - An array of all the results from the API, with parsed data.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| file | <code>string</code> \| <code>Buffer</code> | Either a file or URL or a file buffer that you want to find the source of |
-
-**Example**  
-```ts
- const Sagiri = require('sagiri');
- const sagiri = new Sagiri('YOUR_TOKEN');
- (async function() {
-   const data = await sagiri.getSauce('https://i.imgur.com/YmaYT5L.jpg');
-   console.log(data);
- })();
-```
-
-## Ratings
-If `options.getRatings` is true, then each source returned from the API will have a `rating` field, with a number from `0` to `3`.
-The meaning of these values are:
- - `0 (UNKNOWN)` The rating of the source could not be determined.
- - `1 (SAFE)` The source is safe and doesn't contain nudity, sex, etc.
- - `2 (QUESTIONABLE)` The source isn't 100% safe and may contain nudity.
- - `3 (NSFW)` The source is not safe, and contains nudity, sex, etc.
-
-If `options.getRatings` is not true, then this value will always be `0`.
-
-* * *
+- `results` controls how many results are returned from SauceNAO.
+- `mask` is an array of the only database indices you want returned from SauceNAO. A mask of `[5]` would only return results from Pixiv.
+- `excludeMask` is like `mask`, but instead of only including the indices you give, it excludes them from the results - allowing everything but those indices. For example, a mask of `[5]` would disallow results from Pixiv.
+- `testMode` causes each index that has a match for the given image to output at most `1` result. Useful for testing some things.
+- `db` searches a specific database index without having to generate a mask.
 
 ## Contributing
 
-All contributions are accepted! If you think you can bring uploading support, or make the lib perform better, make a PR and start coding!
-For more detailed contribution guidelines please read over [this repositories Contributing Guidelines](https://github.com/ClarityCafe/Sagiri/blob/master/.github/CONTRIBUTING.md)
+Any contributions to this project are welcome, but please be sure to read over our [contributing guidelines](./.github/CONTRIBUTING.md).
 
-## Copyright
+## License
 
-Copyright 2017 (c) ClarityMoe. This Library is from the [Clara base project](https://github.com/ClarityCafe/Clara).
-
-Sagiri is a character from Eromanga-sensei. All rights reserved to her authors.
+The code contained within this repository is licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
