@@ -34,6 +34,9 @@ export interface SagiriResult {
 
 type File = string | Buffer | Readable;
 
+/**
+ * Creates a function to be used for finding potential sources for a given image.
+ */
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
   const request = bent('https://saucenao.com', 'json', 'POST');
 
