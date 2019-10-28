@@ -2,7 +2,8 @@
 import isMatch from 'lodash.ismatch';
 import nock from 'nock';
 
-import { promises as fs } from 'fs';
+import fs from 'fs';
+import { promisify } from 'util';
 
 import sagiri from '../lib';
 
@@ -16,6 +17,7 @@ import {
 
 const client = sagiri('');
 const testImage = `${__dirname}/fixtures/image.png`;
+const readFile = promisify(fs.readFile);
 /* const ratingMatcher = expect.arrayContaining([
   expect.objectContaining({
     url: 'https://deviantart.com/view/507811345',
@@ -112,7 +114,7 @@ describe('Sagiri#getSauce', () => {
         });
       }).reply(200, normalData);
 
-      const results = await client(await fs.readFile(testImage));
+      const results = await client(await readFile(testImage));
 
       expect(results).toEqual(normalExpectations);
     });
