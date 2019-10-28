@@ -1,22 +1,18 @@
-sudo: false
-dist: bionic
-language: node_js
+env:
+  global:
+    - CC_TEST_REPORTER_ID=bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
 cache: yarn
-
+language: node_js
 node_js:
+  - '8'
   - '10'
   - '12'
-
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-
-install:
-  - yarn
-
 script:
-  - yarn lint && yarn coverage
-
+  - yarn lint
+  - yarn coverage
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
