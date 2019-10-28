@@ -3,10 +3,9 @@
     "outDir": "dist",
     "rootDir": "lib",
     "module": "commonjs",
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "target": "es6",
     "moduleResolution": "node",
-    "newLine": "LF",
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -20,5 +19,5 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true
   },
-  "include": ["lib"]
+  "include": ["lib", "types.d.ts"]
 }
