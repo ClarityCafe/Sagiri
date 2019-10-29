@@ -46,7 +46,7 @@
     "form-data": "^2.5.0"
   },
   "devDependencies": {
-    "@types/bent": "^7.0.0",
+    "@types/bent": "7.0.0",
     "@types/debug": "4.1.5",
     "@types/dotenv": "6.1.1",
     "@types/jest": "24.0.20",
