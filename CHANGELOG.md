@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Completely redo API to a simpler, FP inspired interface. Main export is now a function instead of a class.
 - Options have been renamed to make more sense.
+- `getRatings` has been removed due to implementation quirks, but may come back in a future release.
 
 ### Added
 
