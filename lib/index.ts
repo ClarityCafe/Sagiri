@@ -46,6 +46,8 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     file: File,
     optionOverrides: Options = {}
   ): Promise<SagiriResult[]> => {
+    if (!file) throw new Error('Missing file to find source for');
+
     log(
       `Requesting possible sources for ${
         typeof file === 'string' ? file : 'a stream or buffer'
