@@ -43,7 +43,7 @@
   "dependencies": {
     "bent": "^7.0.2",
     "debug": "^4.1.1",
-    "form-data": "^2.5.0"
+    "form-data": "^3.0.0"
   },
   "devDependencies": {
     "@types/bent": "7.0.0",
