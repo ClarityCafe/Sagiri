@@ -70,7 +70,7 @@
     "prettier": "1.19.1",
     "ts-jest": "24.2.0",
     "ts-node": "8.5.4",
-    "typescript": "3.7.3"
+    "typescript": "3.7.4"
   },
   "files": [
     "dist"
