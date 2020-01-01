@@ -38,8 +38,6 @@ type File = string | Buffer | Readable;
  * Creates a function to be used for finding potential sources for a given image.
  */
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
-  const request = bent('https://saucenao.com', 'json', 'POST');
-
   log('Created Sagiri function with default options:', defaultOptions);
 
   return async (
@@ -101,6 +99,14 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       log('Adding file as stream or buffer');
       form.append('file', file);
     }
+
+    const request = bent(
+      'https://saucenao.com',
+      'json',
+      'POST',
+      200,
+      form.getHeaders()
+    );
 
     log('Sending request to SauceNAO');
 
