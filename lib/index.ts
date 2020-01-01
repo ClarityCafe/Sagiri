@@ -40,6 +40,8 @@ type File = string | Buffer | Readable;
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
   log('Created Sagiri function with default options:', defaultOptions);
 
+  const request = bent('https://saucenao.com', 'json', 'POST', 200);
+
   return async (
     file: File,
     optionOverrides: Options = {}
@@ -100,17 +102,13 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       form.append('file', file);
     }
 
-    const request = bent(
-      'https://saucenao.com',
-      'json',
-      'POST',
-      200,
-      form.getHeaders()
-    );
-
     log('Sending request to SauceNAO');
 
-    const response = (await request('/search.php', form)) as Response;
+    const response = (await request(
+      '/search.php',
+      form,
+      form.getHeaders()
+    )) as Response;
     const {
       header: { status, message, results_returned: resultsReturned }
     } = response;
