@@ -38,7 +38,7 @@
     "source"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "dependencies": {
     "bent": "^7.0.4",
