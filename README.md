@@ -16,10 +16,10 @@ npm install sagiri
 ## Usage
 
 ```js
-const sagiri = require('sagiri');
+const sagiri = require("sagiri");
 
-const client = sagiri('token');
-const results = await client('http://i.imgur.com/5yFTeRV.png');
+const client = sagiri("token");
+const results = await client("http://i.imgur.com/5yFTeRV.png");
 ```
 
 `sagiri` is a function that returns an async function, so you can call it and store it in a variable to use multiple times, or you can call it and use it immediately.
@@ -27,8 +27,8 @@ const results = await client('http://i.imgur.com/5yFTeRV.png');
 Sagiri also has the ability to provide [options]() both when calling the main function, and the given async function.
 
 ```js
-const client = sagiri('client', { results: 10 });
-const results = await client('http://i.imgur.com/5yFTeRV.png', { mask: [5] });
+const client = sagiri("client", { results: 10 });
+const results = await client("http://i.imgur.com/5yFTeRV.png", { mask: [5] });
 ```
 
 ### API

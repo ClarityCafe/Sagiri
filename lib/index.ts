@@ -1,16 +1,16 @@
-import bent from 'bent';
-import debug from 'debug';
-import FormData from 'form-data';
+import bent from "bent";
+import debug from "debug";
+import FormData from "form-data";
 
-import { createReadStream } from 'fs';
-import { Readable } from 'stream';
+import { createReadStream } from "fs";
+import { Readable } from "stream";
 
-import { SagiriClientError, SagiriServerError } from './errors';
-import { generateMask, resolveResult } from './util';
-import { Response, Result } from './response';
-import sites from './sites';
+import { SagiriClientError, SagiriServerError } from "./errors";
+import { generateMask, resolveResult } from "./util";
+import { Response, Result } from "./response";
+import sites from "./sites";
 
-const log = debug('sagiri');
+const log = debug("sagiri");
 
 export interface Options {
   results?: number;
@@ -38,19 +38,19 @@ type File = string | Buffer | Readable;
  * Creates a function to be used for finding potential sources for a given image.
  */
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
-  log('Created Sagiri function with default options:', defaultOptions);
+  log("Created Sagiri function with default options:", defaultOptions);
 
-  const request = bent('https://saucenao.com', 'json', 'POST', 200);
+  const request = bent("https://saucenao.com", "json", "POST", 200);
 
   return async (
     file: File,
     optionOverrides: Options = {}
   ): Promise<SagiriResult[]> => {
-    if (!file) throw new Error('Missing file to find source for');
+    if (!file) throw new Error("Missing file to find source for");
 
     log(
       `Requesting possible sources for ${
-        typeof file === 'string' ? file : 'a stream or buffer'
+        typeof file === "string" ? file : "a stream or buffer"
       }`
     );
 
@@ -60,15 +60,15 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     };
     const form = new FormData();
 
-    log(`Requesting ${numResults} results from SauceNAO`);
+    log(`Requesting ${numResults!} results from SauceNAO`);
 
-    form.append('api_key', token);
-    form.append('output_type', 2);
-    form.append('numres', numResults);
+    form.append("api_key", token);
+    form.append("output_type", 2);
+    form.append("numres", numResults);
 
     if (testMode) {
-      log('Enabling test mode');
-      form.append('testmode', 1);
+      log("Enabling test mode");
+      form.append("testmode", 1);
     }
 
     if (mask && excludeMask)
@@ -79,33 +79,33 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       log(
         `Adding inclusive db mask with a value of ${generateMask(
           mask
-        )} (from [${mask}])`
+        )} (from [${mask.join(", ")}])`
       );
-      form.append('dbmask', generateMask(mask));
+      form.append("dbmask", generateMask(mask));
     } else if (excludeMask) {
       log(
         `Adding exclusive db mask with value of ${generateMask(
           excludeMask
-        )} (from [${excludeMask}])`
+        )} (from [${excludeMask.join(", ")}])`
       );
-      form.append('dbmaski', generateMask(excludeMask));
+      form.append("dbmaski", generateMask(excludeMask));
     }
 
-    if (typeof file === 'string' && /^https?:/.test(file)) {
-      log('Adding given file as a URL');
-      form.append('url', file);
-    } else if (typeof file === 'string') {
-      log('Adding given file from an fs.createReadStream');
-      form.append('file', createReadStream(file));
+    if (typeof file === "string" && /^https?:/.test(file)) {
+      log("Adding given file as a URL");
+      form.append("url", file);
+    } else if (typeof file === "string") {
+      log("Adding given file from an fs.createReadStream");
+      form.append("file", createReadStream(file));
     } else {
-      log('Adding file as stream or buffer');
-      form.append('file', file);
+      log("Adding file as stream or buffer");
+      form.append("file", file);
     }
 
-    log('Sending request to SauceNAO');
+    log("Sending request to SauceNAO");
 
     const response = (await request(
-      '/search.php',
+      "/search.php",
       form,
       form.getHeaders()
     )) as Response;

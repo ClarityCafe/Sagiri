@@ -6,5 +6,6 @@ When testing, make sure you have added a value called `SAUCENAO_TOKEN` to your e
 - Add your token after the `=` at `SAUCENAO_TOKEN=`
 
 ## For CI environments
+
 - Add the environment variable to the CI enviroment settings.
-How this works depends on the CI service, so look up documentation for your service.
+  How this works depends on the CI service, so look up documentation for your service.
