@@ -64,6 +64,8 @@ interface ResultData {
   user_acct?: string;
   yandere_id?: string;
   "anime-pictures_id"?: string;
+  member_id?: string;
+  member_name?: string;
 }
 
 interface ResultHeader {
