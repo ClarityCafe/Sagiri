@@ -1,4 +1,7 @@
 {
   "extends": ["config:base"],
-  "automerge": true
+  "automerge": true,
+  "automergeType": "branch",
+  "automergeComment": "autodep: r+",
+  "requiredStatusChecks": null
 }
