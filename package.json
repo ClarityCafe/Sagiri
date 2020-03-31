@@ -61,7 +61,7 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "3.0.0",
     "eslint-plugin-sift": "0.3.0",
-    "jest": "25.1.0",
+    "jest": "25.2.4",
     "lodash.ismatch": "4.4.0",
     "nock": "12.0.2",
     "parse-multipart": "1.0.4",
