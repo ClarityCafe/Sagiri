@@ -373,10 +373,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/bent@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@types/bent/-/bent-7.0.1.tgz#fc798878190b8748650b7039fdf2d6e769025009"
-  integrity sha512-WgkridLPfbgdgCavp70c6vFR3cLV2n8hoyAG+xZjouiADpN6niow/OzszH02cRtW25dYoJnEaGWQ8siMO7Bh0Q==
+"@types/bent@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@types/bent/-/bent-7.0.2.tgz#ff3ab6d2112e08b6b22b2e1582ca182c5de090bf"
+  integrity sha512-ppRvU9y5oD33ylKNnLEeQx7PNizULq9XUwZT7tMZKZ5e5MYoNruP92poHv3zCsJtWFwB8pGgntHI6YbyOAZB0Q==
   dependencies:
     "@types/node" "*"
 
