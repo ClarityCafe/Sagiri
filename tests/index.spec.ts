@@ -11,7 +11,7 @@ import { normalData, inverseMaskData, regularMaskData } from "./fixtures/data";
 import {
   normalExpectations,
   inverseMaskExpectations,
-  regularMaskExpectations
+  regularMaskExpectations,
 } from "./fixtures/expectations";
 // import remoteData from './fixtures/remoteData';
 
@@ -53,7 +53,7 @@ const parseMultipart = (body: string): { [key: string]: any } => {
     .split(boundary) // Split on boundaries
     .slice(1, -1) // Remove blank elements at start and end
     .map(
-      x =>
+      (x) =>
         x
           .trimLeft() // Remove padding at start
           .split("\r\n") // Split based on ending \r\n to get [name, blank, value]
@@ -73,13 +73,13 @@ const mockApi = (...args: [nock.RequestBodyMatcher?, nock.Options?]) =>
 
 describe("Sagiri#getSauce", () => {
   test("gets source from url", async () => {
-    mockApi(b => {
+    mockApi((b) => {
       const body = parseMultipart(b);
       return isMatch(body, {
         api_key: "",
         output_type: "2",
         numres: "5",
-        url: "https://owo.whats-th.is/6MtFNmm.png"
+        url: "https://owo.whats-th.is/6MtFNmm.png",
       });
     }).reply(200, normalData);
 
@@ -90,12 +90,12 @@ describe("Sagiri#getSauce", () => {
 
   describe("gets source from file", () => {
     test("path", async () => {
-      mockApi(b => {
+      mockApi((b) => {
         const body = parseEncodedMultipart(b);
         return isMatch(body, {
           api_key: "",
           output_type: "2",
-          numres: "5"
+          numres: "5",
         });
       }).reply(200, normalData);
 
@@ -105,12 +105,12 @@ describe("Sagiri#getSauce", () => {
     });
 
     test("buffer", async () => {
-      mockApi(b => {
+      mockApi((b) => {
         const body = parseEncodedMultipart(b);
         return isMatch(body, {
           api_key: "",
           output_type: "2",
-          numres: "5"
+          numres: "5",
         });
       }).reply(200, normalData);
 
@@ -122,14 +122,14 @@ describe("Sagiri#getSauce", () => {
 
   describe("index masks", () => {
     test("regular", async () => {
-      mockApi(b => {
+      mockApi((b) => {
         const body = parseMultipart(b);
         return isMatch(body, {
           api_key: "",
           output_type: "2",
           numres: "5",
           dbmask: "32",
-          url: "http://saucenao.com/images/static/banner.gif"
+          url: "http://saucenao.com/images/static/banner.gif",
         });
       }).reply(200, regularMaskData);
 
@@ -142,14 +142,14 @@ describe("Sagiri#getSauce", () => {
     });
 
     test("inverse", async () => {
-      mockApi(b => {
+      mockApi((b) => {
         const body = parseMultipart(b);
         return isMatch(body, {
           api_key: "",
           output_type: "2",
           numres: "5",
           dbmaski: "32",
-          url: "http://saucenao.com/images/static/banner.gif"
+          url: "http://saucenao.com/images/static/banner.gif",
         });
       }).reply(200, inverseMaskData);
 

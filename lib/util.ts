@@ -18,7 +18,7 @@ export function resolveResult(result: Result) {
 
   // Try to find matching url from ones provided by SauceNAO
   if (data.ext_urls && data.ext_urls.length > 1)
-    [url] = data.ext_urls.filter(url => urlMatcher.test(url));
+    [url] = data.ext_urls.filter((url) => urlMatcher.test(url));
   else if (data.ext_urls) [url] = data.ext_urls;
 
   // If we can't find out, generate one ourselves

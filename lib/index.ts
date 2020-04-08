@@ -56,7 +56,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     const { results: numResults, testMode, mask, excludeMask } = {
       ...defaultOptions,
-      ...optionOverrides
+      ...optionOverrides,
     };
     const form = new FormData();
 
@@ -110,7 +110,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       form.getHeaders()
     )) as Response;
     const {
-      header: { status, message, results_returned: resultsReturned }
+      header: { status, message, results_returned: resultsReturned },
     } = response;
 
     log(`Received response, status ${status}`);
@@ -130,11 +130,11 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
         `Found ${results.length} acceptable results.`
     );
 
-    return results.map(result => {
+    return results.map((result) => {
       const { url, name, id } = resolveResult(result);
       const {
         data: { author_name: authorName, author_url: authorUrl },
-        header: { similarity, thumbnail }
+        header: { similarity, thumbnail },
       } = result;
 
       return {
@@ -145,7 +145,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
         thumbnail,
         authorName,
         authorUrl,
-        raw: result
+        raw: result,
       };
     });
   };

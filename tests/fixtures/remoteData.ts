@@ -511,7 +511,7 @@ const remoteData = {
 
     </body>
     <!-- da-deviation:ga:1.780.0 -->
-  </html>`
+  </html>`,
 };
 
 export default remoteData;
