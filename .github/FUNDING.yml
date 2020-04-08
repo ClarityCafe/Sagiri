@@ -1,9 +1,8 @@
-# These are supported funding model platforms
-
-github: Ovyerus # Replace with up to 4 GitHub Sponsors-enabled usernames e.g., [user1, user2]
-ko_fi: capuccino # Replace with a single Ko-fi username
-custom: [
+github: Ovyerus
+ko_fi: capuccino
+custom:
+  [
     "https://paypal.me/chinodesuuu",
     "https://paypal.me/notvsaucemichael",
-    "https://liberapay.com/Ovyerus/"",
-  ] # Replace with a single custom sponsorship URL
+    "https://liberapay.com/Ovyerus/",
+  ]
