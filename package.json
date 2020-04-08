@@ -2,12 +2,14 @@
   "name": "sagiri",
   "version": "3.0.4",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
-  "author": "sr229",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "runkitExampleFilename": "./dist/examples/example.js",
-  "homepage": "https://github.com/ClarityCafe#readme",
+  "contributors": [
+    "sr229",
+    "Michael Mitchell <michael@ovyerus.com> (https://ovyerus.com)"
+  ],
+  "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ClarityCafe/Sagiri"
@@ -15,6 +17,16 @@
   "bugs": {
     "url": "https://github.com/ClarityCafe/issues"
   },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://github.com/sponsors/Ovyerus"
+    },
+    {
+      "type": "individual",
+      "url": "https://ko-fi.com/capuccino"
+    }
+  ],
   "scripts": {
     "build": "yarn lint && yarn test && yarn clean && yarn compile",
     "clean": "rimraf dist",
