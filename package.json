@@ -28,13 +28,10 @@
     }
   ],
   "scripts": {
-    "build": "yarn lint && yarn test && yarn clean && yarn compile",
-    "clean": "rimraf dist",
-    "compile": "tsc",
+    "build": "tsc",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prepublishOnly": "yarn build",
-    "start": "yarn build -w",
     "test": "jest",
     "test:debug": "cross-env DEBUG=sagiri jest"
   },

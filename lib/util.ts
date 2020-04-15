@@ -1,4 +1,4 @@
-import { Result } from "./response";
+import { Result, ResultData } from "./response";
 import sites from "./sites";
 
 export const generateMask = (masks: number[]) =>
@@ -27,3 +27,23 @@ export function resolveResult(result: Result) {
   return { id, url, name };
   /* eslint-enable */
 }
+
+interface AuthorData {
+  authorName?: string | null;
+  authorUrl?: string | null;
+}
+
+export const makeAuthorData = (data: ResultData): AuthorData => {
+  if (data.pixiv_id)
+    return {
+      authorName: data.member_name,
+      authorUrl: `https://www.pixiv.net/users/${data.member_id}`,
+    };
+  else if (data.bcy_id)
+    return {
+      authorName: data.member_name,
+      authorUrl: `https://bcy.net/u/${data.member_id}`,
+    };
+
+  return { authorName: null, authorUrl: null };
+};

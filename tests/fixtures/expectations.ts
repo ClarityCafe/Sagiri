@@ -81,6 +81,8 @@ export const normalExpectations = [
     similarity: 94.52,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv/4181/41817184_m.jpg?auth=EZ-kzUSPWzobHq0lx8bRMA&exp=1571293428",
+    authorName: "Gz",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "94.52",
@@ -108,6 +110,8 @@ export const normalExpectations = [
     similarity: 91.6,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv/6023/60231445_p0_master1200.jpg?auth=izM6Chn8mNB9eOVkuP-hww&exp=1571293428",
+    authorName: "miguelonn",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "91.6",
@@ -138,6 +142,8 @@ export const regularMaskExpectations = [
     similarity: 23.5,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv/493/4933944_s.jpg?auth=Up9BDClLy7R-a_jVr10ZpA&exp=1571746128",
+    authorName: "佳虫",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "23.50",
@@ -165,6 +171,8 @@ export const regularMaskExpectations = [
     similarity: 21.15,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv/6070/manga/60706368_p2.jpg?auth=fit_Th-DmLczFvl6SdK53A&exp=1571746128",
+    authorName: "まゆ",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "21.15",
@@ -192,6 +200,8 @@ export const regularMaskExpectations = [
     similarity: 19.13,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv/7567/75673655_p0_master1200.jpg?auth=P0-k9fSmN-76d95T42l5bw&exp=1571746128",
+    authorName: "桜夜(サヨ)",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "19.13",
@@ -246,6 +256,8 @@ export const inverseMaskExpectations = [
     similarity: 21.48,
     thumbnail:
       "https://img1.saucenao.com/res/pixiv_historical/383/3836606_s.jpg?auth=onLJgrY36duFEf7jkGVWOA&exp=1571746122",
+    authorName: "白菜",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "21.48",
@@ -272,6 +284,8 @@ export const inverseMaskExpectations = [
     similarity: 21,
     thumbnail:
       "https://img1.saucenao.com/res/bcy/illust/69/manga/694527_p9-48.jpg?auth=NQw6JD9RNXuOqbRflxXa4A&exp=1571746122",
+    authorName: "第四存档点",
+    authorUrl: null,
     raw: {
       header: {
         similarity: "21.0",
@@ -298,6 +312,8 @@ export const inverseMaskExpectations = [
     similarity: 19.58,
     thumbnail:
       "https://img1.saucenao.com/res/pawoo/468/46871064_1.jpg?auth=5I_e3su5TWkQexCx2JX46w&exp=1571746122",
+    authorName: null,
+    authorUrl: null,
     raw: {
       header: {
         similarity: "19.58",

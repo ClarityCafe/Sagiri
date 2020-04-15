@@ -33,7 +33,7 @@ export interface Result {
   header: ResultHeader;
 }
 
-interface ResultData {
+export interface ResultData {
   ext_urls: string[];
   title: string;
   da_id: number;
@@ -68,7 +68,7 @@ interface ResultData {
   member_name?: string;
 }
 
-interface ResultHeader {
+export interface ResultHeader {
   index_id: Indices;
   index_name: string;
   similarity: number; // Actually a string but this is for type coercion funsies.

@@ -6,7 +6,7 @@ import { createReadStream } from "fs";
 import { Readable } from "stream";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
-import { generateMask, resolveResult } from "./util";
+import { generateMask, resolveResult, makeAuthorData } from "./util";
 import { Response, Result } from "./response";
 import sites from "./sites";
 
@@ -27,8 +27,8 @@ export interface SagiriResult {
   index: number;
   similarity: number;
   thumbnail: string;
-  authorName: string;
-  authorUrl: string;
+  authorName: string | null;
+  authorUrl: string | null;
   raw: Result;
 }
 
@@ -133,7 +133,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     return results.map((result) => {
       const { url, name, id } = resolveResult(result);
       const {
-        data: { author_name: authorName, author_url: authorUrl },
+        data,
         header: { similarity, thumbnail },
       } = result;
 
@@ -143,8 +143,9 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
         index: (id as any) as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
         similarity: Number(similarity),
         thumbnail,
-        authorName,
-        authorUrl,
+        ...makeAuthorData(data),
+        // authorName: (data.author_name || data.member_name) ?? null,
+        // authorUrl: data.author_url || null,
         raw: result,
       };
     });
