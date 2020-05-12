@@ -1,26 +1,3 @@
-export interface Response {
-  header: Header;
-  results: Result[];
-}
-
-export interface Header {
-  account_type: string;
-  index: { [id: string]: HeaderIndex | undefined }; // do i wanna generic this to be id value?
-  long_limit: string;
-  long_remaining: number;
-  message?: string;
-  minimum_similarity: number;
-  query_image: string;
-  query_image_display: string;
-  results_requested: number;
-  results_returned: number;
-  search_depth: string;
-  short_limit: number;
-  short_remaining: number;
-  status: number;
-  user_id: string;
-}
-
 interface HeaderIndex {
   id: number;
   parent_id: number;
@@ -106,3 +83,26 @@ export type Indices =
   | "34"
   | "35"
   | "36";
+
+export interface Response {
+  header: Header;
+  results: Result[];
+}
+
+export interface Header {
+  account_type: string;
+  index: { [id: string]: HeaderIndex | undefined }; // do i wanna generic this to be id value?
+  long_limit: string;
+  long_remaining: number;
+  message?: string;
+  minimum_similarity: number;
+  query_image: string;
+  query_image_display: string;
+  results_requested: number;
+  results_returned: number;
+  search_depth: string;
+  short_limit: number;
+  short_remaining: number;
+  status: number;
+  user_id: string;
+}

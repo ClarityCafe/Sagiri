@@ -32,3 +32,4 @@ docsbuild/
 
 # Lock files
 package-lock.json
+yarn.lock

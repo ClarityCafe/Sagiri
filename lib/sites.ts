@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { Result } from "./response";
 
-export interface SiteData {
-  name: string;
-  index: number;
-  urlMatcher: RegExp;
-  backupUrl(result: Result): string;
-  // getRating(body: string): boolean; we remove this?
-  // isNSFW: boolean
-}
-
 // #region Site data objects
 const DoujinMangaLexicon: SiteData = {
   name: "The Doujinshi & Manga Lexicon",
@@ -251,5 +242,14 @@ const sites: { [key: string]: SiteData | undefined } = {
   "35": Pawoo,
   "36": MangaUpdates,
 };
+
+export interface SiteData {
+  name: string;
+  index: number;
+  urlMatcher: RegExp;
+  backupUrl(result: Result): string;
+  // getRating(body: string): boolean; we remove this?
+  // isNSFW: boolean
+}
 
 export default sites;

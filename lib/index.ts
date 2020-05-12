@@ -152,5 +152,6 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
   };
 };
 
-export default sagiri;
 module.exports = sagiri;
+
+export default sagiri;
