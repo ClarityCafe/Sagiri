@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Result } from "./response";
+import { Result, ResultData } from "./response";
+
+interface AuthorData {
+  authorName: string | null;
+  authorUrl: string | null;
+}
 
 // #region Site data objects
 const DoujinMangaLexicon: SiteData = {
@@ -16,6 +21,10 @@ const Pixiv: SiteData = {
   urlMatcher: /(?:https?:\/\/)?(?:www\.)?pixiv\.net\/member_illust\.php\?mode=.+&illust_id=\d+/i,
   backupUrl: ({ data: { pixiv_id } }) =>
     `https://www.pixiv.net/member_illust.php?mode=medium&illust_id=${pixiv_id}`,
+  authorData: ({ member_id, member_name }) => ({
+    authorName: member_name as string,
+    authorUrl: `https://www.pixiv.net/users/${member_id as string}`,
+  }),
 };
 
 const NicoNicoSeiga: SiteData = {
@@ -168,6 +177,10 @@ const bcyIllust: SiteData = {
   urlMatcher: /(?:http:\/\/)?bcy.net\/illust\/detail\/\d+/i,
   backupUrl: (data) =>
     `https://bcy.net/${data.data.bcy_type}/detail/${data.data.member_link_id}/${data.data.bcy_id}`,
+  authorData: ({ member_id, member_name }) => ({
+    authorName: member_name as string,
+    authorUrl: `https://bcy.net/u/${member_id as string}`,
+  }),
 };
 
 const bcyCosplay: SiteData = {
@@ -248,6 +261,7 @@ export interface SiteData {
   index: number;
   urlMatcher: RegExp;
   backupUrl(result: Result): string;
+  authorData?(data: ResultData): AuthorData;
   // getRating(body: string): boolean; we remove this?
   // isNSFW: boolean
 }

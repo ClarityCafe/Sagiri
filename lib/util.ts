@@ -1,4 +1,4 @@
-import { Result, ResultData } from "./response";
+import { Result } from "./response";
 import sites from "./sites";
 
 export const generateMask = (masks: number[]) =>
@@ -13,7 +13,7 @@ export function resolveResult(result: Result) {
   if (!sites[id])
     throw new Error(`Cannot resolve data for unknown index ${id}`);
 
-  const { name, urlMatcher, backupUrl } = sites[id]!;
+  const { name, urlMatcher, backupUrl, authorData } = sites[id]!;
   let url: string | undefined;
 
   // Try to find matching url from ones provided by SauceNAO
@@ -24,26 +24,11 @@ export function resolveResult(result: Result) {
   // If we can't find out, generate one ourselves
   if (!url) url = backupUrl(result);
 
-  return { id, url, name };
+  return {
+    id,
+    url,
+    name,
+    ...(authorData?.(result.data) ?? { authorName: null, authorUrl: null }),
+  };
   /* eslint-enable */
 }
-
-interface AuthorData {
-  authorName?: string | null;
-  authorUrl?: string | null;
-}
-
-export const makeAuthorData = (data: ResultData): AuthorData => {
-  if (data.pixiv_id)
-    return {
-      authorName: data.member_name,
-      authorUrl: `https://www.pixiv.net/users/${data.member_id}`,
-    };
-  else if (data.bcy_id)
-    return {
-      authorName: data.member_name,
-      authorUrl: `https://bcy.net/u/${data.member_id}`,
-    };
-
-  return { authorName: null, authorUrl: null };
-};

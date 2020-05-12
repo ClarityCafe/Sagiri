@@ -131,9 +131,8 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     );
 
     return results.map((result) => {
-      const { url, name, id } = resolveResult(result);
+      const { url, name, id, authorName, authorUrl } = resolveResult(result);
       const {
-        data,
         header: { similarity, thumbnail },
       } = result;
 
@@ -143,9 +142,8 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
         index: (id as any) as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
         similarity: Number(similarity),
         thumbnail,
-        ...makeAuthorData(data),
-        // authorName: (data.author_name || data.member_name) ?? null,
-        // authorUrl: data.author_url || null,
+        authorName,
+        authorUrl,
         raw: result,
       };
     });
