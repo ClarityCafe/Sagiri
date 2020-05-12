@@ -1,6 +1,6 @@
 module.exports = {
-  extends: 'clarity/typescript',
+  extends: "clarity/typescript",
   parserOptions: {
-    project: './tsconfig.eslint.json'
-  }
+    project: "./tsconfig.eslint.json",
+  },
 };
