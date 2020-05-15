@@ -1,6 +1,6 @@
 {
   "name": "sagiri",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
   "main": "dist/index.js",
