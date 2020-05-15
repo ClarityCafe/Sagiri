@@ -6,31 +6,11 @@ import { createReadStream } from "fs";
 import { Readable } from "stream";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
-import { generateMask, resolveResult, makeAuthorData } from "./util";
 import { Response, Result } from "./response";
 import sites from "./sites";
+import { generateMask, resolveResult } from "./util";
 
 const log = debug("sagiri");
-
-export interface Options {
-  results?: number;
-  mask?: number[];
-  excludeMask?: number[];
-  // getRatings?: boolean;
-  testMode?: boolean;
-  db?: number;
-}
-
-export interface SagiriResult {
-  url: string;
-  site: string;
-  index: number;
-  similarity: number;
-  thumbnail: string;
-  authorName: string | null;
-  authorUrl: string | null;
-  raw: Result;
-}
 
 type File = string | Buffer | Readable;
 
@@ -153,3 +133,23 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 module.exports = sagiri;
 
 export default sagiri;
+
+export interface Options {
+  results?: number;
+  mask?: number[];
+  excludeMask?: number[];
+  // getRatings?: boolean;
+  testMode?: boolean;
+  db?: number;
+}
+
+export interface SagiriResult {
+  url: string;
+  site: string;
+  index: number;
+  similarity: number;
+  thumbnail: string;
+  authorName: string | null;
+  authorUrl: string | null;
+  raw: Result;
+}
