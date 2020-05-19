@@ -204,6 +204,10 @@ const DeviantArt: SiteData = {
   index: 34,
   urlMatcher: /(?:https:\/\/)?deviantart\.com\/view\/\d+/i,
   backupUrl: (data) => `https://deviantart.com/view/${data.data.da_id}`,
+  authorData: ({ author_name: authorName, author_url: authorUrl }) => ({
+    authorName,
+    authorUrl,
+  }),
 };
 
 const Pawoo: SiteData = {
