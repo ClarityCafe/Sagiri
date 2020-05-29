@@ -9,13 +9,13 @@ on:
       - '**'
 
 jobs:
-  build:
+  publish-npm:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -23,12 +23,36 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Get Dependencies
       run: npm i -SD
 
     - name: Publish
-      uses: pascalgn/npm-publish-action@master
+      run: npm publish
       env: # More info about the environment variables in the README
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+
+  publish-github:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        registry-url: 'https://npm.pkg.github.com'
+        node-version: ${{ matrix.node-version }}
+
+    - name: Get Dependencies
+      run: npm i -SD
+
+    - name: Publish
+      run: npm publish
+      env: # More info about the environment variables in the README
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # You need to set this in your repo settings
