@@ -4,8 +4,9 @@
 name: Node.js CI (Release)
 
 on:
-  tags:
-    - '*'
+  push:
+    tags:
+      - '**'
 
 jobs:
   build:
