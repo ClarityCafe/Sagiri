@@ -30,8 +30,8 @@ jobs:
 
     - name: Publish
       run: npm publish
-      env: # More info about the environment variables in the README
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
   publish-github:
 
@@ -46,13 +46,14 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        registry-url: 'https://npm.pkg.github.com'
         node-version: ${{ matrix.node-version }}
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@ClarityCafe'
 
     - name: Get Dependencies
       run: npm i -SD
 
     - name: Publish
       run: npm publish
-      env: # More info about the environment variables in the README
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # You need to set this in your repo settings
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
