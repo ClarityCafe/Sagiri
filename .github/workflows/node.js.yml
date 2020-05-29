@@ -26,7 +26,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Get Dependencies
-      run: npm i -SD
+      run: yarn
     - name: Get CodeClimate Coverage
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -35,8 +35,8 @@ jobs:
 
     - name: Run Coverage and Lint
       run: |
-        npm run lint
-        npm run coverage
+        yarn lint
+        yarn coverage
         ./cc-test-reporter after-build --exit-code $(echo $?)
       env:
        CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
