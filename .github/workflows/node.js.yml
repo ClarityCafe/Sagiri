@@ -36,5 +36,4 @@ jobs:
       run: |
         npm run lint
         npm run coverage
-    - name: Submit Coverage to CodeClimate
-      run: ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+        ./cc-test-reporter after-build --exit-code $(echo $?)
