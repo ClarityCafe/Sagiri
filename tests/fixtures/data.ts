@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 
 // SauceNao output of https://owo.whats-th.is/6MtFNmm.png (upload of image.png)
 export const normalData = {

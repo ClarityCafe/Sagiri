@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
+
 import isMatch from "lodash.ismatch";
 import nock from "nock";
 
