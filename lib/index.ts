@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import bent from "bent";
 import debug from "debug";
 import FormData from "form-data";
