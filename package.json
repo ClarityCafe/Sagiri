@@ -72,7 +72,7 @@
     "eslint-plugin-sift": "0.3.0",
     "jest": "26.1.0",
     "lodash.ismatch": "4.4.0",
-    "nock": "13.0.0",
+    "nock": "13.0.1",
     "parse-multipart": "1.0.4",
     "prettier": "2.0.5",
     "ts-jest": "26.1.1",
