@@ -1,6 +1,6 @@
 {
   "name": "sagiri",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -65,6 +65,7 @@
     "cross-env": "7.0.2",
     "eslint": "7.10.0",
     "eslint-config-clarity": "0.5.0",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.21.2",

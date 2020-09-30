@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Result, ResultData } from "./response";
 
@@ -78,7 +79,7 @@ const Fakku: SiteData = {
   urlMatcher: /(?:https?:\/\/)?(www\.)?fakku\.net\/hentai\/[a-z-]+\d+}/i,
   backupUrl: (data) =>
     `https://www.fakku.net/hentai/${data.data
-      .source!.toLowerCase()
+      .source?.toLowerCase()
       .replace(" ", "-")}`,
 };
 
@@ -88,7 +89,7 @@ const NHentai: SiteData = {
   urlMatcher: /(?:https?:\/\/)nhentai.net\/g\/\d+/i,
   backupUrl: (data) =>
     `https://nhentai.net/g/${
-      data.header.thumbnail.match(/nhentai\/(\d+)/)![1]
+      data.header.thumbnail.match(/nhentai\/(\d+)/)?.[1]
     }`,
 };
 
@@ -98,8 +99,8 @@ const TwoDMarket: SiteData = {
   urlMatcher: /(?:https?:\/\/)2d-market\.com\/Comic\/\d+/i,
   backupUrl: (data) =>
     `http://2d-market.com/Comic/${
-      data.header.thumbnail.match(/2d_market\/(\d+)/i)![1]
-    }-${data.data.source!.replace(" ", "-")}`,
+      data.header.thumbnail.match(/2d_market\/(\d+)/i)?.[1]
+    }-${data.data.source?.replace(" ", "-")}`,
 };
 
 const MediBang: SiteData = {

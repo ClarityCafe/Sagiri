@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Result } from "./response";
 import sites from "./sites";
 
-export const generateMask = (masks: number[]) =>
+export const generateMask = (masks: number[]): number =>
   // eslint-disable-next-line prefer-template
   masks.reduce((prev, curr) => prev ^ parseInt("1" + "0".repeat(curr), 2), 0);
 
-export function resolveResult(result: Result) {
+export function resolveResult(result: Result): any {
   /* eslint-disable @typescript-eslint/no-unnecessary-condition */
   const { data, header } = result;
   const id = header.index_id;
