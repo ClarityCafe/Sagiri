@@ -58,7 +58,7 @@
     "@types/bent": "7.3.2",
     "@types/debug": "4.1.7",
     "@types/jest": "27.4.1",
-    "@types/lodash.ismatch": "4.4.6",
+    "@types/lodash.ismatch": "4.4.7",
     "@types/node": "16.11.27",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
