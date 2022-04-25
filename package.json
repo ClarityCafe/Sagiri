@@ -59,7 +59,7 @@
     "@types/debug": "4.1.7",
     "@types/jest": "27.4.1",
     "@types/lodash.ismatch": "4.4.7",
-    "@types/node": "16.11.28",
+    "@types/node": "16.11.29",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
     "cross-env": "7.0.3",
