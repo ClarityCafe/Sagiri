@@ -57,7 +57,7 @@
   "devDependencies": {
     "@types/bent": "7.3.2",
     "@types/debug": "4.1.7",
-    "@types/jest": "27.5.0",
+    "@types/jest": "27.5.1",
     "@types/lodash.ismatch": "4.4.7",
     "@types/node": "16.11.34",
     "@typescript-eslint/eslint-plugin": "5.23.0",
