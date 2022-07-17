@@ -5,8 +5,8 @@ import bent from "bent";
 import debug from "debug";
 import FormData from "form-data";
 
-import { createReadStream } from "node:fs";
-import { Readable } from "node:stream";
+import { createReadStream } from "fs";
+import { Readable } from "stream";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
 import { Response, Result } from "./response";
