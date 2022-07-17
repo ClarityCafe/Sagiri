@@ -31,6 +31,7 @@
     "build": "tsc",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier . --write --config .prettierrc",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:debug": "cross-env DEBUG=sagiri jest"

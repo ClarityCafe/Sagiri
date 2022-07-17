@@ -12,16 +12,14 @@ const DoujinMangaLexicon: SiteData = {
   name: "The Doujinshi & Manga Lexicon",
   index: 3,
   urlMatcher: /(?:http:\/\/)?doujinshi\.mugimugi\.org\/index\.php?P=BOOK&ID=\d+/i,
-  backupUrl: ({ data: { ddb_id } }) =>
-    `http://doujinshi.mugimugi.org/index.php?P=BOOK&ID=${ddb_id}`,
+  backupUrl: ({ data: { ddb_id } }) => `http://doujinshi.mugimugi.org/index.php?P=BOOK&ID=${ddb_id}`,
 };
 
 const Pixiv: SiteData = {
   name: "Pixiv",
   index: 5,
   urlMatcher: /(?:https?:\/\/)?(?:www\.)?pixiv\.net\/member_illust\.php\?mode=.+&illust_id=\d+/i,
-  backupUrl: ({ data: { pixiv_id } }) =>
-    `https://www.pixiv.net/member_illust.php?mode=medium&illust_id=${pixiv_id}`,
+  backupUrl: ({ data: { pixiv_id } }) => `https://www.pixiv.net/member_illust.php?mode=medium&illust_id=${pixiv_id}`,
   authorData: ({ member_id, member_name }) => ({
     authorName: member_name as string,
     authorUrl: `https://www.pixiv.net/users/${member_id as string}`,
@@ -32,24 +30,21 @@ const NicoNicoSeiga: SiteData = {
   name: "Nico Nico Seiga",
   index: 8,
   urlMatcher: /(?:http:\/\/)?seiga\.nicovideo\.jp\/seiga\/im\d+/i,
-  backupUrl: ({ data: { seiga_id } }) =>
-    `http://seiga.nicovideo.jp/seiga/im${seiga_id}`,
+  backupUrl: ({ data: { seiga_id } }) => `http://seiga.nicovideo.jp/seiga/im${seiga_id}`,
 };
 
 const Danbooru: SiteData = {
   name: "Danbooru",
   index: 9,
   urlMatcher: /(?:https?:\/\/)?danbooru\.donmai\.us\/(?:posts|post\/show)\/\d+/i,
-  backupUrl: ({ data: { danbooru_id } }) =>
-    `https://danbooru.donmai.us/posts/${danbooru_id}`,
+  backupUrl: ({ data: { danbooru_id } }) => `https://danbooru.donmai.us/posts/${danbooru_id}`,
 };
 
 const Drawr: SiteData = {
   name: "drawr",
   index: 10,
   urlMatcher: /(?:http:\/\/)?(?:www\.)?drawr\.net\/show\.php\?id=\d+/i,
-  backupUrl: ({ data: { drawr_id } }) =>
-    `http://drawr.net/show.php?id=${drawr_id}`,
+  backupUrl: ({ data: { drawr_id } }) => `http://drawr.net/show.php?id=${drawr_id}`,
 };
 
 const Nijie: SiteData = {
@@ -77,20 +72,14 @@ const Fakku: SiteData = {
   name: "FAKKU",
   index: 16,
   urlMatcher: /(?:https?:\/\/)?(www\.)?fakku\.net\/hentai\/[a-z-]+\d+}/i,
-  backupUrl: (data) =>
-    `https://www.fakku.net/hentai/${data.data
-      .source?.toLowerCase()
-      .replace(" ", "-")}`,
+  backupUrl: (data) => `https://www.fakku.net/hentai/${data.data.source?.toLowerCase().replace(" ", "-")}`,
 };
 
 const NHentai: SiteData = {
   name: "nHentai",
   index: 18,
   urlMatcher: /(?:https?:\/\/)nhentai.net\/g\/\d+/i,
-  backupUrl: (data) =>
-    `https://nhentai.net/g/${
-      data.header.thumbnail.match(/nhentai\/(\d+)/)?.[1]
-    }`,
+  backupUrl: (data) => `https://nhentai.net/g/${data.header.thumbnail.match(/nhentai\/(\d+)/)?.[1]}`,
 };
 
 const TwoDMarket: SiteData = {
@@ -98,9 +87,10 @@ const TwoDMarket: SiteData = {
   index: 19,
   urlMatcher: /(?:https?:\/\/)2d-market\.com\/Comic\/\d+/i,
   backupUrl: (data) =>
-    `http://2d-market.com/Comic/${
-      data.header.thumbnail.match(/2d_market\/(\d+)/i)?.[1]
-    }-${data.data.source?.replace(" ", "-")}`,
+    `http://2d-market.com/Comic/${data.header.thumbnail.match(/2d_market\/(\d+)/i)?.[1]}-${data.data.source?.replace(
+      " ",
+      "-",
+    )}`,
 };
 
 const MediBang: SiteData = {
@@ -114,8 +104,7 @@ const AniDB: SiteData = {
   name: "AniDB",
   index: 21,
   urlMatcher: /(?:https?:\/\/)?anidb\.net\/perl-bin\/animedb\.pl\?show=.+&aid=\d+/i,
-  backupUrl: (data) =>
-    `https://anidb.net/perl-bin/animedb.pl?show=anime&aid=${data.data.anidb_aid}`,
+  backupUrl: (data) => `https://anidb.net/perl-bin/animedb.pl?show=anime&aid=${data.data.anidb_aid}`,
 };
 
 const IMDb: SiteData = {
@@ -129,32 +118,28 @@ const Gelbooru: SiteData = {
   name: "Gelbooru",
   index: 25,
   urlMatcher: /(?:https?:\/\/)gelbooru\.com\/index\.php\?page=post&s=view&id=\d+/i,
-  backupUrl: (data) =>
-    `https://gelbooru.com/index.php?page=post&s=view&id=${data.data.gelbooru_id}`,
+  backupUrl: (data) => `https://gelbooru.com/index.php?page=post&s=view&id=${data.data.gelbooru_id}`,
 };
 
 const Konachan: SiteData = {
   name: "Konachan",
   index: 26,
   urlMatcher: /(?:http:\/\/)?konachan\.com\/post\/show\/\d+/i,
-  backupUrl: (data) =>
-    `https://konachan.com/post/show/${data.data.konachan_id}`,
+  backupUrl: (data) => `https://konachan.com/post/show/${data.data.konachan_id}`,
 };
 
 const SankakuChannel: SiteData = {
   name: "Sankaku Channel",
   index: 27,
   urlMatcher: /(?:https?:\/\/)?chan\.sankakucomplex\.com\/post\/show\/\d+/i,
-  backupUrl: (data) =>
-    `https://chan.sankakucomplex.com/post/show/${data.data.sankaku_id}`,
+  backupUrl: (data) => `https://chan.sankakucomplex.com/post/show/${data.data.sankaku_id}`,
 };
 
 const AnimePictures: SiteData = {
   name: "Anime-Pictures",
   index: 28,
   urlMatcher: /(?:https?:\/\/)?anime-pictures\.net\/pictures\/view_post\/\d+/i,
-  backupUrl: (data) =>
-    `https://anime-pictures.net/pictures/view_post/${data.data["anime-pictures_id"]}`,
+  backupUrl: (data) => `https://anime-pictures.net/pictures/view_post/${data.data["anime-pictures_id"]}`,
 };
 
 const E621: SiteData = {
@@ -168,16 +153,14 @@ const IdolComplex: SiteData = {
   name: "Idol Complex",
   index: 30,
   urlMatcher: /(?:https?:\/\/)?idol\.sankakucomplex\.com\/post\/show\/\d+/i,
-  backupUrl: (data) =>
-    `https://idol.sankakucomplex.com/post/show/${data.data.idol_id}`,
+  backupUrl: (data) => `https://idol.sankakucomplex.com/post/show/${data.data.idol_id}`,
 };
 
 const bcyIllust: SiteData = {
   name: "bcy.net Illust",
   index: 31,
   urlMatcher: /(?:http:\/\/)?bcy.net\/illust\/detail\/\d+/i,
-  backupUrl: (data) =>
-    `https://bcy.net/${data.data.bcy_type}/detail/${data.data.member_link_id}/${data.data.bcy_id}`,
+  backupUrl: (data) => `https://bcy.net/${data.data.bcy_type}/detail/${data.data.member_link_id}/${data.data.bcy_id}`,
   authorData: ({ member_id, member_name }) => ({
     authorName: member_name as string,
     authorUrl: `https://bcy.net/u/${member_id as string}`,
@@ -188,8 +171,7 @@ const bcyCosplay: SiteData = {
   name: "bcy.net Cosplay",
   index: 32,
   urlMatcher: /(?:http:\/\/)?bcy.net\/coser\/detail\/\d{5}/i,
-  backupUrl: (data) =>
-    `https://bcy.net/${data.data.bcy_type}/detail/${data.data.member_link_id}/${data.data.bcy_id}`,
+  backupUrl: (data) => `https://bcy.net/${data.data.bcy_type}/detail/${data.data.member_link_id}/${data.data.bcy_id}`,
 };
 
 const PortalGraphics: SiteData = {
@@ -215,16 +197,14 @@ const Pawoo: SiteData = {
   name: "Pawoo",
   index: 35,
   urlMatcher: /(?:https?:\/\/)?pawoo\.net\/@.+/i,
-  backupUrl: (data) =>
-    `https://pawoo.net/@${data.data.user_acct}/${data.data.pawoo_id}`,
+  backupUrl: (data) => `https://pawoo.net/@${data.data.user_acct}/${data.data.pawoo_id}`,
 };
 
 const MangaUpdates: SiteData = {
   name: "Manga Updates",
   index: 36,
   urlMatcher: /(?:https:\/\/)?www\.mangaupdates\.com\/series\.html\?id=\d+/gi,
-  backupUrl: (data) =>
-    `https://www.mangaupdates.com/series.html?id=${data.data.mu_id}`,
+  backupUrl: (data) => `https://www.mangaupdates.com/series.html?id=${data.data.mu_id}`,
 };
 // #endregion
 
@@ -265,8 +245,11 @@ export interface SiteData {
   name: string;
   index: number;
   urlMatcher: RegExp;
+
   backupUrl(result: Result): string;
+
   authorData?(data: ResultData): AuthorData;
+
   // getRating(body: string): boolean; we remove this?
   // isNSFW: boolean
 }

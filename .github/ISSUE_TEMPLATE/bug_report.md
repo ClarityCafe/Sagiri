@@ -1,10 +1,9 @@
 ---
 name: Bug report
 about: Report incorrect or unexpected behaviour of this library
-title: ''
-labels: 'bug'
-assignees: ''
-
+title: ""
+labels: "bug"
+assignees: ""
 ---
 
 <!--
@@ -16,15 +15,14 @@ You likely won't receive any basic help here.
 
 **Please describe the problem you are having in as much detail as possible:**
 
-
 **Include a reproducible code sample here, if possible:**
+
 ```js
-
 // Place your code here
-
 ```
 
 **Further details:**
+
 - version:
 - Node.js version:
 - Operating system:

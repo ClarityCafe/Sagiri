@@ -25,19 +25,17 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
   const request = bent("https://saucenao.com", "json", "POST", 200);
 
-  return async (
-    file: File,
-    optionOverrides: Options = {}
-  ): Promise<SagiriResult[]> => {
+  return async (file: File, optionOverrides: Options = {}): Promise<SagiriResult[]> => {
     if (!file) throw new Error("Missing file to find source for");
 
-    log(
-      `Requesting possible sources for ${
-        typeof file === "string" ? file : "a stream or buffer"
-      }`
-    );
+    log(`Requesting possible sources for ${typeof file === "string" ? file : "a stream or buffer"}`);
 
-    const { results: numResults, testMode, mask, excludeMask } = {
+    const {
+      results: numResults,
+      testMode,
+      mask,
+      excludeMask,
+    } = {
       ...defaultOptions,
       ...optionOverrides,
     };
@@ -55,22 +53,12 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     }
 
     if (mask && excludeMask)
-      throw new Error(
-        "It's redundant to set both mask and excludeMask. Choose one or the other."
-      );
+      throw new Error("It's redundant to set both mask and excludeMask. Choose one or the other.");
     else if (mask) {
-      log(
-        `Adding inclusive db mask with a value of ${generateMask(
-          mask
-        )} (from [${mask.join(", ")}])`
-      );
+      log(`Adding inclusive db mask with a value of ${generateMask(mask)} (from [${mask.join(", ")}])`);
       form.append("dbmask", generateMask(mask));
     } else if (excludeMask) {
-      log(
-        `Adding exclusive db mask with value of ${generateMask(
-          excludeMask
-        )} (from [${excludeMask.join(", ")}])`
-      );
+      log(`Adding exclusive db mask with value of ${generateMask(excludeMask)} (from [${excludeMask.join(", ")}])`);
       form.append("dbmaski", generateMask(excludeMask));
     }
 
@@ -87,11 +75,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     log("Sending request to SauceNAO");
 
-    const response = (await request(
-      "/search.php",
-      form,
-      form.getHeaders()
-    )) as Response;
+    const response = (await request("/search.php", form, form.getHeaders())) as Response;
     const {
       header: { status, message, results_returned: resultsReturned },
     } = response;
@@ -110,7 +94,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     log(
       `Expected ${numResults} results. ` +
         `SauceNAO says it sent ${resultsReturned}, actually sent ${response.results.length}. ` +
-        `Found ${results.length} acceptable results.`
+        `Found ${results.length} acceptable results.`,
     );
 
     return results.map((result) => {
@@ -122,7 +106,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       return {
         url,
         site: name,
-        index: (id as any) as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
+        index: id as any as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
         similarity: Number(similarity),
         thumbnail,
         authorName,
