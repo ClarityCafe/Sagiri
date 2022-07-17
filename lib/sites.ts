@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Result, ResultData } from "./response";
+import { SagiriClientError } from "./errors";
 
 interface AuthorData {
   authorName: string | null;
@@ -11,7 +12,7 @@ interface AuthorData {
 const DoujinMangaLexicon: SiteData = {
   name: "The Doujinshi & Manga Lexicon",
   index: 3,
-  urlMatcher: /(?:http:\/\/)?doujinshi\.mugimugi\.org\/index\.php?P=BOOK&ID=\d+/i,
+  urlMatcher: /(?:http:\/\/)?doujinshi\.mugimugi\.org\/index\.php?p=book&id=\d+/i,
   backupUrl: ({ data: { ddb_id } }) => `http://doujinshi.mugimugi.org/index.php?P=BOOK&ID=${ddb_id}`,
 };
 
@@ -78,14 +79,14 @@ const Fakku: SiteData = {
 const NHentai: SiteData = {
   name: "nHentai",
   index: 18,
-  urlMatcher: /(?:https?:\/\/)nhentai.net\/g\/\d+/i,
+  urlMatcher: /https?:\/\/nhentai.net\/g\/\d+/i,
   backupUrl: (data) => `https://nhentai.net/g/${data.header.thumbnail.match(/nhentai\/(\d+)/)?.[1]}`,
 };
 
 const TwoDMarket: SiteData = {
   name: "2D-Market",
   index: 19,
-  urlMatcher: /(?:https?:\/\/)2d-market\.com\/Comic\/\d+/i,
+  urlMatcher: /https?:\/\/2d-market\.com\/comic\/\d+/i,
   backupUrl: (data) =>
     `http://2d-market.com/Comic/${data.header.thumbnail.match(/2d_market\/(\d+)/i)?.[1]}-${data.data.source?.replace(
       " ",
@@ -96,7 +97,7 @@ const TwoDMarket: SiteData = {
 const MediBang: SiteData = {
   name: "MediBang",
   index: 20,
-  urlMatcher: /(?:https?:\/\/)?medibang\.com\/picture\/[a-z0-9]+/i,
+  urlMatcher: /(?:https?:\/\/)?medibang\.com\/picture\/[\da-z]+/i,
   backupUrl: (data) => data.data.url!,
 };
 
@@ -206,6 +207,134 @@ const MangaUpdates: SiteData = {
   urlMatcher: /(?:https:\/\/)?www\.mangaupdates\.com\/series\.html\?id=\d+/gi,
   backupUrl: (data) => `https://www.mangaupdates.com/series.html?id=${data.data.mu_id}`,
 };
+
+const MangaDex: SiteData = {
+  name: "MangaDex",
+  index: 37,
+  urlMatcher: /(?:https?:\/\/)?mangadex\.org\/chapter\/(\w|-)+\/(?:\d+)?/gi,
+  backupUrl: (data) => `https://mangadex.org/chapter/${data.data.md_id}`,
+  authorData: (data) => ({
+    authorName: data.author!,
+    authorUrl: null,
+  }),
+};
+
+const ArtStation: SiteData = {
+  name: "FurAffinity",
+  index: 39,
+  urlMatcher: /(?:https?:\/\/)?www\.artstation\.com\/artwork\/\w+/i,
+  backupUrl: (data) => `https://www.artstation.com/artwork/${data.data.as_project}`,
+  authorData: (data) => ({
+    authorName: data.author_name!,
+    authorUrl: data.author_url,
+  }),
+};
+
+const FurAffinity: SiteData = {
+  name: "FurAffinity",
+  index: 40,
+  urlMatcher: /(?:https?:\/\/)?furaffinity\.net\/view\/\d+/i,
+  backupUrl: (data) => `https://furaffinity.net/view/${data.data.fa_id}`,
+  authorData: (data) => ({
+    authorName: data.author_name!,
+    authorUrl: data.author_url,
+  }),
+};
+
+const Twitter: SiteData = {
+  name: "Twitter",
+  index: 41,
+  urlMatcher: /(?:https?:\/\/)?twitter\.com\/.+/i,
+  backupUrl: (data) => `https://twitter.com/i/web/status/${data.data.tweet_id}`,
+  authorData: (data) => ({
+    authorName: data.twitter_user_handle!,
+    authorUrl: `https://twitter.com/i/user/${data.twitter_user_id}`,
+  }),
+};
+
+const FurryNetwork: SiteData = {
+  name: "Furry Network",
+  index: 42,
+  urlMatcher: /(?:https?:\/\/)?furrynetwork\.com\/artwork\/\d+/i,
+  backupUrl: (data) => `https://furrynetwork.com/artwork/${data.data.fn_id}`,
+  authorData: (data) => ({
+    authorName: data.author_name!,
+    authorUrl: data.author_url,
+  }),
+};
+
+const Kemono: SiteData = {
+  name: "Kemono",
+  index: 43,
+  urlMatcher:
+    /|(?:(?:https?:\/\/)?fantia\.jp\/posts\/\d+)|(?:(?:https?:\/\/)?subscribestar\.adult\/posts\/\d+)|(?:(?:https?:\/\/)?gumroad\.com\/l\/\w+)|(?:(?:https?:\/\/)?patreon\.com\/posts\/\d+)|(?:(?:https?:\/\/)?pixiv\.net\/fanbox\/creator\/\d+\/post\/\d+)|(?:(?:https?:\/\/)?dlsite\.com\/home\/work\/=\/product_id\/\w+\.\w+)/i,
+  backupUrl: (data) => {
+    switch (data.data.service) {
+      case "fantia":
+        return `https://fantia.jp/posts/${data.data.id}`;
+      case "subscribestar":
+        return `https://subscribestar.adult/posts/${data.data.id}`;
+      case "gumroad":
+        return `https://gumroad.com/l/${data.data.id}`;
+      case "patreon":
+        return `https://patreon.com/posts/${data.data.id}`;
+      case "fanbox":
+        return `https://pixiv.net/fanbox/creator/${data.data.user_id}/post/${data.data.id}`;
+      case "dlsite":
+        return `https://dlsite.com/home/work/=/${data.data.id}`;
+      default:
+        throw new SagiriClientError(999, `Unknown service type for Kemono: ${data.data.service}`);
+    }
+  },
+  authorData: (data) => {
+    switch (data.service) {
+      case "fantia":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://fantia.jp/fanclubs/${data.user_id}`,
+        };
+      case "subscribestar":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://subscribestar.adult/${data.user_id}`,
+        };
+      case "gumroad":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://gumroad.com/${data.user_id}`,
+        };
+      case "patreon":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://patreon.com/user?u=${data.user_id}`,
+        };
+      case "fanbox":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://pixiv.net/fanbox/creator/${data.user_id}`,
+        };
+      case "dlsite":
+        return {
+          authorName: data.user_name!,
+          authorUrl: `https://dlsite.com/eng/cicrle/profile/=/marker_id/${data.user_id}`,
+        };
+      default:
+        throw new SagiriClientError(999, `Unknown service type for Kemono: ${data.service}`);
+    }
+  },
+};
+
+const Skeb: SiteData = {
+  name: "Skeb",
+  index: 44,
+  urlMatcher: /(?:(?:https?:\/\/)?skeb\.jp\/@\w+\/works\/\d+)/i,
+  backupUrl: (data) => `https://skeb.jp${data.data.path}`,
+  authorData: (data) => ({
+    authorName: data.creator_name!,
+    authorUrl: data.author_url,
+  }),
+};
+
 // #endregion
 
 const sites: { [key: string]: SiteData | undefined } = {
@@ -239,6 +368,15 @@ const sites: { [key: string]: SiteData | undefined } = {
   "34": DeviantArt,
   "35": Pawoo,
   "36": MangaUpdates,
+  "37": MangaDex,
+  "371": MangaDex,
+  // 38
+  "39": ArtStation,
+  "40": FurAffinity,
+  "41": Twitter,
+  "42": FurryNetwork,
+  "43": Kemono,
+  "44": Skeb,
 };
 
 export interface SiteData {

@@ -5,8 +5,8 @@ import bent from "bent";
 import debug from "debug";
 import FormData from "form-data";
 
-import { createReadStream } from "fs";
-import { Readable } from "stream";
+import { createReadStream } from "node:fs";
+import { Readable } from "node:stream";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
 import { Response, Result } from "./response";
@@ -31,7 +31,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     log(`Requesting possible sources for ${typeof file === "string" ? file : "a stream or buffer"}`);
 
     const {
-      results: numResults,
+      results: numberResults,
       testMode,
       mask,
       excludeMask,
@@ -41,11 +41,11 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     };
     const form = new FormData();
 
-    log(`Requesting ${numResults!} results from SauceNAO`);
+    log(`Requesting ${numberResults!} results from SauceNAO`);
 
     form.append("api_key", token);
     form.append("output_type", 2);
-    form.append("numres", numResults);
+    form.append("numres", numberResults);
 
     if (testMode) {
       log("Enabling test mode");
@@ -87,12 +87,23 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     // Client side error
     else if (status < 0) throw new SagiriClientError(status, message!);
 
+    const unknownIds = new Set(
+      response.results.filter((result) => !sites[result.header.index_id]).map((result) => result.header.index_id),
+    );
+
+    if (unknownIds.size > 0) {
+      console.warn(
+        `Some results were not resolved, because they were not found in the list of supported sites.
+Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
+      );
+    }
+
     const results = response.results
-      .filter(({ header: { index_id: id } }) => !!sites[id])
+      .filter((result) => !unknownIds.has(result.header.index_id))
       .sort((a, b) => b.header.similarity - a.header.similarity);
 
     log(
-      `Expected ${numResults} results. ` +
+      `Expected ${numberResults} results. ` +
         `SauceNAO says it sent ${resultsReturned}, actually sent ${response.results.length}. ` +
         `Found ${results.length} acceptable results.`,
     );

@@ -44,6 +44,34 @@ export interface ResultData {
   "anime-pictures_id"?: string;
   member_id?: string;
   member_name?: string;
+  // MangaDex
+  md_id?: string;
+  author?: string;
+  artist?: string;
+  part?: string;
+  // ArtStation
+  as_project?: string;
+  // Twitter
+  created_at?: string;
+  tweet_id?: string;
+  twitter_user_id?: string;
+  twitter_user_handle?: string;
+  // FurAffinity
+  fa_id?: string;
+  // Furry Network
+  fn_id?: string;
+  fn_type?: string;
+  // Skeb
+  creator?: string;
+  creator_name?: string;
+  path?: string;
+  // Kemono
+  service?: "patreon" | "dlsite" | "fanbox" | "gumroad" | "subscribestar" | "fantia";
+  service_name?: "Patreon" | "DLsite" | "pixiv Fanbox" | "Gumroad" | "SubscribeStar" | "Fantia";
+  id?: string;
+  user_id?: string;
+  user_name?: string;
+  published?: string;
 }
 
 export interface ResultHeader {
