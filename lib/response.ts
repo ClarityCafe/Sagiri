@@ -44,6 +44,8 @@ export interface ResultData {
   "anime-pictures_id"?: string;
   member_id?: string;
   member_name?: string;
+  characters: string;
+  est_time: string;
   // MangaDex
   md_id?: string;
   author?: string;
