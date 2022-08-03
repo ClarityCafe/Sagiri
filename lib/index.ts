@@ -25,29 +25,27 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
   const request = bent("https://saucenao.com", "json", "POST", 200);
 
-  return async (
-    file: File,
-    optionOverrides: Options = {}
-  ): Promise<SagiriResult[]> => {
+  return async (file: File, optionOverrides: Options = {}): Promise<SagiriResult[]> => {
     if (!file) throw new Error("Missing file to find source for");
 
-    log(
-      `Requesting possible sources for ${
-        typeof file === "string" ? file : "a stream or buffer"
-      }`
-    );
+    log(`Requesting possible sources for ${typeof file === "string" ? file : "a stream or buffer"}`);
 
-    const { results: numResults, testMode, mask, excludeMask } = {
+    const {
+      results: numberResults,
+      testMode,
+      mask,
+      excludeMask,
+    } = {
       ...defaultOptions,
       ...optionOverrides,
     };
     const form = new FormData();
 
-    log(`Requesting ${numResults!} results from SauceNAO`);
+    log(`Requesting ${numberResults!} results from SauceNAO`);
 
     form.append("api_key", token);
     form.append("output_type", 2);
-    form.append("numres", numResults);
+    form.append("numres", numberResults);
 
     if (testMode) {
       log("Enabling test mode");
@@ -55,22 +53,12 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     }
 
     if (mask && excludeMask)
-      throw new Error(
-        "It's redundant to set both mask and excludeMask. Choose one or the other."
-      );
+      throw new Error("It's redundant to set both mask and excludeMask. Choose one or the other.");
     else if (mask) {
-      log(
-        `Adding inclusive db mask with a value of ${generateMask(
-          mask
-        )} (from [${mask.join(", ")}])`
-      );
+      log(`Adding inclusive db mask with a value of ${generateMask(mask)} (from [${mask.join(", ")}])`);
       form.append("dbmask", generateMask(mask));
     } else if (excludeMask) {
-      log(
-        `Adding exclusive db mask with value of ${generateMask(
-          excludeMask
-        )} (from [${excludeMask.join(", ")}])`
-      );
+      log(`Adding exclusive db mask with value of ${generateMask(excludeMask)} (from [${excludeMask.join(", ")}])`);
       form.append("dbmaski", generateMask(excludeMask));
     }
 
@@ -87,11 +75,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     log("Sending request to SauceNAO");
 
-    const response = (await request(
-      "/search.php",
-      form,
-      form.getHeaders()
-    )) as Response;
+    const response = (await request("/search.php", form, form.getHeaders())) as Response;
     const {
       header: { status, message, results_returned: resultsReturned },
     } = response;
@@ -103,14 +87,25 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
     // Client side error
     else if (status < 0) throw new SagiriClientError(status, message!);
 
+    const unknownIds = new Set(
+      response.results.filter((result) => !sites[result.header.index_id]).map((result) => result.header.index_id),
+    );
+
+    if (unknownIds.size > 0) {
+      console.warn(
+        `Some results were not resolved, because they were not found in the list of supported sites.
+Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
+      );
+    }
+
     const results = response.results
-      .filter(({ header: { index_id: id } }) => !!sites[id])
+      .filter((result) => !unknownIds.has(result.header.index_id))
       .sort((a, b) => b.header.similarity - a.header.similarity);
 
     log(
-      `Expected ${numResults} results. ` +
+      `Expected ${numberResults} results. ` +
         `SauceNAO says it sent ${resultsReturned}, actually sent ${response.results.length}. ` +
-        `Found ${results.length} acceptable results.`
+        `Found ${results.length} acceptable results.`,
     );
 
     return results.map((result) => {
@@ -122,7 +117,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
       return {
         url,
         site: name,
-        index: (id as any) as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
+        index: id as any as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
         similarity: Number(similarity),
         thumbnail,
         authorName,

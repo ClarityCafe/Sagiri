@@ -11,15 +11,13 @@ export function resolveResult(result: Result): any {
   const { data, header } = result;
   const id = header.index_id;
 
-  if (!sites[id])
-    throw new Error(`Cannot resolve data for unknown index ${id}`);
+  if (!sites[id]) throw new Error(`Cannot resolve data for unknown index ${id}`);
 
   const { name, urlMatcher, backupUrl, authorData } = sites[id]!;
   let url: string | undefined;
 
   // Try to find matching url from ones provided by SauceNAO
-  if (data.ext_urls && data.ext_urls.length > 1)
-    [url] = data.ext_urls.filter((url) => urlMatcher.test(url));
+  if (data.ext_urls && data.ext_urls.length > 1) [url] = data.ext_urls.filter((url) => urlMatcher.test(url));
   else if (data.ext_urls) [url] = data.ext_urls;
 
   // If we can't find out, generate one ourselves

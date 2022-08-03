@@ -5,7 +5,7 @@ plugins:
     enabled: true
   eslint:
     enabled: true
-    channel: 'eslint-5'
+    channel: "eslint-5"
     ignore_warnings: true
     extensions:
       - .ts

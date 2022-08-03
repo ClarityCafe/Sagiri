@@ -7,6 +7,7 @@ pull request. We use ESLint to enforce a consistent coding style, any PR that do
 merged until the formatting is resolved.
 
 ## Setup
+
 To get ready to work on the codebase, please do the following:
 
 1. Fork & clone the repository, and make sure you're on the **master** branch

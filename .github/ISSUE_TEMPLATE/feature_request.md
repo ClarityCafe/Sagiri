@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: Request a feature for the library
-title: ''
-labels: 'enhancement'
-assignees: ''
-
+title: ""
+labels: "enhancement"
+assignees: ""
 ---
 
 <!--

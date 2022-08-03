@@ -3,7 +3,7 @@
 A simple and lightweight NodeJS wrapper for [SauceNAO](https://saucenao.com/).
 
 ![NPM Downloads Badge](https://img.shields.io/npm/dm/sagiri.svg)
-![Node.js CI (Test)](https://github.com/ClarityCafe/Sagiri/workflows/Node.js%20CI%20(Test)/badge.svg)
+![Node.js CI (Test)](<https://github.com/ClarityCafe/Sagiri/workflows/Node.js%20CI%20(Test)/badge.svg>)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FClarityCafe%2FSagiri.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FClarityCafe%2FSagiri?ref=badge_shield)
 
 ## Installation
@@ -71,6 +71,5 @@ Any contributions to this project are welcome, but please be sure to read over o
 ## License
 
 The code contained within this repository is licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
-
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FClarityCafe%2FSagiri.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FClarityCafe%2FSagiri?ref=badge_large)

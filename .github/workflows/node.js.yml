@@ -5,38 +5,37 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ '**' ]
+    branches: ["**"]
   pull_request:
-    branches: [ '**' ]
+    branches: ["**"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Get Dependencies
-      run: yarn
-    - name: Get CodeClimate Coverage
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
+      - name: Get Dependencies
+        run: yarn
+      - name: Get CodeClimate Coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
 
-    - name: Run Coverage and Lint
-      run: |
-        yarn lint
-        yarn coverage
-        ./cc-test-reporter after-build --exit-code $(echo $?)
-      env:
-       CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
+      - name: Run Coverage and Lint
+        run: |
+          yarn lint
+          yarn coverage
+          ./cc-test-reporter after-build --exit-code $(echo $?)
+        env:
+          CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
