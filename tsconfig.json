@@ -17,7 +17,8 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": ["lib", "types.d.ts"]
 }

@@ -1,6 +1,6 @@
 {
-  "name": "sagiri-fork",
-  "version": "3.2.1",
+  "name": "sagiri",
+  "version": "3.2.2",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API. Forked by Agent_RBY_",
   "license": "MIT",
   "main": "dist/index.js",
