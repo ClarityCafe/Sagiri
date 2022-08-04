@@ -9,13 +9,13 @@
     "sr229",
     "Agent_RBY_"
   ],
-  "homepage": "https://github.com/AgentRBY/Sagiri#readme",
+  "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AgentRBY/Sagiri"
+    "url": "git+https://github.com/ClarityCafe/Sagiri"
   },
   "bugs": {
-    "url": "https://github.com/AgentRBY/Sagiri/issues"
+    "url": "https://github.com/ClarityCafe/Sagiri/issues"
   },
   "funding": [
     {
