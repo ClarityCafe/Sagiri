@@ -1,13 +1,12 @@
 {
   "name": "sagiri",
   "version": "3.2.2",
-  "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API. Forked by Agent_RBY_",
+  "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "contributors": [
     "sr229",
-    "Michael Mitchell <michael@ovyerus.com> (https://ovyerus.com)",
     "Agent_RBY_"
   ],
   "homepage": "https://github.com/AgentRBY/Sagiri#readme",
@@ -19,10 +18,6 @@
     "url": "https://github.com/AgentRBY/Sagiri/issues"
   },
   "funding": [
-    {
-      "type": "individual",
-      "url": "https://github.com/sponsors/Ovyerus"
-    },
     {
       "type": "individual",
       "url": "https://ko-fi.com/capuccino"
