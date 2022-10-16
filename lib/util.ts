@@ -4,7 +4,15 @@ import sites from "./sites";
 
 export const generateMask = (masks: number[]): number =>
   // eslint-disable-next-line prefer-template
-  masks.reduce((prev, curr) => prev ^ parseInt("1" + "0".repeat(curr), 2), 0);
+  masks.reduce((prev, curr) => {
+    /* SauceNao API skips index 17 as it is reserved meaning all bitshifts above 17 are off by 1 */
+    if (curr > 16)
+    {
+      return prev + Math.pow(2, curr - 1);
+    } else {
+      return prev + Math.pow(2, curr);
+    }
+  }, 0);
 
 export function resolveResult(result: Result): any {
   /* eslint-disable @typescript-eslint/no-unnecessary-condition */
