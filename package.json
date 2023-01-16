@@ -53,7 +53,7 @@
     "form-data": "^4.0.0"
   },
   "devDependencies": {
-    "@types/bent": "7.3.2",
+    "@types/bent": "7.3.3",
     "@types/debug": "4.1.7",
     "@types/jest": "28.1.6",
     "@types/lodash.ismatch": "4.4.7",
