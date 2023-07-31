@@ -59,7 +59,7 @@
     "@types/lodash.ismatch": "4.4.7",
     "@types/node": "20.4.5",
     "@typescript-eslint/eslint-plugin": "6.2.0",
-    "@typescript-eslint/parser": "5.48.0",
+    "@typescript-eslint/parser": "6.2.0",
     "cross-env": "7.0.3",
     "eslint": "8.38.0",
     "eslint-config-prettier": "8.9.0",
