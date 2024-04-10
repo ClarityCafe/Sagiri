@@ -73,7 +73,7 @@
     "globals": "^15.0.0",
     "jest": "29.6.2",
     "lodash.ismatch": "4.4.0",
-    "nock": "13.5.0",
+    "nock": "13.5.4",
     "parse-multipart": "1.0.4",
     "prettier": "3.0.0",
     "ts-jest": "29.1.1",
