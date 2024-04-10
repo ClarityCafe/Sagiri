@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+ 
 interface HeaderIndex {
   id: number;
   parent_id: number;
