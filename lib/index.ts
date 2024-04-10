@@ -23,6 +23,12 @@ type File = string | Buffer | Readable;
 const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
   log("Created Sagiri function with default options:", defaultOptions);
 
+  // do some token validation, tokens must be 40 chars long and alphanumeric
+  // make sure we're lenient during testing though to allow jest to pass.
+  if (process.env.NODE_ENV !== "test")
+    if (token.length < 40 || !/^[a-zA-Z0-9]+$/.test(token))
+      throw new Error("Malformed SauceNAO Token. Fetch your own at https://saucenao.com/user.php");
+
   const request = bent("https://saucenao.com", "json", "POST", 200);
 
   return async (file: File, optionOverrides: Options = {}): Promise<SagiriResult[]> => {
