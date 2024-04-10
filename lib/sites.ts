@@ -1,5 +1,5 @@
- 
- 
+
+
 import { Result, ResultData } from "./response";
 import { SagiriClientError } from "./errors";
 
@@ -77,7 +77,7 @@ const Fakku: SiteData = {
 };
 
 const NHentai: SiteData = {
-  name: "nHentai",
+  name: "H-Misc (nHentai)",
   index: 18,
   urlMatcher: /https?:\/\/nhentai.net\/g\/\d+/i,
   backupUrl: (data) => `https://nhentai.net/g/${data.header.thumbnail.match(/nhentai\/(\d+)/)?.[1]}`,
@@ -218,6 +218,13 @@ const MangaDex: SiteData = {
     authorUrl: null,
   }),
 };
+
+const Ehentai: SiteData = {
+  name: "H-Misc (eHentai)",
+  index: 38,
+  urlMatcher: /(?:https?:\/\/)?e-hentai\.org\/g\/\d+/i,
+  backupUrl: (data) => `https://e-hentai.org/g/${data.header.thumbnail.match(/e-hentai\/(\d+)/)?.[1]}`
+}
 
 const ArtStation: SiteData = {
   name: "FurAffinity",
@@ -370,7 +377,7 @@ const sites: { [key: string]: SiteData | undefined } = {
   "36": MangaUpdates,
   "37": MangaDex,
   "371": MangaDex,
-  // 38
+  "38": Ehentai,
   "39": ArtStation,
   "40": FurAffinity,
   "41": Twitter,
