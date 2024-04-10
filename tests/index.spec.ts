@@ -1,5 +1,5 @@
- 
- 
+
+
 
 import isMatch from "lodash.ismatch";
 import nock from "nock";
@@ -67,6 +67,22 @@ const parseEncodedMultipart = (body: string) => parseMultipart(Buffer.from(body,
 
 const mockApi = (...args: [nock.RequestBodyMatcher?, nock.Options?]) =>
   nock("https://saucenao.com").post("/search.php", ...args);
+
+describe("Sagiri#constructor", () => {
+  test("Should fail on invalid characters", () => {
+    // momentarily set to production mode to force the error lmao
+    process.env.NODE_ENV = "production";
+
+    expect(() => {sagiri("!!!!!*&#@(!)")}).toThrow(Error);
+  })
+
+  test("Should fail on invalid length", () => {
+    // momentarily set to production mode to force the error lmao
+    process.env.NODE_ENV = "production";
+
+    expect(() => {sagiri("7".repeat(27))}).toThrow(Error);
+  })
+})
 
 describe("Sagiri#getSauce", () => {
   test("gets source from url", async () => {
