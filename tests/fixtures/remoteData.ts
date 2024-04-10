@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+ 
 
 const remoteData = {
   "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=41817184": `<!DOCTYPE html>
