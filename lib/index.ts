@@ -123,7 +123,7 @@ Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
       return {
         url,
         site: name,
-        index: id as any as number, // These are actually numbers but they're typed as strings so they can be used to select from the sites map
+        index: parseInt(id), // These are actually numbers but they're typed as strings so they can be used to select from the sites map
         similarity: Number(similarity),
         thumbnail,
         authorName,
