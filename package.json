@@ -56,7 +56,7 @@
     "@eslint/js": "^9.0.0",
     "@types/bent": "7.3.8",
     "@types/bun": "latest",
-    "@types/debug": "4.1.10",
+    "@types/debug": "4.1.12",
     "@types/jest": "29.5.12",
     "@types/lodash.ismatch": "4.4.9",
     "@types/node": "20.12.7",
