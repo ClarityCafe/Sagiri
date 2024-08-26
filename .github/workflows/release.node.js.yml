@@ -8,7 +8,7 @@ on:
     tags: ["**"]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: read
