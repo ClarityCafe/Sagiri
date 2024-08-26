@@ -26,16 +26,16 @@ jobs:
 
       - name: Get Dependencies
         run: bun install
-      - name: Get CodeClimate Coverage
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
+#      - name: Get CodeClimate Coverage
+#        run: |
+#          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+#          chmod +x ./cc-test-reporter
+#          ./cc-test-reporter before-build
 
       - name: Run Coverage and Lint
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
           bun run coverage
-          ./cc-test-reporter after-build --exit-code $(echo $?)
-        env:
-          CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
+#          ./cc-test-reporter after-build --exit-code $(echo $?)
+#        env:
+#          CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
