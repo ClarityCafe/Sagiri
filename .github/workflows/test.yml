@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Test
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
           bun-version: ${{ matrix.bun-version }}
 
       - name: Get Dependencies
-        run: yarn
+        run: bun install
       - name: Get CodeClimate Coverage
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -35,7 +35,7 @@ jobs:
       - name: Run Coverage and Lint
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
-          bun install && bun run coverage
+          bun run coverage
           ./cc-test-reporter after-build --exit-code $(echo $?)
         env:
           CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e
