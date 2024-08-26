@@ -11,6 +11,7 @@
             "name": "Debug File",
             "program": "${file}",
             "cwd": "${workspaceFolder}",
+            "envFile": ".env.test.local",
             "stopOnEntry": false,
             "watchMode": false
         },

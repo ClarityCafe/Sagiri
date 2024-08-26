@@ -7,12 +7,12 @@ import FormData from 'form-data';
 import { generateMask, resolveResult } from './util';
 import { SagiriClientError, SagiriServerError } from './errors';
 
-let fetch;
+let fetchFn;
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
 if (globalThis.fetch === undefined) {
-  fetch = nodeFetch.default;
+  fetchFn = nodeFetch.default;
 } else {
-  fetch = globalThis.fetch;
+  fetchFn = globalThis.fetch;
 }
 
 type File = string | Buffer | Readable;
@@ -33,7 +33,7 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
     const form = new FormData();
     const { results, mask, excludeMask, getRatings, testMode, db } = { ...defaultOpts, ...opts };
 
-    form.append("file", file);
+    form.append("api_key", token);
     form.append("output_type", 2);
     form.append("numres", results);
 
@@ -73,7 +73,7 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
         throw new Error("Invalid file type");
     }
 
-    const response = await fetch("https://saucenao.com/search.php", {
+    const response = await fetchFn("https://saucenao.com/search.php", {
       method: "POST",
       body: form.getBuffer(),
       headers: form.getHeaders()
