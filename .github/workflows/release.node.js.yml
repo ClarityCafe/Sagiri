@@ -23,7 +23,6 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - run: npx jsr publish
       - uses: actions/setup-node@v4
         with:
           registry-url: "https://npm.pkg.github.com"
