@@ -5,6 +5,7 @@ import FormData from "form-data";
 import { createReadStream } from "node:fs";
 import { Readable } from "node:stream";
 import { env } from "node:process";
+import * as NodeFetch from "node-fetch";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
 import { IResponse, IResult } from "./response";
@@ -12,8 +13,14 @@ import sites from "./sites";
 import { generateMask, resolveResult } from "./util";
 
 const log = debug("sagiri");
+let fetch;
 
 type File = string | Buffer | Readable;
+
+// check if fetch exists, if it does, use it, otherwise use node-fetch
+if (typeof fetch === "undefined") {
+  fetch = NodeFetch.default;
+}
 
 /**
  * Creates a function to be used for finding potential sources for a given image.
@@ -27,7 +34,7 @@ const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): (file
     if (token.length < 40 || !/^[a-zA-Z0-9]+$/.test(token))
       throw new Error("Malformed SauceNAO Token. Fetch your own at https://saucenao.com/user.php");
 
-  const request = bent("https://saucenao.com", "json", "POST", 200);
+  //const request = bent("https://saucenao.com", "json", "POST", 200);
 
   return async (file: File, optionOverrides: IOptions = {}): Promise<ISagiriResult[]> => {
     if (!file) throw new Error("Missing file to find source for");
@@ -79,10 +86,16 @@ const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): (file
 
     log("Sending request to SauceNAO");
 
-    const response = (await request("/search.php", form, form.getHeaders())) as IResponse;
+    //const response = (await request("/search.php", form, form.getHeaders())) as IResponse;
+    const res2 = await fetch("https://saucenao.com/search.php", {
+      method: "POST",
+      body: form,
+      headers: form.getHeaders(),
+    })
+    .then((res: { json: () => never; }) => res.json()) as IResponse;
     const {
       header: { status, message, results_returned: resultsReturned },
-    } = response;
+    } = res2;
 
     log(`Received response, status ${status}`);
 
@@ -92,7 +105,7 @@ const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): (file
     else if (status < 0) throw new SagiriClientError(status, message!);
 
     const unknownIds = new Set(
-      response.results.filter((result) => !sites[result.header.index_id]).map((result) => result.header.index_id),
+      res2.results.filter((result) => !sites[result.header.index_id]).map((result) => result.header.index_id),
     );
 
     if (unknownIds.size > 0) {
@@ -102,13 +115,13 @@ Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
       );
     }
 
-    const results = response.results
+    const results = res2.results
       .filter((result) => !unknownIds.has(result.header.index_id))
       .sort((a, b) => b.header.similarity - a.header.similarity);
 
     log(
       `Expected ${numberResults} results. ` +
-        `SauceNAO says it sent ${resultsReturned}, actually sent ${response.results.length}. ` +
+        `SauceNAO says it sent ${resultsReturned}, actually sent ${res2.results.length}. ` +
         `Found ${results.length} acceptable results.`,
     );
 
