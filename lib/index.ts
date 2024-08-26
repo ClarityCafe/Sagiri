@@ -134,15 +134,13 @@ Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
   };
 };
 
-module.exports = sagiri;
-
 export default sagiri;
 
 export interface Options {
   results?: number;
   mask?: number[];
   excludeMask?: number[];
-  // getRatings?: boolean;
+  getRatings?: boolean;
   testMode?: boolean;
   db?: number;
 }
