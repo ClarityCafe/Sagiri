@@ -18,7 +18,7 @@ type File = string | Buffer | Readable;
 /**
  * Creates a function to be used for finding potential sources for a given image.
  */
-const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): Promise<ISagiriResult[]> => {
+const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): (file: File, optionOverrides?: IOptions) => Promise<ISagiriResult[]> => {
   log("Created Sagiri function with default options:", defaultOptions);
 
   // do some token validation, tokens must be 40 chars long and alphanumeric
