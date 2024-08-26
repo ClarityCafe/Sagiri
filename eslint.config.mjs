@@ -10,7 +10,8 @@ export default [
   {
     ignores: [
       "*.config.*",
-      "tests/**"
+      "tests/**",
+      "dist/**"
     ]
   }
 ];

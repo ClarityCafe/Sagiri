@@ -4,5 +4,6 @@
     pkgs.vim
     pkgs.git
     pkgs.bun
+    pkgs.deno
     ];
 }

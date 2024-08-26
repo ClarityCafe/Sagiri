@@ -1,4 +1,4 @@
-import { IResult, IResultData } from "./response";
+import type { IResult, IResultData } from "./response";
 import { SagiriClientError } from "./errors";
 
 interface AuthorData {
