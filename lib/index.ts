@@ -4,7 +4,7 @@ import FormData from "form-data";
 
 import { createReadStream } from "node:fs";
 import { Readable } from "node:stream";
-import process from "node:process";
+import { env } from "node:process";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
 import { IResponse, IResult } from "./response";
@@ -23,7 +23,7 @@ const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): (file
 
   // do some token validation, tokens must be 40 chars long and alphanumeric
   // make sure we're lenient during testing though to allow jest to pass.
-  if (process.env.NODE_ENV !== "test")
+  if (env.NODE_ENV !== "test")
     if (token.length < 40 || !/^[a-zA-Z0-9]+$/.test(token))
       throw new Error("Malformed SauceNAO Token. Fetch your own at https://saucenao.com/user.php");
 
