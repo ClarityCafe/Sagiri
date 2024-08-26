@@ -6,6 +6,8 @@ import { createReadStream } from 'node:fs';
 import FormData from 'form-data';
 import { generateMask, resolveResult } from './util';
 import { SagiriClientError, SagiriServerError } from './errors';
+import type { IResponse } from './response';
+import sites from './sites';
 
 let fetchFn;
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
@@ -31,7 +33,7 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
     console.debug(`Searching for possible sources of image: ${typeof file === 'string' ? file : 'Buffer'}`);
 
     const form = new FormData();
-    const { results, mask, excludeMask, getRatings, testMode, db } = { ...defaultOpts, ...opts };
+    const { results, mask, excludeMask, testMode } = { ...defaultOpts, ...opts };
 
     form.append("api_key", token);
     form.append("output_type", 2);
@@ -79,27 +81,55 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
       headers: form.getHeaders()
     });
 
-    const { header, res } = await response.json();
+    const res = await response.json() as IResponse;
+
+    const {
+      header: { status, message, results_returned: resultsReturned },
+    } = res;
+
+    // I'm sure there's a better way to do this but I'll just re-assign a new var
+    // because I am writing this in midnight and I want to go to sleep
+
 
     // server-side error
-    if (header.status > 0) throw new SagiriServerError(header.status, header.message);
+    if (status > 0) throw new SagiriServerError(status, message!);
     // client-side error
-    if (header.status < 0) throw new SagiriClientError(header.status, header.message);
+    if (status < 0) throw new SagiriClientError(status, message!);
 
+    // filter unknowns
     const unknownIds = new Set(
-      res.map((result: any) => result.header.index_id)
-    )
+      res.results.filter((result) => !sites[result.header.index_id]).map((result) => result.header.index_id),
+    );
 
     if (unknownIds.size > 0)
       console.warn(
         `Same results were not resolved, because they were not found in the list of supported sites.
         Please report this IDs to the library maintainer: ${Array.from(unknownIds).join(", ")}`);
 
-    const srcResults = res
-    .filter((res: any) => !unknownIds.has(res.header.index_id))
-    .sort((a: any, b: any) => b.header.similarity - a.header.similarity);
+    const srcResults = res.results
+    .filter((res) => !unknownIds.has(res.header.index_id))
+    .sort((a, b) => b.header.similarity - a.header.similarity);
 
-    console.debug(`Exepcted ${results} results, got ${srcResults.length}, with ${unknownIds.size} unknown IDs`);
+    console.debug(`Exepcted ${results} results, got ${srcResults.length}, with saucenao reporting ${resultsReturned} results.`);
+
+    // return the results
+    return srcResults.map((res) => {
+      const { url, name, id, authorName, authorUrl } = resolveResult(res);
+      const {
+        header: { similarity, thumbnail }
+      } = res;
+
+      return {
+        url,
+        site: name,
+        index: parseInt(id),
+        similarity: Number(similarity),
+        thumbnail,
+        authorName,
+        authorUrl,
+        raw: res
+      }
+    });
   }
 }
 

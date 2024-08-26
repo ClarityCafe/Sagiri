@@ -119,6 +119,11 @@ export interface IResponse {
   results: IResult[];
 }
 
+export interface IHeaderStatus {
+  status: number;
+  message: string;
+}
+
 export interface IHeader {
   account_type: string;
   index: { [id: string]: IHeaderIndex | undefined }; // do i wanna generic this to be id value?

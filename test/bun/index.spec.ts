@@ -14,5 +14,6 @@ test("Should fail on invalid length", () => {
 
 test("Resolve with results", async () => {
   const result = await sagiri(env.SAUCENAO_TOKEN as string, { results: 5 })("https://i.imgur.com/F9QSgPx.jpeg");
+  console.log(result);
   expect(result).toBeDefined();
 })

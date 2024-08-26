@@ -15,14 +15,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        bun-version: [latest, 1.1]
 
     steps:
       - uses: actions/checkout@v4.1.7
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Use Bun.js ${{ matrix.bun-version }}
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          bun-version: ${{ matrix.bun-version }}
 
       - name: Get Dependencies
         run: yarn
@@ -34,8 +34,8 @@ jobs:
 
       - name: Run Coverage and Lint
         run: |
-          yarn lint
-          yarn coverage
+          echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
+          bun install && bun run coverage
           ./cc-test-reporter after-build --exit-code $(echo $?)
         env:
           CC_TEST_REPORTER_ID: bda3746e9ecd039cee2dcfb3c1e4efc59c712a40fa3b9316e281eb00d61c613e

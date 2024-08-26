@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING** - ESM support has been added to allow the module to be used on Node.js 16+ code that uses ESM code.
 - **BREAKING** - Bun and Deno support has been added. Library contributors are encouraged to try the library on these platforms and avoid any Node.js specific code.
 - **NEW** - Package is now published in the [JSR](https://jsr.io) registry. To install the package, run `deno install jsr:@clarity/sagiri`.
+- **NEW** - Library now uses the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). A [node-fetch](https://npmjs.com/package/node-fetch) fallback is provided for LTS versions below 21.x - however this will be removed once 18 and 20.x versions become deprecated.
 
 ## [3.6.0] - 2024-04-10
 

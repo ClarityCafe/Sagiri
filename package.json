@@ -1,9 +1,58 @@
 {
   "name": "sagiri",
+  "version": "4.0.0",
+  "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
+  "license": "MIT",
   "module": "./lib/sagiri.ts",
   "type": "module",
+  "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClarityCafe/Sagiri"
+  },
+  "bugs": {
+    "url": "https://github.com/ClarityCafe/Sagiri/issues"
+  },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://ko-fi.com/capuccino"
+    }
+  ],
+  "contributors": [
+    "sr229",
+    "Agent_RBY_",
+    "Kotosif"
+  ],
+  "keywords": [
+    "hitorigoto",
+    "sagiri",
+    "saucenao",
+    "simple",
+    "easy",
+    "api",
+    "functional",
+    "image",
+    "source"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "bun --env-file='./.env.test.local' test bun",
+    "test:deno": "deno test",
+    "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
+    "lint": "eslint --fix",
+    "prepublishOnly": "bun run build"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "bun": "^1.1.26",
+    "eslint": "^9.9.1",
+    "typescript-eslint": "^8.3.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
