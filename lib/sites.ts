@@ -1,6 +1,4 @@
-
-
-import { Result, ResultData } from "./response";
+import { IResult, IResultData } from "./response";
 import { SagiriClientError } from "./errors";
 
 interface AuthorData {
@@ -223,8 +221,8 @@ const Ehentai: SiteData = {
   name: "H-Misc (eHentai)",
   index: 38,
   urlMatcher: /(?:https?:\/\/)?e-hentai\.org\/g\/\d+/i,
-  backupUrl: (data) => `https://e-hentai.org/g/${data.header.thumbnail.match(/e-hentai\/(\d+)/)?.[1]}`
-}
+  backupUrl: (data) => `https://e-hentai.org/g/${data.header.thumbnail.match(/e-hentai\/(\d+)/)?.[1]}`,
+};
 
 const ArtStation: SiteData = {
   name: "FurAffinity",
@@ -391,9 +389,9 @@ export interface SiteData {
   index: number;
   urlMatcher: RegExp;
 
-  backupUrl(result: Result): string;
+  backupUrl(result: IResult): string;
 
-  authorData?(data: ResultData): AuthorData;
+  authorData?(data: IResultData): AuthorData;
 
   // getRating(body: string): boolean; we remove this?
   // isNSFW: boolean

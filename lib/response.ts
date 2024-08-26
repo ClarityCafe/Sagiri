@@ -1,17 +1,16 @@
- 
-interface HeaderIndex {
+interface IHeaderIndex {
   id: number;
   parent_id: number;
   results: number;
   status: number;
 }
 
-export interface Result {
-  data: ResultData;
-  header: ResultHeader;
+export interface IResult {
+  data: IResultData;
+  header: IResultHeader;
 }
 
-export interface ResultData {
+export interface IResultData {
   ext_urls: string[];
   title: string;
   da_id: number;
@@ -76,7 +75,7 @@ export interface ResultData {
   published?: string;
 }
 
-export interface ResultHeader {
+export interface IResultHeader {
   index_id: Indices;
   index_name: string;
   similarity: number; // Actually a string but this is for type coercion funsies.
@@ -115,14 +114,14 @@ export type Indices =
   | "35"
   | "36";
 
-export interface Response {
-  header: Header;
-  results: Result[];
+export interface IResponse {
+  header: IHeader;
+  results: IResult[];
 }
 
-export interface Header {
+export interface IHeader {
   account_type: string;
-  index: { [id: string]: HeaderIndex | undefined }; // do i wanna generic this to be id value?
+  index: { [id: string]: IHeaderIndex | undefined }; // do i wanna generic this to be id value?
   long_limit: string;
   long_remaining: number;
   message?: string;

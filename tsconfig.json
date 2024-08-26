@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "lib",
+    "outDir": "dist/",
+    "rootDir": "lib/",
     "module": "commonjs",
     "lib": ["esnext", "dom"],
     "target": "es6",
@@ -15,10 +15,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "noUnusedParameters": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "skipLibCheck": true
   },
-  "include": ["lib", "types.d.ts"]
+  "include": ["lib/**/*"]
 }

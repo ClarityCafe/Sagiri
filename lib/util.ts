@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Result } from "./response";
+import { IResult } from "./response";
 import sites from "./sites";
 
 export const generateMask = (masks: number[]): number =>
-
   masks.reduce((prev, curr) => {
     /* SauceNao API skips index 17 as it is reserved meaning all bitshifts above 17 are off by 1 */
-    if (curr > 16)
-    {
+    if (curr > 16) {
       return prev + Math.pow(2, curr - 1);
     } else {
       return prev + Math.pow(2, curr);
     }
   }, 0);
 
-export function resolveResult(result: Result): any {
-
+export function resolveResult(result: IResult): any {
   const { data, header } = result;
   const id = header.index_id;
 
@@ -38,5 +35,4 @@ export function resolveResult(result: Result): any {
     name,
     ...(authorData?.(result.data) ?? { authorName: null, authorUrl: null }),
   };
-
 }

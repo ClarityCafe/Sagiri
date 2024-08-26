@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-
 import bent from "bent";
 import debug from "debug";
 import FormData from "form-data";
 
-import { createReadStream } from "fs";
-import { Readable } from "stream";
+import { createReadStream } from "node:fs";
+import { Readable } from "node:stream";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
-import { Response, Result } from "./response";
+import { IResponse, IResult } from "./response";
 import sites from "./sites";
 import { generateMask, resolveResult } from "./util";
 
@@ -20,7 +17,7 @@ type File = string | Buffer | Readable;
 /**
  * Creates a function to be used for finding potential sources for a given image.
  */
-const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
+const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }) => {
   log("Created Sagiri function with default options:", defaultOptions);
 
   // do some token validation, tokens must be 40 chars long and alphanumeric
@@ -31,7 +28,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
   const request = bent("https://saucenao.com", "json", "POST", 200);
 
-  return async (file: File, optionOverrides: Options = {}): Promise<SagiriResult[]> => {
+  return async (file: File, optionOverrides: IOptions = {}): Promise<ISagiriResult[]> => {
     if (!file) throw new Error("Missing file to find source for");
 
     log(`Requesting possible sources for ${typeof file === "string" ? file : "a stream or buffer"}`);
@@ -81,7 +78,7 @@ const sagiri = (token: string, defaultOptions: Options = { results: 5 }) => {
 
     log("Sending request to SauceNAO");
 
-    const response = (await request("/search.php", form, form.getHeaders())) as Response;
+    const response = (await request("/search.php", form, form.getHeaders())) as IResponse;
     const {
       header: { status, message, results_returned: resultsReturned },
     } = response;
@@ -136,7 +133,7 @@ Please report this IDs to the author ${[...unknownIds.values()].join(", ")}`,
 
 export default sagiri;
 
-export interface Options {
+export interface IOptions {
   results?: number;
   mask?: number[];
   excludeMask?: number[];
@@ -145,7 +142,7 @@ export interface Options {
   db?: number;
 }
 
-export interface SagiriResult {
+export interface ISagiriResult {
   url: string;
   site: string;
   index: number;
@@ -153,5 +150,5 @@ export interface SagiriResult {
   thumbnail: string;
   authorName: string | null;
   authorUrl: string | null;
-  raw: Result;
+  raw: IResult;
 }
