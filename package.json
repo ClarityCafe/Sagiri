@@ -81,7 +81,7 @@
     "ts-jest": "29.2.3",
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
-    "typescript-eslint": "^7.6.0"
+    "typescript-eslint": "^8.2.0"
   },
   "files": [
     "dist"
