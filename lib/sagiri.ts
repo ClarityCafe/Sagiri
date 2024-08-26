@@ -6,7 +6,7 @@ import { createReadStream } from 'node:fs';
 import FormData from 'form-data';
 import { generateMask, resolveResult } from './util';
 import { SagiriClientError, SagiriServerError } from './errors';
-import type { IResponse } from './response';
+import type { IResponse, IResult } from './response';
 import sites from './sites';
 
 let fetchFn;
@@ -19,13 +19,22 @@ if (globalThis.fetch === undefined) {
 
 type File = string | Buffer | Readable;
 
-const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
+/**
+ * Creates a function to be used for finding potential sources for a given image.
+ * By default has options set to give 5 results from SauceNAO.
+ * @param token your saucenao token, get one from https://saucenao.com/user.php
+ * @param defaultOpts the default options that the client will use for querying
+ * @returns an `async function (file: File, optionOverrides?: Options)` which is loaded with the given token and default options to use.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: File, opts?: IOptions) => Promise<{ url: any; site: any; index: number; similarity: number; thumbnail: string; authorName: any; authorUrl: any; raw: IResult; }[]> => {
   console.debug(`Created sagiri instance with opts: ${JSON.stringify(defaultOpts)}`);
 
   // token validation to ensure the token is 40 characters long and alphanumeric
   if (env.NODE_ENV !== "test")
     if (token.length < 40 || !/^[a-zA-Z0-9]+$/.test(token))
       throw new Error("Malformed token. Get a token from https://saucenao.com/user.php");
+
 
   return async (file: File, opts: IOptions = {}) => {
     if (!file) throw new Error("No file provided");
@@ -81,14 +90,13 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }) => {
       headers: form.getHeaders()
     });
 
+    // I'm sure there's a better way to do this but I'll just re-assign a new var
+    // because I am writing this in midnight and I want to go to sleep
     const res = await response.json() as IResponse;
 
     const {
       header: { status, message, results_returned: resultsReturned },
     } = res;
-
-    // I'm sure there's a better way to do this but I'll just re-assign a new var
-    // because I am writing this in midnight and I want to go to sleep
 
 
     // server-side error
