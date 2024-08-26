@@ -4,6 +4,7 @@ import FormData from "form-data";
 
 import { createReadStream } from "node:fs";
 import { Readable } from "node:stream";
+import process from "node:process";
 
 import { SagiriClientError, SagiriServerError } from "./errors";
 import { IResponse, IResult } from "./response";
@@ -17,7 +18,7 @@ type File = string | Buffer | Readable;
 /**
  * Creates a function to be used for finding potential sources for a given image.
  */
-const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }) => {
+const sagiri = (token: string, defaultOptions: IOptions = { results: 5 }): Promise<ISagiriResult[]> => {
   log("Created Sagiri function with default options:", defaultOptions);
 
   // do some token validation, tokens must be 40 chars long and alphanumeric

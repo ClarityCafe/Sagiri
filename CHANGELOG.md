@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2024-08-26
+
+### Changed
+
+- **BREAKING** - Interfaces have been renamed to use the hungarian notation style (e.g. `SagiriResult` is now `ISagiriResult`). Please adapt your code accordingly.
+- **BREAKING** - ESM support has been added to allow the module to be used on Node.js 16+ code that uses ESM code.
+- **NEW** - Package is now published in the [JSR](https://jsr.io) registry. To install the package, run `npm install jsr:@clarity/sagiri`.
+
+## [3.6.0] - 2024-04-10
+
+### Changed
+
+- Ensure tokens are validated
+- Fully support Index eHentai (idx 38)
+
 ## [3.0.8] 2019-05-30
 
 ### Changed
