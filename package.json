@@ -3,7 +3,11 @@
   "version": "4.0.0",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
-  "module": "./lib/sagiri.ts",
+  "exports": {
+    "require": "./dist/sagiri.cjs",
+    "import": "./dist/sagiri.js"
+  },
+  "main": "dist/sagiri.js",
   "type": "module",
   "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
   "repository": {
@@ -46,12 +50,14 @@
     "test:deno": "deno test",
     "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
     "lint": "eslint --fix",
+    "build": "tsup",
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "bun": "^1.1.26",
     "eslint": "^9.9.1",
+    "tsup": "^8.2.4",
     "typescript-eslint": "^8.3.0"
   },
   "peerDependencies": {
