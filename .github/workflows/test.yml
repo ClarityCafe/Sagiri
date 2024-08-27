@@ -25,11 +25,6 @@ jobs:
         with:
           deno-version: ${{ matrix.deno-version }}
 
-      - name: Get Dependencies
-        run: deno install
-        env:
-          DENO_FUTURE: 1
-
       - name: Get CodeClimate Coverage
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
