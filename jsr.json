@@ -1,5 +1,5 @@
 {
   "name": "@clarity/sagiri",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "exports": "./lib/sagiri.ts"
 }

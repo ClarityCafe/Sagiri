@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2024-08-27
+
+- **NEW** - Library now passes Deno tests. Any forthcoming change should always pass through the test suite.
+- **NEW** - Library now supports `Blob`. This is useful for Browser compatibility. Report any bugs if you find any!
+
 ## [4.0.0] - 2024-08-26
 
 ### Changed
