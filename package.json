@@ -47,7 +47,8 @@
   ],
   "scripts": {
     "test": "bun --env-file='./.env.test.local' test bun",
-    "test:deno": "deno test",
+    "test:deno": "deno test --unstable-sloppy-imports --allow-net",
+    "coverage:deno": "deno test --unstable-sloppy-imports --allow-net --coverage",
     "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
     "lint": "eslint --fix",
     "build": "tsup",

@@ -1,5 +1,5 @@
 import { assertEquals, assertExists } from "@std/assert";
-import sagiri from "../../lib/sagiri";
+import sagiri from "../../lib/sagiri.ts";
 
 Deno.test("should fail on invalid characters", () => {
   assertEquals(() => {sagiri("!!!!!*&#@(!)")}, Error);
@@ -10,5 +10,5 @@ Deno.test("should fail on invalid length", () => {
 });
 
 Deno.test("Resolve with results", () => {
-  assertExists(()=> {});
+  assertExists(()=> {sagiri(Deno.env.get("SAUCENAO_TOKEN")!)("https://i.imgur.com/F9QSgPx.jpeg")}, "pixiv");
 })
