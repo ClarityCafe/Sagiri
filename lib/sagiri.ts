@@ -1,13 +1,13 @@
-import * as nodeFetch from 'node-fetch';
-import type { IOptions } from './interfaces';
-import { env } from 'node:process';
-import { Readable } from 'node:stream';
-import { createReadStream } from 'node:fs';
-import FormData from 'form-data';
-import { generateMask, resolveResult } from './util';
-import { SagiriClientError, SagiriServerError } from './errors';
-import type { IResponse, IResult } from './response';
-import sites from './sites';
+import * as nodeFetch from "node-fetch";
+import type { IOptions } from "./interfaces";
+import { env } from "node:process";
+import { Readable } from "node:stream";
+import { createReadStream } from "node:fs";
+import FormData from "form-data";
+import { generateMask, resolveResult } from "./util";
+import { SagiriClientError, SagiriServerError } from "./errors";
+import type { IResponse, IResult } from "./response";
+import sites from "./sites";
 
 let fetchFn;
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
@@ -17,7 +17,7 @@ if (globalThis.fetch === undefined) {
   fetchFn = globalThis.fetch;
 }
 
-type File = string | Buffer | Readable;
+type File = string | Buffer | globalThis.Blob | Readable;
 
 /**
  * Creates a function to be used for finding potential sources for a given image.
@@ -26,8 +26,24 @@ type File = string | Buffer | Readable;
  * @param defaultOpts the default options that the client will use for querying
  * @returns an `async function (file: File, optionOverrides?: Options)` which is loaded with the given token and default options to use.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: File, opts?: IOptions) => Promise<{ url: any; site: any; index: number; similarity: number; thumbnail: string; authorName: any; authorUrl: any; raw: IResult; }[]> => {
+const sagiri = (
+  token: string,
+  defaultOpts: IOptions = { results: 5 },
+): ((
+  file: File,
+  opts?: IOptions,
+) => Promise<
+  {
+    url: string;
+    site: string;
+    index: number;
+    similarity: number;
+    thumbnail: string;
+    authorName: string;
+    authorUrl: string;
+    raw: IResult;
+  }[]
+>) => {
   console.debug(`Created sagiri instance with opts: ${JSON.stringify(defaultOpts)}`);
 
   // token validation to ensure the token is 40 characters long and alphanumeric
@@ -35,11 +51,10 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: F
     if (token.length < 40 || !/^[a-zA-Z0-9]+$/.test(token))
       throw new Error("Malformed token. Get a token from https://saucenao.com/user.php");
 
-
   return async (file: File, opts: IOptions = {}) => {
     if (!file) throw new Error("No file provided");
 
-    console.debug(`Searching for possible sources of image: ${typeof file === 'string' ? file : 'Buffer'}`);
+    console.debug(`Searching for possible sources of image: ${typeof file === "string" ? file : "Buffer"}`);
 
     const form = new FormData();
     const { results, mask, excludeMask, testMode } = { ...defaultOpts, ...opts };
@@ -63,41 +78,35 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: F
       form.append("dbmaski", generateMask(excludeMask));
     }
 
-    switch (typeof file) {
-      case 'string':
-        if (/^https?:\/\//.test(file)) {
-          form.append("url", file);
-        } else {
-          form.append("file", createReadStream(file), { filename: "image.jpg" });
-        }
-        break;
-      case 'object':
-        if (file instanceof Buffer) {
-          form.append("file", file, { filename: "image.jpg" });
-        } else if (file instanceof Readable) {
-          form.append("file", file, { filename: "image.jpg" });
-        } else {
-          throw new Error("Invalid file type");
-        }
-        break;
-      default:
-        throw new Error("Invalid file type");
+    if (typeof file === "string") {
+      if (/^https?:\/\//.test(file)) {
+        form.append("url", file);
+      } else {
+        form.append("file", createReadStream(file), { filename: "image.jpg" });
+      }
+    } else if (file instanceof Buffer) {
+      form.append("file", file, { filename: "image.jpg" });
+    } else if (file instanceof Readable) {
+      form.append("file", file, { filename: "image.jpg" });
+    } else if (file instanceof Blob) {
+      form.append("file", file, { filename: "image.jpg" });
+    } else {
+      throw new Error("Invalid file type");
     }
 
     const response = await fetchFn("https://saucenao.com/search.php", {
       method: "POST",
       body: form.getBuffer(),
-      headers: form.getHeaders()
+      headers: form.getHeaders(),
     });
 
     // I'm sure there's a better way to do this but I'll just re-assign a new var
     // because I am writing this in midnight and I want to go to sleep
-    const res = await response.json() as IResponse;
+    const res = (await response.json()) as IResponse;
 
     const {
       header: { status, message, results_returned: resultsReturned },
     } = res;
-
 
     // server-side error
     if (status > 0) throw new SagiriServerError(status, message!);
@@ -112,19 +121,22 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: F
     if (unknownIds.size > 0)
       console.warn(
         `Same results were not resolved, because they were not found in the list of supported sites.
-        Please report this IDs to the library maintainer: ${Array.from(unknownIds).join(", ")}`);
+        Please report this IDs to the library maintainer: ${Array.from(unknownIds).join(", ")}`,
+      );
 
     const srcResults = res.results
-    .filter((res) => !unknownIds.has(res.header.index_id))
-    .sort((a, b) => b.header.similarity - a.header.similarity);
+      .filter((res) => !unknownIds.has(res.header.index_id))
+      .sort((a, b) => b.header.similarity - a.header.similarity);
 
-    console.debug(`Exepcted ${results} results, got ${srcResults.length}, with saucenao reporting ${resultsReturned} results.`);
+    console.debug(
+      `Exepcted ${results} results, got ${srcResults.length}, with saucenao reporting ${resultsReturned} results.`,
+    );
 
     // return the results
     return srcResults.map((res) => {
       const { url, name, id, authorName, authorUrl } = resolveResult(res);
       const {
-        header: { similarity, thumbnail }
+        header: { similarity, thumbnail },
       } = res;
 
       return {
@@ -135,11 +147,10 @@ const sagiri = (token: string, defaultOpts: IOptions = { results: 5 }): (file: F
         thumbnail,
         authorName,
         authorUrl,
-        raw: res
-      }
+        raw: res,
+      };
     });
-  }
-}
-
+  };
+};
 
 export default sagiri;
