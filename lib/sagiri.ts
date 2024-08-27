@@ -1,6 +1,7 @@
 import * as nodeFetch from "node-fetch";
 import type { IOptions } from "./interfaces";
 import { env } from "node:process";
+import { Buffer } from "node:buffer";
 import { Readable } from "node:stream";
 import { createReadStream } from "node:fs";
 import FormData from "form-data";
@@ -9,8 +10,9 @@ import { SagiriClientError, SagiriServerError } from "./errors";
 import type { IResponse, IResult } from "./response";
 import sites from "./sites";
 
-let fetchFn;
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
+let fetchFn;
+
 if (globalThis.fetch === undefined) {
   fetchFn = nodeFetch.default;
 } else {
