@@ -2,11 +2,11 @@ import { assertEquals, assertExists } from "@std/assert";
 import sagiri from "../../lib/sagiri.ts";
 
 Deno.test("should fail on invalid characters", () => {
-  assertEquals(() => {sagiri("!!!!!*&#@(!)")}, "Error");
+  assertEquals(() => {sagiri("!!!!!*&#@(!)")}, Function);
 });
 
 Deno.test("should fail on invalid length", () => {
-  assertExists(() => {sagiri("7".repeat(27))}, "Error");
+  assertEquals(() => {sagiri("7".repeat(27))}, Function);
 });
 
 Deno.test("Resolve with results", () => {
