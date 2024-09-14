@@ -1,7 +1,6 @@
 {
   "name": "Bun",
-  // See complete list https://hub.docker.com/r/oven/bun
-  "image": "oven/bun:debian",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     // Http
@@ -10,10 +9,12 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "upgradePackages": true,
-      "username": "bun",
+      "username": "vscode",
       "userUid": 1000,
       "userGid": 1000
-    }
+    },
+    "ghcr.io/michidk/devcontainers-features/bun:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "customizations": {
     // Configure properties specific to VS Code.
@@ -26,7 +27,5 @@
         "oven.bun-vscode"
       ]
     }
-  },
-
-  "remoteUser": "bun"
+  }
 }
