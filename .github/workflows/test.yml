@@ -28,6 +28,7 @@ jobs:
       - name: Test
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env
+          deno install
           deno task coverage:deno
   test:
     runs-on: ubuntu-latest
