@@ -15,21 +15,23 @@ jobs:
 
     strategy:
       matrix:
-        deno-version: [canary, v1.46.1]
+        deno-version: [canary, rc]
 
     steps:
       - uses: actions/checkout@v4.1.7
 
       - name: Setup Deno ${{ matrix.bun-version }}
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v1.5.1
         with:
           deno-version: ${{ matrix.deno-version }}
 
       - name: Test
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env
+          deno install -D
+          deno task build
           deno task coverage:deno
-  test:
+  test-bun:
     runs-on: ubuntu-latest
 
     strategy:
