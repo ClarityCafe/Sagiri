@@ -3,7 +3,7 @@
   "version": "4.1.0",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
-  "main": "./dist/sagiri.cjs",
+  "main": "dist/sagiri.cjs",
   "type": "module",
   "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
   "repository": {
@@ -49,8 +49,8 @@
   },
   "scripts": {
     "test": "bun --env-file='./.env.test.local' test bun",
-    "test:deno": "deno test --unstable-sloppy-imports --allow-net",
-    "coverage:deno": "deno test --unstable-sloppy-imports --allow-net --coverage",
+    "test:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read",
+    "coverage:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read --coverage",
     "test:nodejs": "jest node",
     "coverage:nodejs": "jest node --coverage",
     "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
