@@ -28,7 +28,7 @@ jobs:
       - name: Test
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env
-          deno install
+          deno install -D
           deno task build
           deno task coverage:deno
   test-bun:
