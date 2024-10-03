@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        deno-version: [canary, v1.46.1]
+        deno-version: [canary, rc]
 
     steps:
       - uses: actions/checkout@v4.1.7
