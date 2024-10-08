@@ -1,5 +1,12 @@
 {
   "name": "@clarity/sagiri",
   "version": "4.1.0",
-  "exports": "./lib/sagiri.ts"
+  "exports": "./src/sagiri.ts",
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "src/**/*.ts"
+    ]
+  }
 }

@@ -1,5 +1,5 @@
 import { assertThrows, assertExists } from "@std/assert";
-import sagiri from "../../lib/sagiri.ts";
+import sagiri from "../../src/sagiri.ts";
 
 Deno.test("should fail on invalid characters", () => {
   assertThrows(() => { sagiri("!!!!!*&#@(!)") });

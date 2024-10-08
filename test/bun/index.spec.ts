@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import sagiri from "../../lib/sagiri";
+import sagiri from "../../src/sagiri";
 import { env } from "node:process";
 
 test("Should fail on invalid characters", () => {

@@ -33,3 +33,6 @@ docsbuild/
 # Lock files
 package-lock.json
 yarn.lock
+
+# nyc test coverage
+.nyc_output/
