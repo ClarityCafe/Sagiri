@@ -14,7 +14,10 @@
       "userGid": 1000
     },
     "ghcr.io/michidk/devcontainers-features/bun:1": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers-community/features/deno": {
+      "version": "latest"
+    }
   },
   "customizations": {
     // Configure properties specific to VS Code.

@@ -12,7 +12,7 @@ yarn add sagiri
 # or with npm
 npm install sagiri
 # or with deno
-deno add @clarify/sagiri
+deno add @clarity/sagiri
 ```
 
 ## Usage
