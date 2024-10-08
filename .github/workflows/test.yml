@@ -70,6 +70,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Get Dependencies
         run: pnpm install
