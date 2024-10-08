@@ -73,8 +73,8 @@ jobs:
         with:
           version: 9
 
-      - name: Get Dependencies
-        run: pnpm install
+      - name: Get Dependencies and Build
+        run: pnpm install && pnpm build
 
       - name: Run Coverage and Lint
         run: |
