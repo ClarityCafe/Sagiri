@@ -3,8 +3,15 @@
   "version": "4.1.0",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
-  "main": "dist/sagiri.cjs",
-  "type": "module",
+  "main": "./dist/sagiri.cjs",
+  "module": "./dist/sagiri.mjs",
+  "types": "./dist/sagiri.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/sagiri.cjs",
+      "import": "./dist/sagiri.mjs"
+    }
+  },
   "homepage": "https://github.com/ClarityCafe/Sagiri#readme",
   "repository": {
     "type": "git",
@@ -43,29 +50,27 @@
     "README.md",
     "LICENSE"
   ],
-  "exports": {
-    "import": "./dist/sagiri.cjs",
-    "require": "./dist/index.cjs"
-  },
   "scripts": {
     "test": "bun --env-file='./.env.test.local' test bun",
     "test:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read test/deno/sagiri.test.ts",
     "coverage:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read --coverage test/deno/sagiri.test.ts",
-    "test:nodejs": "jest node",
-    "coverage:nodejs": "jest node --coverage",
+    "test:nodejs": "mocha node",
+    "coverage:nodejs": "mocha node --coverage",
     "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
     "lint": "eslint --fix",
-    "build": "tsup",
-    "prepublishOnly": "bun run build"
+    "build": "unbuild",
+    "prepublishOnly": "bun run build",
+    "postinstall": "node scripts/postinstall.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/mocha": "^10.0.9",
     "bun": "^1.1.26",
     "eslint": "^9.9.1",
-    "jest": "^29.7.0",
-    "tsup": "^8.2.4",
+    "mocha": "^10.7.3",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.3.0"
+    "typescript-eslint": "^8.3.0",
+    "unbuild": "^2.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

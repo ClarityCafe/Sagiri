@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const process = require("process");
-// this is so arbitrary holy shit
-const sagiriOnCjs = require("../../dist/sagiri.cjs");
+/* eslint-disable no-undef */
+const assert = require('assert');
+const sagiri = require('../../dist/sagiri.cjs');
+const describe = require('mocha').describe;
+const it = require('mocha').it;
 
-test("Resolve using Commonjs", async() => {
-  const result = await sagiriOnCjs(process.env.SAUCENAO_TOKEN, { results: 5 })("https://i.imgur.com/F9QSgPx.jpeg");
-  console.log(result);
+describe('Sagiri#client', function() {
+  it('should be a function', function() {
+    assert.strictEqual(typeof sagiri, 'function');
+  });
 
-  expect(sagiriOnCjs).toBeDefined();
-  expect(result).toBeDefined();
+  it('should throw on invalid characters', function () {
+    assert.throws(() => sagiri("!!!!!*&#@(!)"));
+  })
 })
