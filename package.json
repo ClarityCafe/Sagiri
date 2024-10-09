@@ -1,6 +1,6 @@
 {
   "name": "sagiri",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
   "main": "./dist/sagiri.cjs",
@@ -43,7 +43,7 @@
     "source"
   ],
   "engines": {
-    "node": "20.x"
+    "node": ">=20"
   },
   "files": [
     "dist",
@@ -79,6 +79,6 @@
   },
   "dependencies": {
     "form-data": "^4.0.0",
-    "node-fetch": "2.6.7"
+    "node-fetch": "^2.6.7"
   }
 }

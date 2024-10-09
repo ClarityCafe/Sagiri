@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        deno-version: [canary, rc]
+        deno-version: [latest, rc]
 
     steps:
       - uses: actions/checkout@v4.1.7
@@ -28,8 +28,7 @@ jobs:
       - name: Test
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env
-          deno install -D
-          deno task build
+          deno install
           deno task coverage:deno
 
   test-bun:
@@ -59,7 +58,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4.1.7
