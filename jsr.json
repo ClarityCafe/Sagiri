@@ -1,12 +1,13 @@
 {
   "name": "@clarity/sagiri",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "exports": "./src/sagiri.ts",
   "publish": {
     "include": [
       "LICENSE",
       "README.md",
-      "src/**/*.ts"
+      "src/**/*.ts",
+      "jsr.json"
     ]
   }
 }
