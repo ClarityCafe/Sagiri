@@ -1,4 +1,4 @@
-import { assertThrows, assertExists } from "@std/assert";
+import { assertThrows, assertExists } from "jsr:@std/assert";
 import sagiri from "../../src/sagiri.ts";
 
 Deno.test("should fail on invalid characters", () => {
