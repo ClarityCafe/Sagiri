@@ -8,7 +8,24 @@ on:
     tags: ["**"]
 
 jobs:
-  release:
+  release-ghpr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4.2.1
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: "https://npm.pkg.github.com"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+
+  release-npm:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,10 +40,3 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - uses: actions/setup-node@v4
-        with:
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@ClarityCafe"
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
