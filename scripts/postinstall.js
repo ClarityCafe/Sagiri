@@ -1,4 +1,4 @@
-console.log(`
+console.debug(`
 **************************************************
 *                                                *
 *         Thank you for using Sagiri <3!         *
