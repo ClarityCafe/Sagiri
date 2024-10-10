@@ -3,9 +3,9 @@
 
 name: Node.js Package
 
-on: push
-#  push:
-#    tags: ["**"]
+on:
+  push:
+    tags: ["**"]
 
 jobs:
   release-ghpr:
@@ -36,6 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4.2.1
       - uses: actions/setup-node@v4
@@ -49,3 +50,16 @@ jobs:
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  release-jsr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4.2.1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bunx jsr publish
