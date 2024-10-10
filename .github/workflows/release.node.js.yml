@@ -3,9 +3,9 @@
 
 name: Node.js Package
 
-on:
-  push:
-    tags: ["**"]
+on: push
+#  push:
+#    tags: ["**"]
 
 jobs:
   release-ghpr:
@@ -13,16 +13,22 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      packages: write
     steps:
       - uses: actions/checkout@v4.2.1
       - uses: actions/setup-node@v4
         with:
+          node-version: "20.x"
           registry-url: "https://npm.pkg.github.com"
+          scope: "@claritycafe"
       - uses: pnpm/action-setup@v4
         with:
           version: 9
-      - run: pnpm install
-      - run: npm publish
+      - run: |
+          pnpm install
+          # workaround to get it publish on ghpr scope
+          sed -i 's/"name": "sagiri"/"name": "@claritycafe\/sagiri"/g' package.json
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,7 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4.2.1
       - uses: actions/setup-node@v4
@@ -41,6 +46,6 @@ jobs:
         with:
           version: 9
       - run: pnpm install
-      - run: npm publish --access public
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
