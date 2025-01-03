@@ -7,6 +7,7 @@ import FormData from "form-data";
 import { generateMask, resolveResult } from "./util";
 import { SagiriClientError, SagiriServerError } from "./errors";
 import type { IResponse, IResult } from "./response";
+import * as process from "node:process";
 import sites from "./sites";
 
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
