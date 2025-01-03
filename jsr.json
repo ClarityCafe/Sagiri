@@ -1,6 +1,6 @@
 {
   "name": "@clarity/sagiri",
-  "version": "4.2.3",
+  "version": "4.3.0",
   "exports": "./src/sagiri.ts",
   "publish": {
     "include": [
