@@ -12,8 +12,18 @@ import sites from "./sites";
 
 // compatibility with older versions of nodejs. This will be removed in the future once LTS versions of nodejs has moved above 21.x
 let fetchFn;
+const disableWarning = process.env.SAGIRI_DISABLE_NODE_FETCH_WARNING === "true" ? true : false;
 
 if (globalThis.fetch === undefined) {
+  if (!disableWarning)
+    console.warn(`
+    WARNING: Starting in Sagiri 4.3.x, the node-fetch fallback will be removed in favor of using Node.js's native
+    fetch implementation. Furthermore, CJS exports will cease to work. 4.3.0 will be a transitionary period for
+    everyone relying on the old implementation. If you wish to use older LTS versions, stick to Sagiri 4.2.x
+    which will be supported until EOY 2025.
+
+    To disable this warning, add SAGIRI_DISABLE_NODE_FETCH_WARNING="true" in your environment variable.
+  `)
   fetchFn = nodeFetch.default;
 } else {
   fetchFn = globalThis.fetch;

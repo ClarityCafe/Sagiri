@@ -79,7 +79,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "form-data": "^4.0.0",
+    "form-data": "^4.0.0"
+  },
+  "optionalDependencies": {
     "node-fetch": "^2.6.7"
   }
 }
