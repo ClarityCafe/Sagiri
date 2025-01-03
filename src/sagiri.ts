@@ -1,4 +1,3 @@
-import * as nodeFetch from "node-fetch";
 import type { IOptions } from "./interfaces";
 import { env } from "node:process";
 import { Buffer } from "node:buffer";
@@ -24,7 +23,9 @@ if (globalThis.fetch === undefined) {
 
     To disable this warning, add SAGIRI_DISABLE_NODE_FETCH_WARNING="true" in your environment variable.
   `)
-  fetchFn = nodeFetch.default;
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  fetchFn = require("node-fetch");
 } else {
   fetchFn = globalThis.fetch;
 }
