@@ -36,6 +36,7 @@ export interface IResultData {
   pixiv_id?: string;
   sankaku_id?: string;
   seiga_id?: string;
+  material?: string;
   source?: string;
   url?: string;
   user_acct?: string;
