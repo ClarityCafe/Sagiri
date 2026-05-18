@@ -3,12 +3,10 @@
   "version": "4.3.0",
   "description": "A simple, lightweight and actually good JS wrapper for the SauceNAO API.",
   "license": "MIT",
-  "main": "./dist/sagiri.cjs",
   "module": "./dist/sagiri.mjs",
   "types": "./dist/sagiri.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/sagiri.cjs",
       "import": "./dist/sagiri.mjs"
     }
   },
@@ -55,8 +53,6 @@
     "test": "bun --env-file='./.env.test.local' test bun",
     "test:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read test/deno/sagiri.test.ts",
     "coverage:deno": "deno test --unstable-sloppy-imports --allow-net --allow-read --coverage test/deno/sagiri.test.ts",
-    "test:nodejs": "mocha ./test/node/",
-    "coverage:nodejs": "nyc mocha ./test/node/",
     "coverage": "bun --env-file='./.env.test.local' test bun --coverage",
     "lint": "eslint --fix",
     "build": "unbuild",
@@ -65,12 +61,8 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/mocha": "^10.0.9",
-    "@types/node-fetch": "^2.6.11",
     "bun": "^1.1.26",
     "eslint": "^9.9.1",
-    "mocha": "^11.0.1",
-    "nyc": "^17.1.0",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.3.0",
     "unbuild": "^3.2.0"
@@ -80,8 +72,5 @@
   },
   "dependencies": {
     "form-data": "^4.0.0"
-  },
-  "optionalDependencies": {
-    "node-fetch": "^2.6.7"
   }
 }
