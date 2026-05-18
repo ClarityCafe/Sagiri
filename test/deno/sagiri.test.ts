@@ -1,3 +1,4 @@
+/// <reference lib="deno.ns" />
 import { assertThrows, assertExists } from "jsr:@std/assert";
 import sagiri from "../../src/sagiri.ts";
 

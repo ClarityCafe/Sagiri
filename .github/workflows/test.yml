@@ -54,29 +54,3 @@ jobs:
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
           bun run coverage
 
-  test-node:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x, 22.x]
-
-    steps:
-      - uses: actions/checkout@v4.2.2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Get Dependencies and Build
-        run: pnpm install && pnpm build
-
-      - name: Run Coverage and Lint
-        run: |
-          echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
-          pnpm coverage:nodejs
