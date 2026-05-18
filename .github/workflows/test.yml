@@ -79,4 +79,4 @@ jobs:
       - name: Run Coverage and Lint
         run: |
           echo 'SAUCENAO_TOKEN=${{ secrets.SAUCENAO_TOKEN }}' > ./.env.test.local
-          pnpm coverage:nodejs
+          bun run coverage

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { IResult } from "./response";
+import type { IResult } from "./response";
 import sites from "./sites";
 
 export const generateMask = (masks: number[]): number =>
