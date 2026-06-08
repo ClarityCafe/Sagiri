@@ -19,7 +19,7 @@ jobs:
         deno-version: [latest]
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v6.0.3
 
       - name: Setup Deno ${{ matrix.bun-version }}
         uses: denoland/setup-deno@v2.0.3
@@ -40,7 +40,7 @@ jobs:
         bun-version: [latest, 1.1]
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v6.0.3
       - name: Use Bun.js ${{ matrix.bun-version }}
         uses: oven-sh/setup-bun@v2
         with:
